@@ -1,0 +1,53 @@
+.switch{
+    display: flex;
+    position: relative;
+    transition: all .5s;
+    margin-bottom: 12px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.material-icons{
+    font-size: 34px;
+}
+
+.slice{
+    width: 50px;
+    height: 24px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background: var(--blue);
+}
+
+.slice::before{
+    content: "";
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    border-radius: 20px;
+    transition: width .5s;
+    background: var(--white);
+}
+
+.slice::after{
+    content: "";
+    top: -1px;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    transition: all .5s;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: 0px 1px 2px grey;
+}
+
+.slice.--active::after{
+    transform: translateX(100%);
+}
+
+.slice.--active::before{
+    width: 100%;
+}
+

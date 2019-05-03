@@ -1,0 +1,11 @@
+.MyFavorites{
+  display: flex;
+  font-size: 12px;
+
+  --blue : #193847;
+  --gray : #858585;
+  --light-gray : #b9b9b9;
+  --black : #000;
+  --white : #fff;
+  --orange : #ee8d38;
+}
