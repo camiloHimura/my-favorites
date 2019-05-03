@@ -3,7 +3,7 @@ input{
     padding: 12px;
     outline: none;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 6px;
     box-sizing: border-box;
     border: 1px solid var(--light-gray);
 }

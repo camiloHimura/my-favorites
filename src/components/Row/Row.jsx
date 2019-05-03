@@ -6,7 +6,7 @@ class Row  extends React.Component{
     render(){
 
         return  <div className="row">
-                    <i className="material-icons">{this.props.icon}</i>
+                    <i className="material-icons rowIcon">{this.props.icon}</i>
                     {this.props.children()}
                 </div>
     }
