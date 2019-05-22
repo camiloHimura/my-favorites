@@ -1,7 +1,8 @@
 .MyFavorites{
   display: flex;
   font-size: 12px;
-
+  flex-wrap: wrap;
+  
   --black : #000;
   --white : #fff;
   --red : #ed5355;

@@ -1,8 +1,8 @@
 import React from 'react';
 import "./SideBar.css"
 
-import Search from "../Search/Search";
-import Switch from "../Switch/Switch";
+import Tag from "../Tag";
+import Switch from "../Switch";
 
 class SideBar  extends React.Component{
     state = {
@@ -13,15 +13,17 @@ class SideBar  extends React.Component{
         return  <section className="sideBar">
                     <div className="logo"></div>
                     <div className="sideBar__container">
-                        <h2 className="--filters">Smart Filters</h2>
+                        <h2 className="--filters">Filters</h2>
                         <div className="sideBar__container__options">
-                            {this.state.options.map((icon, index) => <Switch key={`${index}-icon`} icon={icon}/>)}
+                            {this.state.options.map((icon, index) => <Switch key={`${index}-icon`} name="test"/>)}
                         </div>
 
-                        <h2>Status</h2>
-                        <Search/>
-
-                        <div className="sideBar__container__status">DELIVERED</div>
+                        <h2>Tags</h2>
+                        <div className="sideBar__container__tags">
+                            <Tag name="Tutorial"/>
+                            <Tag name="Blog"/>
+                            <Tag name="VideoTutorial"/>
+                        </div>
                     </div>
                 </section>
     }

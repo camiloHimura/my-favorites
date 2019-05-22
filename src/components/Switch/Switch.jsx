@@ -13,11 +13,12 @@ class Switch  extends React.Component{
 
     render(){
         console.log(this.state);
-        const {icon} = this.props;
+        const {icon, name = ""} = this.props;
         let className = this.state.active? "slice": "slice --active";
 
         return  <div className="switch" onClick={this.swap}>
-                    <i className="material-icons">{icon}</i>
+                    {icon && <i className="material-icons">{icon}</i>}
+                    {name}
                     <div className={className}></div>
                 </div>
     }

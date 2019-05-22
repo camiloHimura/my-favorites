@@ -1,14 +1,23 @@
 import React from 'react';
 import './App.css';
-import SideBar from "./components/SideBar/SideBar"
-import Content from "./components/Content/Content"
+
+import Nav from "./components/Nav";
+import SideBar from "./components/SideBar"
+import Content from "./components/Content"
 
 function App() {
-  return (
-    <div className="MyFavorites">
-        <SideBar/>
-        <Content/>
-    </div>
+    const items = [{name:"Home", icon:"home", selected: true},{name:"Messages", icon:"mail_outline"},
+                  {name:"Whishlist", icon:"star"}, {name:"Settings", icon:"settings"},
+                  {name:"My Account", icon:"person"}]
+
+    return (
+        <React.Fragment>
+            <div className="MyFavorites">
+                <Nav items={items}/>
+                <SideBar/>
+                <Content/>
+            </div>
+        </React.Fragment>
   );
 }
 
