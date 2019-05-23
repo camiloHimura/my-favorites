@@ -14,7 +14,7 @@ class Tag  extends React.Component{
     }
 
     render(){
-        const {background = "#0396A6", onClose, name} = this.props;
+        const {background = "#0396A6", onClose, name = ""} = this.props;
 
         return  <div className="Tag" onClick={this.swap} style={{"background": background}} >
                     <Icon name="close" onClick={onClose} className={"close"} pointer={true}/>

@@ -1,0 +1,27 @@
+.link{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    font-size: 16px;
+    color: var(--gray);
+    align-items: center;
+    border-radius: 4% / 50%;
+    background: var(--white);
+    justify-content: space-around;
+}
+
+.link__cont{
+    width: calc(100% / 3);
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box; 
+    text-overflow: ellipsis;
+}
+
+.link__cont:nth-child(2){
+    margin: 0px 10px;
+}
+
+.link .--title{
+    text-align: center;
+}

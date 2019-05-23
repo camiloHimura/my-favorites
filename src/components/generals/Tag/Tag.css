@@ -1,10 +1,12 @@
 .Tag{
-    margin: 0px 4px 4px 0px;
-    position: relative;
+    width: fit-content;
+    font-size: 12px;
     border-left: 14px;
-    margin-bottom: 4px;
-    padding: 6px 8px 6px 18px;
+    position: relative;
+    color: var(--black);
+    margin: 0px 4px 4px 0px;
     border-radius: 6% / 18px;
+    padding: 6px 8px 6px 18px;
 }
 
 .Tag .close{

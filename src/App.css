@@ -3,11 +3,28 @@
   font-size: 12px;
   flex-wrap: wrap;
   
-  --black : #000;
+  --black : #262626;
   --white : #fff;
   --red : #ed5355;
   --blue : #193847;
   --gray : #858585;
   --orange : #ee8d38;
   --light-gray : #b9b9b9;
+}
+
+.--flex{
+  display: flex;
+}
+.--wrap{
+  flex-wrap: wrap;
+}
+
+button{
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.invalid{
+  border: 1px solid var(--red);
 }
