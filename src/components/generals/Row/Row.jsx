@@ -1,14 +1,11 @@
 import React from 'react';
 import "./Row.css"
 
-class Row  extends React.Component{
-
-    render(){
-        return  <div className="row">
-                    {this.props.icon && <i className="material-icons rowIcon">{this.props.icon}</i>}
-                    {this.props.children()}
-                </div>
-    }
+function Row(props) {
+    return  <div className="row">
+                {props.icon && <i className="material-icons rowIcon">{props.icon}</i>}
+                {props.children()}
+            </div>
 }
 
 export default Row ;

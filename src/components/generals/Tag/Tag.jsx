@@ -1,26 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Tag.css"
 
 import Icon from '../Icon';
 
-class Tag  extends React.Component{
+function Tag(props){
+    const [active, setActive] = useState(true);
+    const {color = "0396A6", onClose, name = ""} = props;
 
-    state = {
-        active: true
-    }
+    return  <div className="Tag --ellipsis" style={{"background": `#${color}`}} >
+                <Icon name="close" onClick={onClose} className={"close"} pointer={true}/>
+                {name}
+            </div>
 
-    swap = () => {
-        this.setState(prev => ({active: !prev.active}))
-    }
-
-    render(){
-        const {background = "#0396A6", onClose, name = ""} = this.props;
-
-        return  <div className="Tag" onClick={this.swap} style={{"background": background}} >
-                    <Icon name="close" onClick={onClose} className={"close"} pointer={true}/>
-                    {name}
-                </div>
-    }
 }
 
 export default Tag;

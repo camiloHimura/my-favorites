@@ -1,0 +1,17 @@
+.board{
+    width: 100%;
+    padding: 4px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.contOptions{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.board input{
+    width: 100px;
+    padding: 2px;
+    margin-right: 20px;
+}

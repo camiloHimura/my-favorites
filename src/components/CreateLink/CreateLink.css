@@ -2,25 +2,26 @@
     width: 100%;
     padding: 12px;
     outline: none;
-    display: flex;
     text-align: center;
+    align-items: center;
     border-radius: 6px;
     box-sizing: border-box;
     border: 1px solid var(--light-gray);
 }
 
-.createLink > input{
-    width: 35%;
+.createLink .createLink__contInputs{
+    width: 90%;
 }
 
 .createLink__contTags{
     width: 20%;
 }
 
-.createLink > *:last-child{
-    width: 10%;
+.createLink button{
+    padding: 10px;
     margin-left: 10px;
     color: var(--white);
     background: var(--blue);
     box-sizing: border-box;
+    width: calc(10% - 10px);
 }

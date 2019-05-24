@@ -1,27 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Switch.css"
 
-class Switch  extends React.Component{
+function Switch(props) {
 
-    state = {
-        active: true
+    const {icon, name = ""} = props;
+    const [active, setActive] = useState(true);
+
+    function swap(){
+        setActive(!active)
     }
 
-    swap = () => {
-        this.setState(prev => ({active: !prev.active}))
-    }
+    console.log("active", active);
+    let className = active? "slice": "slice --active";
 
-    render(){
-        console.log(this.state);
-        const {icon, name = ""} = this.props;
-        let className = this.state.active? "slice": "slice --active";
-
-        return  <div className="switch" onClick={this.swap}>
-                    {icon && <i className="material-icons">{icon}</i>}
-                    {name}
-                    <div className={className}></div>
-                </div>
-    }
+    return  <div className="switch" onClick={swap}>
+                {icon && <i className="material-icons">{icon}</i>}
+                {name}
+                <div className={className}></div>
+            </div>
 }
 
 export default Switch ;

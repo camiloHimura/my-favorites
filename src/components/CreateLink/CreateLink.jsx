@@ -1,37 +1,42 @@
-import React from 'react';
+import React, {useRef, useState} from 'react'; 
 import "./CreateLink.css"
-import Colors from "../../utils/Colors";
+import Board from "../generals/Board";
+import Tag from "../generals/Tag";
 
-class CreateLink  extends React.Component{
-    
-    removeInvalid(event){
+function CreateLink() {
+    const inputTitle = useRef();
+    const inputUrl = useRef();
+    const [tags, setTags] = useState([])
+
+    function removeInvalid(event){
         event.target.classList.remove("invalid");
     }
 
-    check = () => {
-        if(this.title.value == ""){
-            this.title.classList.add("invalid")
+    function check() {
+        if(inputTitle.current.value == ""){
+            inputTitle.current.classList.add("invalid")
         }
 
-        if(this.url.value == ""){
-            this.url.classList.add("invalid");
+        if(inputUrl.current.value == ""){
+            inputUrl.current.classList.add("invalid");
         }
-        
+
+        console.log(inputTitle.current.value, inputUrl.current.value, "tags", tags)
     }
 
-    render(){
-        console.log(Colors.getRamdom());
-        const {style = {}} = this.props
-        
-        return  <div className="createLink">
-                    <input placeholder="Title" onFocus={this.removeInvalid} ref={div => this.title = div}/>
-                    <input placeholder="Url" onFocus={this.removeInvalid} ref={div => this.url = div}/>
-                    <div className="createLink__contTags">
-                        <input placeholder="Tags"/>
-                    </div>
-                    <button type="button" onClick={this.check}>Send</button>
+    return  <div className="createLink --flex --wrap">
+                <div className="createLink__contInputs --flex">
+                    <input placeholder="Title" onFocus={removeInvalid} ref={inputTitle}/>
+                    <input placeholder="Url" onFocus={removeInvalid} ref={inputUrl}/>
                 </div>
-    }
+                <button type="button" onClick={check}>Send</button>
+                <Board 
+                    options={tags} 
+                    Component={Tag}
+                    setOptions={setTags}
+                    className="boardTags"
+                    placeHolder="Add Tags"/>
+            </div>
 }
 
-export default CreateLink ;
+export default CreateLink;
