@@ -1,10 +1,10 @@
 import React from 'react';
 import "./Row.css"
 
-function Row(props) {
-    return  <div className="row">
-                {props.icon && <i className="material-icons rowIcon">{props.icon}</i>}
-                {props.children()}
+function Row({icon, children, className}) {
+    return  <div className={`row --flexBetween ${className}`}>
+                {icon && <i className="material-icons rowIcon">{icon}</i>}
+                {children()}
             </div>
 }
 

@@ -13,7 +13,7 @@ function SideBar() {
 
     useEffect(() => {
         setTimeout(() => {
-            dispatchCtx({ type: "addTags", tags: [{name: "test1"}, {name: "test2"}] })
+            dispatchCtx({ type: "addTags", tags: [{name: "test1"}, {name: "test2"}, {name: "test3"}, {name: "test4"}] })
         }, 1000);
     }, []);
 

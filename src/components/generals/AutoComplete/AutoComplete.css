@@ -1,0 +1,25 @@
+.autoComplete{
+    position: relative;
+}
+
+.autoComplete__contOptions{
+    z-index: 1;
+    width: 100%;
+    position: absolute;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+}
+
+.autoComplete__contOptions:empty{
+    display: none;
+}
+
+.autoComplete__contOptions > div{
+    padding: 6px;
+}
+
+.autoComplete__contOptions > div:hover,
+.autoComplete__contOptions > div.select{
+    color: var(--white);
+    background: var(--blue);
+}

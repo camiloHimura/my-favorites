@@ -1,7 +1,6 @@
 .row{
     display: flex;
     margin-bottom: 20px;
-    justify-content: space-between;
 }
 
 .row .material-icons.rowIcon{

@@ -4,8 +4,7 @@ import "./Link.css";
 import Tag from "../generals/Tag";
 
 function Link(props) {
-    const tags = Array.from({length: 10}, () => ({name: "test"}))
-    const {id = 0, title, url, keywords = []} = props;
+    const {id = 0, title, url, keywords = [], tags = []} = props;
 
     return  <div className="link">
                 <div className="link__cont --title">{title}</div>

@@ -14,7 +14,13 @@
 }
 
 .createLink__contTags{
-    width: 20%;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.createLink__contTags .autoComplete{
+    width: 200px;
+    margin-right: 10px;
 }
 
 .createLink button{

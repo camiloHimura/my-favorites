@@ -12,11 +12,13 @@ function reducer(state, action){
             return {...state, loading: !state.loading}
         case "addTags":
             return {...state, tags: [...action.tags, ...state.tags]}
+        case "addLinks":
+            return {...state, links: [...action.links, ...state.links]}
     }
 }
 
 function App(){
-    const [state, dispatch] = useReducer(reducer, {tags: []});
+    const [state] = useReducer(reducer, {tags: [], links: []});
 
     const items = [{name:"Home", icon:"home", selected: true}, {name:"Messages", icon:"mail_outline"},
                     {name:"Whishlist", icon:"star"}, {name:"Settings", icon:"settings"},
