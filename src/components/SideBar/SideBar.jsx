@@ -1,13 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./SideBar.css"
 
 import Tag from "../generals/Tag";
 import Switch from "../generals/Switch";
 import Board from "../generals/Board";
 
+import {useStateValueCtx} from "../../context/Tags.contex";
+
 function SideBar() {
     const [switchs, setSwitchs] = useState([{name: "Fun", name: "React"}])
-    const [tags, setTags] = useState([])
+    const [dataCtx, dispatchCtx] = useStateValueCtx();
+
+    useEffect(() => {
+        setTimeout(() => {
+            dispatchCtx({ type: "addTags", tags: [{name: "test1"}, {name: "test2"}] })
+        }, 1000);
+    }, []);
 
     return  <section className="sideBar">
                 <div className="sideBar__container">
@@ -17,18 +25,18 @@ function SideBar() {
                             isWrap={true} 
                             options={switchs} 
                             Component={Switch}
-                            setOptions={setSwitchs}
+                            setOptions={item => setSwitchs(prev => [item, ...prev])}
                             className="boardSwitchs"
-                            placeHolder="Create Tag"/>
+                            placeHolder="Create Category"/>
                     </div>
 
                     <h2>Current Tags</h2>
                     <div className="sideBar__container__tags">
                         <Board
                             isWrap={true} 
-                            options={tags} 
+                            options={dataCtx.tags} 
                             Component={Tag}
-                            setOptions={setTags}
+                            setOptions={tag => dispatchCtx({type: "addTags", tags: [tag]})}
                             className="boardTags"
                             placeHolder="Create Tag"/>
                     </div>

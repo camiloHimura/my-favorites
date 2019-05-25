@@ -12,7 +12,7 @@ function BoardTags(props) {
         let element = event.target;
 
         if(event.keyCode == 13 && element.value != ""){
-            setOptions([{name: element.value, color: Colors.getRamdom()}, ...options]);
+            setOptions({name: element.value, color: Colors.getRamdom()});
             inputOptions.current.value = "";
         }
     }

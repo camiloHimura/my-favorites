@@ -10,7 +10,6 @@ function Switch(props) {
         setActive(!active)
     }
 
-    console.log("active", active);
     let className = active? "slice": "slice --active";
 
     return  <div className="switch" onClick={swap}>

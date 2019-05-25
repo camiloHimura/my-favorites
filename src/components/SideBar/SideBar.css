@@ -36,10 +36,10 @@ h2.--filters{
 
 .sideBar__container::before{
     content: "";
-    top: 5%;
+    top: 0%;
     right: -20px;
     width: 1px;
-    height: 90%;
+    height: 100%;
     position: absolute;
     background: var(--light-gray);
 }
@@ -69,7 +69,7 @@ h2.--filters{
 
 .boardSwitchs{
     overflow: auto;
-    max-height: 40vh;
+    max-height: 34vh;
 }
 
 
@@ -81,5 +81,5 @@ h2.--filters{
 
 .boardTags{
     overflow: auto;
-    max-height: 40vh;
+    max-height: 34vh;
 }
