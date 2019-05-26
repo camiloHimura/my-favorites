@@ -60,7 +60,6 @@ function AutoComplete (props){
             inputFilter.current.value = options[index][propertyFilter];
         }else{
             inputFilter.current.value = "";
-            inputFilter.current.focus();
         }
     }
 
