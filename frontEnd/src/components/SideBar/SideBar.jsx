@@ -6,15 +6,15 @@ import Switch from "../generals/Switch";
 import Board from "../generals/Board";
 
 import {useStateValueCtx} from "../../context/Tags.contex";
+import {getTags} from "../../utils/ServerRequest";
 
 function SideBar() {
     const [switchs, setSwitchs] = useState([{name: "Fun", name: "React"}])
     const [dataCtx, dispatchCtx] = useStateValueCtx();
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatchCtx({ type: "addTags", tags: [{name: "test1"}, {name: "test2"}, {name: "test3"}, {name: "test4"}] })
-        }, 1000);
+        console.log("useefect", getTags())
+        /* dispatchCtx({ type: "addTags", tags: getTags()}); */
     }, []);
 
     return  <section className="sideBar">
