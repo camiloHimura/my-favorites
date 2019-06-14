@@ -1,4 +1,4 @@
 module.exports = {
-    port: 1991,
-    apiUrl: "http://localhost:1991/api"
+    port: 8082,
+    apiUrl: "http://localhost:8082/api"
 }
