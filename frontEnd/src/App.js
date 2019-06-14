@@ -11,6 +11,7 @@ function reducer(state, action){
         case "switchLoading":
             return {...state, loading: !state.loading}
         case "addTags":
+            console.log(state);
             return {...state, tags: [...action.tags, ...state.tags]}
         case "addLinks":
             return {...state, links: [...action.links, ...state.links]}

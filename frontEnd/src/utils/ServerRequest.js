@@ -1,20 +1,10 @@
-const axios = require('axios');
-
-function fake(data){
-    return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(data), 1000)
-    })
-}
+const instance = require("./axios.conf")
 
 export async function getTags(){
-    /* let data = await axios.get('http://trucosfrontend.com/api/')
-    console.log("data", data); */
-    let info = await axios.get('http://trucosfrontend.com/api/');
-    console.log("info", info)
-    return info;
+    return instance.get("/tag").then(({data}) => data);
 }
 
-export async function getLinks(){
-    
+export async function createTag(data){
+    return instance.put("/tag", data).then(({data}) => data);
 }
 

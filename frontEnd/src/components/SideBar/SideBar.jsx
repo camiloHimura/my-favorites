@@ -6,15 +6,32 @@ import Switch from "../generals/Switch";
 import Board from "../generals/Board";
 
 import {useStateValueCtx} from "../../context/Tags.contex";
-import {getTags} from "../../utils/ServerRequest";
+import {getTags, createTag} from "../../utils/ServerRequest";
 
 function SideBar() {
     const [switchs, setSwitchs] = useState([{name: "Fun", name: "React"}])
     const [dataCtx, dispatchCtx] = useStateValueCtx();
 
+    async function requestTags(){
+        let tags = await getTags();
+        dispatchCtx({ type: "addTags", tags})
+    }
+
+    async function addTag(info){
+        console.log("data", info)
+        try{
+            const {status, data} = await createTag(info);
+            console.log("response", status, data)
+            if(status == "saved"){
+                dispatchCtx({ type: "addTags", tags: [data]})
+            }
+        }catch(error){
+            console.error("error", error)
+        }
+    }
+
     useEffect(() => {
-        console.log("useefect", getTags())
-        /* dispatchCtx({ type: "addTags", tags: getTags()}); */
+        requestTags()
     }, []);
 
     return  <section className="sideBar">
@@ -36,7 +53,7 @@ function SideBar() {
                             isWrap={true} 
                             options={dataCtx.tags} 
                             Component={Tag}
-                            setOptions={tag => dispatchCtx({type: "addTags", tags: [tag]})}
+                            setOptions={addTag}
                             className="boardTags"
                             placeHolder="Create Tag"/>
                     </div>
