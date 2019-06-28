@@ -10,6 +10,7 @@
   --gray : #858585;
   --orange : #ee8d38;
   --light-gray : #b9b9b9;
+  --white-6 : hsla(0, 0%, 100%, 0.6);
 }
 
 .--flex{
@@ -39,4 +40,8 @@ button{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.pointer{
+  cursor: pointer;
 }

@@ -6,7 +6,7 @@ import Switch from "../generals/Switch";
 import Board from "../generals/Board";
 
 import {useStateValueCtx} from "../../context/Tags.contex";
-import {getTags, createTag} from "../../utils/ServerRequest";
+import {getTags, createTag, deleteTag} from "../../utils/ServerRequest";
 
 function SideBar() {
     const [switchs, setSwitchs] = useState([{name: "Fun", name: "React"}])
@@ -18,12 +18,21 @@ function SideBar() {
     }
 
     async function addTag(info){
-        console.log("data", info)
         try{
             const {status, data} = await createTag(info);
-            console.log("response", status, data)
             if(status == "saved"){
                 dispatchCtx({ type: "addTags", tags: [data]})
+            }
+        }catch(error){
+            console.error("error", error)
+        }
+    }
+
+    async function removeTag(id){
+        try{
+            const {status} = await deleteTag(id);
+            if(status == "removed"){
+                dispatchCtx({ type: "removeTags", id})
             }
         }catch(error){
             console.error("error", error)
@@ -52,7 +61,7 @@ function SideBar() {
                         <Board
                             isWrap={true} 
                             options={dataCtx.tags} 
-                            Component={Tag}
+                            Component={props => <Tag {...props} onClose={() => removeTag(props.id)}/>}
                             setOptions={addTag}
                             className="boardTags"
                             placeHolder="Create Tag"/>

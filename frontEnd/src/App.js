@@ -11,8 +11,15 @@ function reducer(state, action){
         case "switchLoading":
             return {...state, loading: !state.loading}
         case "addTags":
-            console.log(state);
             return {...state, tags: [...action.tags, ...state.tags]}
+        case "removeTags":
+                let finalTags = state.tags.filter(({id}) => id != action.id);
+            return {...state, tags: finalTags}
+        case "updateTags":
+                let updatedTags = state.tags.map(data => {
+                    return data.id != action.id? data : {...data, name: action.newName}
+                });
+            return {...state, tags: updatedTags}
         case "addLinks":
             return {...state, links: [...action.links, ...state.links]}
     }
