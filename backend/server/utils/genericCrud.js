@@ -13,7 +13,7 @@ const create = (model, {format}) => async (req, res) => {
 }
 
 const findAll = (model, {arrayFormat}) => async (req, res) => {
-    try{
+    try{ 
         const {body = {}} = req;
         let data = await model.find(body).exec();
         if(!data){ return res.status(200).send([]) }

@@ -20,5 +20,6 @@
 }
 
 .link .--title{
+    color: var(--blue);
     text-align: center;
 }

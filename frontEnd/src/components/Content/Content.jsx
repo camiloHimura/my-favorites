@@ -7,17 +7,20 @@ import Row from "../generals/Row";
 import CreateLink from "../CreateLink";
 
 import {useStateValueCtx} from "../../context/Tags.contex";
+import {getLinks} from "../../utils/ServerRequest";
 
 function Content() {
 
     const [dataCtx, dispatchCtx] = useStateValueCtx();
 
     useEffect(() => {
-        setTimeout(() => {
-            const links = Array.from({length: 5}, () => ({title: "This is a long Test", url: "https://mongoosejs.com/docs/connections.html"}));
-            dispatchCtx({ type: "addLinks", links});
-        },1000)
+        requestLinks();
     }, [])
+    
+    async function requestLinks(){
+        let links = await getLinks();
+        dispatchCtx({type: "addLinks", links});
+    }
 
     return  <section className="Content">                
                 <div className="contend">

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const tagSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     color:{
         type: String,
@@ -17,4 +17,4 @@ tagSchema.pre("save", function(){
     this.name = this.name.toLowerCase();
 })
 
-module.exports = mongoose.model("tag", tagSchema);
+module.exports = mongoose.model("Tag", tagSchema);

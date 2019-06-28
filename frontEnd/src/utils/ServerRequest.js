@@ -6,8 +6,8 @@ export function getTags(){
             .catch(catchError);
 }
 
-export function createTag(data){
-    return instance.put("/tag", data)
+export function createTag(info){
+    return instance.put("/tag", info)
             .then(({data}) => data)
             .catch(catchError);
         }
@@ -20,6 +20,18 @@ export function updateTag(id, name){
 
 export function deleteTag(id){
     return instance.delete(`/tag/${id}`)
+            .then(({data}) => data)
+            .catch(catchError);
+}
+
+export function getLinks(){
+    return instance.get("/link")
+            .then(({data}) => data)
+            .catch(catchError);
+}
+
+export function addLink(info){
+    return instance.put("/link", info)
             .then(({data}) => data)
             .catch(catchError);
 }
