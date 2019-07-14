@@ -1,27 +1,40 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from "react-redux";
+
 import "./SideBar.css"
 
 import Tag from "../generals/Tag";
 import Switch from "../generals/Switch";
 import Board from "../generals/Board";
 
-import {useStateValueCtx} from "../../context/Tags.contex";
 import {getTags, createTag, deleteTag} from "../../utils/ServerRequest";
+import {addTagAction, removeTagAction} from "../../state/actions";
 
-function SideBar() {
+const mapStateToProps = state => {
+    return {tags: state.tags, invalidTag: state.validation.invalidTag}
+}
+
+const mapDispachToProps = dispatch => {
+    return {
+        addTagAction: tag => dispatch(addTagAction(tag)),
+        removeTagAction: id => dispatch(removeTagAction(id)),
+    }
+}
+
+function SideBar(props) {
     const [switchs, setSwitchs] = useState([{name: "Fun", name: "React"}])
-    const [dataCtx, dispatchCtx] = useStateValueCtx();
+    /*const [dataCtx, dispatchCtx] = useStateValueCtx(); */
 
     async function requestTags(){
         let tags = await getTags();
-        dispatchCtx({ type: "addTags", tags})
+        /* dispatchCtx({ type: "addTags", tags}) */
     }
 
     async function addTag(info){
         try{
             const {status, data} = await createTag(info);
             if(status == "saved"){
-                dispatchCtx({ type: "addTags", tags: [data]})
+                props.addTagAction(data);
             }
         }catch(error){
             console.error("error", error)
@@ -32,7 +45,7 @@ function SideBar() {
         try{
             const {status} = await deleteTag(id);
             if(status == "removed"){
-                dispatchCtx({ type: "removeTags", id})
+                props.removeTagAction(id);
             }
         }catch(error){
             console.error("error", error)
@@ -40,7 +53,8 @@ function SideBar() {
     }
 
     useEffect(() => {
-        requestTags()
+        //requestTags()
+        console.log("props", props)
     }, []);
 
     return  <section className="sideBar">
@@ -60,15 +74,16 @@ function SideBar() {
                     <div className="sideBar__container__tags">
                         <Board
                             isWrap={true} 
-                            options={dataCtx.tags} 
+                            options={props.tags} 
                             Component={props => <Tag {...props} onClose={() => removeTag(props.id)}/>}
                             setOptions={addTag}
                             className="boardTags"
                             placeHolder="Create Tag"/>
+                        {/*props.invalidTag && "Type a valid Tag"*/}
                     </div>
                 </div>
             </section>
 
 }
 
-export default SideBar ;
+export default connect(mapStateToProps, mapDispachToProps)(SideBar) ;

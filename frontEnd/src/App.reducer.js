@@ -18,5 +18,8 @@ export default function reducer(state, action){
 
         case "switchLoading":
             return {...state, loading: !state.loading}
+
+        default: 
+            return state;
     }
 }

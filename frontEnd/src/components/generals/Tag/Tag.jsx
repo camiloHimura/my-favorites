@@ -9,7 +9,7 @@ function Tag(props){
     const inputEl = useRef(null);
     const [isEdit, setIsEdit] = useState(false);
     const {color = "0396A6", onClose, name = ""} = props;
-    const [dataCtx, dispatchCtx] = useStateValueCtx();
+    /* const [dataCtx, dispatchCtx] = useStateValueCtx(); */
 
     function activeEdit(){
         setIsEdit(true);
@@ -29,7 +29,7 @@ function Tag(props){
         try{
             const {status, data} = await updateTag(props.id, name);
             if(status == "updated"){
-                dispatchCtx({ type: "updateTags", id: data.id, newName: data.name})
+                /* dispatchCtx({ type: "updateTags", id: data.id, newName: data.name}) */
             }
         }catch(error){
             console.error("error", error)
