@@ -7,54 +7,30 @@ import Tag from "../generals/Tag";
 import Switch from "../generals/Switch";
 import Board from "../generals/Board";
 
-import {getTags, createTag, deleteTag} from "../../utils/ServerRequest";
-import {addTagAction, removeTagAction} from "../../state/actions";
+import {addTagAction} from "../../state/actions";
+import {getAllTags, addTag, removeTag} from "../../state/actions/asyncTagAction";
 
 const mapStateToProps = state => {
-    return {tags: state.tags, invalidTag: state.validation.invalidTag}
+    return {
+            tags: state.tags, 
+            invalidTag: state.validation.invalidTag
+        }            
 }
 
 const mapDispachToProps = dispatch => {
     return {
+        addTag: info => dispatch(addTag(info)),
+        removeTag: id => dispatch(removeTag(id)),
+        getAllTags: () => dispatch(getAllTags()),
         addTagAction: tag => dispatch(addTagAction(tag)),
-        removeTagAction: id => dispatch(removeTagAction(id)),
     }
 }
 
 function SideBar(props) {
     const [switchs, setSwitchs] = useState([{name: "Fun", name: "React"}])
-    /*const [dataCtx, dispatchCtx] = useStateValueCtx(); */
-
-    async function requestTags(){
-        let tags = await getTags();
-        /* dispatchCtx({ type: "addTags", tags}) */
-    }
-
-    async function addTag(info){
-        try{
-            const {status, data} = await createTag(info);
-            if(status == "saved"){
-                props.addTagAction(data);
-            }
-        }catch(error){
-            console.error("error", error)
-        }
-    }
-
-    async function removeTag(id){
-        try{
-            const {status} = await deleteTag(id);
-            if(status == "removed"){
-                props.removeTagAction(id);
-            }
-        }catch(error){
-            console.error("error", error)
-        }
-    }
 
     useEffect(() => {
-        //requestTags()
-        console.log("props", props)
+        props.getAllTags();
     }, []);
 
     return  <section className="sideBar">
@@ -75,8 +51,8 @@ function SideBar(props) {
                         <Board
                             isWrap={true} 
                             options={props.tags} 
-                            Component={props => <Tag {...props} onClose={() => removeTag(props.id)}/>}
-                            setOptions={addTag}
+                            Component={internalProps => <Tag {...internalProps} onClose={() => props.removeTag(internalProps.id)}/>}
+                            setOptions={info => props.addTag(info)}
                             className="boardTags"
                             placeHolder="Create Tag"/>
                         {/*props.invalidTag && "Type a valid Tag"*/}
@@ -86,4 +62,4 @@ function SideBar(props) {
 
 }
 
-export default connect(mapStateToProps, mapDispachToProps)(SideBar) ;
+export default connect(mapStateToProps, mapDispachToProps)(SideBar);

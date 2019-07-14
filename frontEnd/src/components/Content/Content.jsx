@@ -20,7 +20,7 @@ function Content(props) {
 
     useEffect(() => {
         //requestLinks();
-        console.log(props);
+        //console.log(props);
     }, [])
     
     async function requestLinks(){
