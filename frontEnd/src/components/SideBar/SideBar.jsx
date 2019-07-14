@@ -7,8 +7,7 @@ import Tag from "../generals/Tag";
 import Switch from "../generals/Switch";
 import Board from "../generals/Board";
 
-import {addTagAction} from "../../state/actions";
-import {getAllTags, addTag, removeTag} from "../../state/actions/asyncTagAction";
+import {getAllTags, addTag, removeTag} from "../../state/actions";
 
 const mapStateToProps = state => {
     return {
@@ -22,7 +21,6 @@ const mapDispachToProps = dispatch => {
         addTag: info => dispatch(addTag(info)),
         removeTag: id => dispatch(removeTag(id)),
         getAllTags: () => dispatch(getAllTags()),
-        addTagAction: tag => dispatch(addTagAction(tag)),
     }
 }
 

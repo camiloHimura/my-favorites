@@ -12,7 +12,7 @@ export function createTag(info){
             .catch(catchError);
         }
         
-export function updateTag(id, name){
+export function updateTagRequest(id, name){
     return instance.put(`/tag/${id}`, {name})
             .then(({data}) => data)
             .catch(catchError);
@@ -30,7 +30,7 @@ export function getLinks(){
             .catch(catchError);
 }
 
-export function addLink(info){
+export function createLink(info){
     return instance.put("/link", info)
             .then(({data}) => data)
             .catch(catchError);

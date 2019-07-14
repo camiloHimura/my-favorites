@@ -1,3 +1,3 @@
 
-export {default as tagValidationMiddleware} from "./tagValidationMiddleware";
+export {default as validationMiddleware} from "./validationMiddleware";
 

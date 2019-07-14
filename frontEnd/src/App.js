@@ -9,9 +9,13 @@ import SideBar from "./components/SideBar";
 import Content from "./components/Content";
 
 function App(){
-    const items = [{name:"Home", icon:"home", selected: true}, {name:"Messages", icon:"mail_outline"},
-                    {name:"Whishlist", icon:"star"}, {name:"Settings", icon:"settings"},
-                    {name:"My Account", icon:"person"}]
+    const items =   [
+                        {name:"Whishlist", icon:"star"}, 
+                        {name:"My Account", icon:"person"},
+                        {name:"Settings", icon:"settings"},
+                        {name:"Messages", icon:"mail_outline"},
+                        {name:"Home", icon:"home", selected: true}, 
+                    ]
     
     return (
         <Provider store={store}>

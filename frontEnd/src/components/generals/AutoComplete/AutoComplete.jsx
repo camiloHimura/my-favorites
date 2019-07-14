@@ -70,7 +70,13 @@ function AutoComplete (props){
     }
 
     return  <div className="autoComplete">
-                <input type="text" autoFocus={true} ref={inputFilter} onChange={filter} onKeyDown={sweepOptions} onBlur={closeOptions} placeholder={placeHolder}/>
+                <input type="text" ref={inputFilter}
+                        autoFocus={true}
+                        onChange={filter} 
+                        onBlur={closeOptions} 
+                        onKeyDown={sweepOptions} 
+                        placeholder={placeHolder}/>
+
                 <div className="autoComplete__contOptions" ref={divOptions}>
                     {showOptions && options.map((opt, index) => {
                                         return <div key={`${index}-autocomplete`} className={`${indexSelector === index ? "select": ""}`} 

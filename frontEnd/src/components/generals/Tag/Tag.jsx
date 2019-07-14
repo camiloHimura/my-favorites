@@ -1,17 +1,23 @@
 import React, {useState, useRef} from 'react';
 import "./Tag.css"
+import {connect} from 'react-redux';
 
 import Icon from '../Icon';
-import {updateTag} from "../../../utils/ServerRequest";
-import {useStateValueCtx} from "../../../context/Tags.contex";
+import {updateTag} from "../../../state/actions";
+
+const mapDispachToProps = dispatch => {
+    return {
+        updateTag: (id, name, color) => dispatch(updateTag(id, name, color)),
+    }
+}
 
 function Tag(props){
     const inputEl = useRef(null);
     const [isEdit, setIsEdit] = useState(false);
-    const {color = "0396A6", onClose, name = ""} = props;
-    /* const [dataCtx, dispatchCtx] = useStateValueCtx(); */
+    const {color = "0396A6", onClose, name = "", updateTag, id, updateDisable = false} = props;
 
     function activeEdit(){
+        if(updateDisable){return};
         setIsEdit(true);
     }
 
@@ -21,18 +27,7 @@ function Tag(props){
     
     function checkName(event){
         if(event.key == "Enter" && inputEl.current.value !== ""){
-            putTag(inputEl.current.value)
-        }
-    }
-
-    async function putTag(name){
-        try{
-            const {status, data} = await updateTag(props.id, name);
-            if(status == "updated"){
-                /* dispatchCtx({ type: "updateTags", id: data.id, newName: data.name}) */
-            }
-        }catch(error){
-            console.error("error", error)
+            updateTag(id, inputEl.current.value, color);
         }
     }
 
@@ -44,4 +39,4 @@ function Tag(props){
 
 }
 
-export default Tag;
+export default connect(null, mapDispachToProps)(Tag);

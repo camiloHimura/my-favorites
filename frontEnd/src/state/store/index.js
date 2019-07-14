@@ -1,15 +1,11 @@
 import {createStore, applyMiddleware} from "redux";
 import rootReducer from "../reducers";
-import {addArticleAction} from "../actions/index"
-import {tagValidationMiddleware} from "../middleware"
+import {validationMiddleware} from "../middleware"
 import ReduxThunk from "redux-thunk"
 
 const store = createStore(
     rootReducer,
-    applyMiddleware(tagValidationMiddleware, ReduxThunk)
+    applyMiddleware(validationMiddleware, ReduxThunk)
 );
-
-window.store = store;
-window.addArticleAction = addArticleAction;
 
 export default store;

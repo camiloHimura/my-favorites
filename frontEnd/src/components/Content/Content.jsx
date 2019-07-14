@@ -7,26 +7,22 @@ import Search from "../Search";
 import Row from "../generals/Row";
 import CreateLink from "../CreateLink";
 
-import {useStateValueCtx} from "../../context/Tags.contex";
-import {getLinks} from "../../utils/ServerRequest";
+import {getAllLinks} from "../../state/actions";
 
 const mapStateToProps = state => {
     return {links: state.links}
 }
 
-function Content(props) {
-
-    /* const [dataCtx, dispatchCtx] = useStateValueCtx(); */
-
-    useEffect(() => {
-        //requestLinks();
-        //console.log(props);
-    }, [])
-    
-    async function requestLinks(){
-        let links = await getLinks();
-        /* dispatchCtx({type: "addLinks", links}); */
+const mapDispachToProps = dispatch => {
+    return {
+        getAllLinks: () => dispatch(getAllLinks()),
     }
+}
+
+function Content(props) {
+    useEffect(() => {
+        props.getAllLinks();
+    }, [])
 
     return  <section className="Content">                
                 <div className="contend">
@@ -34,10 +30,10 @@ function Content(props) {
                     <Row>{() => <CreateLink />}</Row>
 
                     {props.links.map((info, index) =>  <Row key={`${info.date}-${index}`}>
-                                                    {() => <Link {...info}/>}
-                                                </Row>)}
+                                                            {() => <Link {...info}/>}
+                                                        </Row>)}
                 </div>
             </section>
 }
 
-export default connect(mapStateToProps)(Content);
+export default connect(mapStateToProps, mapDispachToProps)(Content);

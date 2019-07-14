@@ -1,5 +1,5 @@
-import {getTags, createTag, deleteTag} from "../../utils/ServerRequest";
-import {tagsLoadedAction, addTagAction, removeTagAction} from "./index.js"
+import {getTags, createTag, deleteTag, updateTagRequest} from "../../utils/ServerRequest";
+import {tagsLoadedAction, addTagAction, removeTagAction, updateTagAction} from "./index.js"
 
 export function getAllTags(){
     return async function(dispatch){
@@ -35,6 +35,18 @@ export function removeTag(id){
         }catch(error){
             console.error("error", error)
         }
-    }
-    
+    }   
+}
+
+export function updateTag(id, name, color){
+    return async function(dispatch){
+        try{
+            const {status} = await updateTagRequest(id, name);
+            if(status == "updated"){
+                dispatch(updateTagAction({id, name, color}))
+            }
+        }catch(error){
+            console.error("error", error)
+        }
+    }   
 }

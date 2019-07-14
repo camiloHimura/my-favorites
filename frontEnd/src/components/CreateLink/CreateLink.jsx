@@ -1,19 +1,29 @@
-import React, {useRef, useState} from 'react'; 
+import React, {useRef, useState} from 'react';
+import {connect} from "react-redux";
 import "./CreateLink.css"
 
 import Tag from "../generals/Tag";
 import AutoComplete from "../generals/AutoComplete";
+import {addLink, invalidLink} from "../../state/actions";
 
-import {useStateValueCtx} from "../../context/Tags.contex";
-import Colors from "../../utils/Colors";
+const mapStateToProps = state => {
+    return {
+        tags: state.tags,
+        isInvalidLink: state.invalidLink
+    }
+}
 
-import {addLink} from "../../utils/ServerRequest";
+const mapDispachToProps = dispatch => {
+    return {
+        addLink: info => dispatch(addLink(info)),
+        invalidLink: () => dispatch(invalidLink()),
+    }
+}
 
-function CreateLink() {
+function CreateLink(props) {
     const inputTitle = useRef();
     const inputUrl = useRef();
     const [tags, setTags] = useState([]);
-    /* const [dataCtx, dispatchCtx] = useStateValueCtx(); */
 
     function removeInvalid(event){
         event.target.classList.remove("invalid");
@@ -21,35 +31,23 @@ function CreateLink() {
 
     function check() {
         let isValid = true;
-        if(inputTitle.current.value === ""){
+        if(inputTitle.current.value === "") {
             inputTitle.current.classList.add("invalid")
             isValid = false;
         }
         
-        if(inputUrl.current.value === ""){
+        if(inputUrl.current.value === "") {
             inputUrl.current.classList.add("invalid")
             isValid = false;
         }
 
         if(isValid){
-            saveLink({
-                    title: inputTitle.current.value,
-                    url: inputUrl.current.value, 
-                    tags: tags.map(tag => tag.id)
-            })
+            props.addLink({
+                title: inputTitle.current.value,
+                url: inputUrl.current.value, 
+                tags: tags.map(tag => tag.id)
+            });
             clear();
-        }
-    }
-    
-    async function saveLink(info){
-        try{
-            const {status, data} = await addLink(info);
-            console.log(status, data)
-            if(status == "saved"){
-                /* dispatchCtx({ type: "addLinks", links: [data]}); */
-            }
-        }catch(error){
-            console.error("error", error)
         }
     }
 
@@ -67,13 +65,13 @@ function CreateLink() {
                 <button type="button" onClick={check}>Send</button>
 
                 <div className="createLink__contTags --flex">
-                    {/* <AutoComplete 
+                    <AutoComplete 
                         autoHide={false}
                         propertyFilter="name" 
-                        options={dataCtx.tags} 
+                        options={props.tags} 
                         placeHolder="Add Tags"
                         clearAfterSelecting={true}
-                        onSelected={tag => setTags([{...tag}, ...tags])}/> */}
+                        onSelected={tag => setTags([{...tag}, ...tags])}/>
 
                     <div className="contOptions">
                         {tags.map((tag, index) => <Tag key={`${index}-boardTags`} {...tag}/>)}
@@ -82,4 +80,4 @@ function CreateLink() {
             </div>
 }
 
-export default CreateLink;
+export default connect(mapStateToProps, mapDispachToProps)(CreateLink);
