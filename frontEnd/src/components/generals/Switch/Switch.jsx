@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropType from 'prop-types';
 import "./Switch.css"
 
 function Switch(props) {
@@ -17,6 +18,11 @@ function Switch(props) {
                 {name}
                 <div className={className}></div>
             </div>
+}
+
+Switch.propType = {
+    icon: PropType.element,
+    name: PropType.string.isRequired,
 }
 
 export default Switch ;

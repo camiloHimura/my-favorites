@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from "prop-types";
+import {TagPropType} from "../../propsTypes";
 import {connect} from "react-redux";
 
 import "./SideBar.css"
@@ -57,7 +59,14 @@ function SideBar(props) {
                     </div>
                 </div>
             </section>
+}
 
+SideBar.propTypes = {
+    invalidTag: PropTypes.bool,
+    removeTag: PropTypes.func,
+    addTag: PropTypes.func,
+    getAllTags: PropTypes.func,
+    tags: PropTypes.arrayOf(PropTypes.shape(TagPropType)),
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(SideBar);

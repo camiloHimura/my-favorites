@@ -1,6 +1,7 @@
 import React, {useRef, useReducer, useEffect} from 'react';
-import "./AutoComplete.css"
+import PropTypes from 'prop-types';
 import AutoReduce from "./AutoComplete.reducer.js"
+import "./AutoComplete.css";
 
 function AutoComplete (props){
     const divOptions = useRef();
@@ -85,6 +86,16 @@ function AutoComplete (props){
                                                 </div>})}
                 </div>
             </div>
+}
+
+
+AutoComplete.propTypes = {
+    options: PropTypes.array, 
+    autoHide: PropTypes.bool, 
+    onSelected: PropTypes.func,
+    placeHolder: PropTypes.string, 
+    propertyFilter: PropTypes.string, 
+    clearAfterSelecting: PropTypes.bool,
 }
 
 export default AutoComplete;

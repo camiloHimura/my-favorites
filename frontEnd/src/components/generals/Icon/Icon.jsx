@@ -1,5 +1,6 @@
 import React from 'react';
-import "./Icon.css"
+import {IconPropType} from '../../../propsTypes';
+import "./Icon.css";
 
 function Icon (props){
     const {style = {}, name, color = "", pointer = false, onClick, className = ""} = props;
@@ -8,5 +9,7 @@ function Icon (props){
                 {name}
             </i>
 }
+
+Icon.propType = IconPropType;
 
 export default Icon;

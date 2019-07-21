@@ -14,7 +14,6 @@ export function getAllLinks(){
 
 export function addLink(info){
     return async function(dispatch){
-        console.log("addLink")
         try{
             const {status, data} = await createLink(info);
             if(status == "saved"){

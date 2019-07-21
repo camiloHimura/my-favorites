@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {LinkPropType} from "../../propsTypes";
 import "./Content.css";
 
 import Link from "../Link";
@@ -34,6 +36,11 @@ function Content(props) {
                                                         </Row>)}
                 </div>
             </section>
+}
+
+Content.propTypes = {
+    getAllLinks: PropTypes.func,
+    links: PropTypes.arrayOf(PropTypes.shape(LinkPropType)),
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(Content);

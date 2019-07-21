@@ -1,5 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {TagPropType} from "../../propsTypes";
 import "./CreateLink.css"
 
 import Tag from "../generals/Tag";
@@ -78,6 +80,11 @@ function CreateLink(props) {
                     </div>
                 </div>
             </div>
+}
+
+CreateLink.propTypes = {
+    addLink: PropTypes.func,
+    tags: PropTypes.arrayOf(PropTypes.shape(TagPropType))
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(CreateLink);

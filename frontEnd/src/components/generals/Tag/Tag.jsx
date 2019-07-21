@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
-import "./Tag.css"
+import {TagPropType} from '../../../propsTypes';
 import {connect} from 'react-redux';
+import "./Tag.css"
 
 import Icon from '../Icon';
 import {updateTag} from "../../../state/actions";
@@ -38,5 +39,7 @@ function Tag(props){
             </div>
 
 }
+
+Tag.propType = TagPropType;
 
 export default connect(null, mapDispachToProps)(Tag);

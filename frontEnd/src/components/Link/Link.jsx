@@ -1,7 +1,8 @@
 import React from 'react';
-import "./Link.css";
+import {LinkPropType} from '../../propsTypes';
+import './Link.css';
 
-import Tag from "../generals/Tag";
+import Tag from '../generals/Tag';
 
 function Link(props) {
     const {id = 0, title, url, keywords = [], tags = []} = props;
@@ -18,5 +19,7 @@ function Link(props) {
             </div>
 
 }
+
+Link.propTypes = LinkPropType
 
 export default Link ;

@@ -1,7 +1,8 @@
 import React, {useRef} from 'react'; 
-import "./Board.css";
+import PropTypes from 'prop-types';
+import './Board.css';
 
-import Colors from "../../../utils/Colors";
+import Colors from '../../../utils/Colors';
 
 function BoardTags(props) {
     let {options = [], setOptions, isWrap = false, placeHolder = "", Component, className, Input} = props;
@@ -25,6 +26,16 @@ function BoardTags(props) {
                 </div>
             </div>
 
+}
+
+Colors.propTypes = {
+    isWrap: PropTypes.bool, 
+    Input: PropTypes.element,
+    options: PropTypes.array.isRequired,
+    setOptions: PropTypes.func, 
+    className: PropTypes.string, 
+    Component: PropTypes.element.isRequired, 
+    placeHolder: PropTypes.string, 
 }
 
 export default BoardTags;
