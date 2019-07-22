@@ -38,12 +38,12 @@ export function removeTag(id){
     }   
 }
 
-export function updateTag(id, name, color){
+export function updateTag(id, name){
     return async function(dispatch){
         try{
-            const {status} = await updateTagRequest(id, name);
+            const {status, data} = await updateTagRequest(id, name);
             if(status == "updated"){
-                dispatch(updateTagAction({id, name, color}))
+                dispatch(updateTagAction(data))
             }
         }catch(error){
             console.error("error", error)
