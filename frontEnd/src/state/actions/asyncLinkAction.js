@@ -1,5 +1,5 @@
-import {getLinks, createLink} from "../../utils/ServerRequest";
-import {linkLoadedAction, addLinkAction, removeLinkAction} from "./index.js"
+import {getLinks, createLink, removeTagLinkRequest} from "../../utils/ServerRequest";
+import {linkLoadedAction, addLinkAction, removeTagLinkAction} from "./index.js"
 
 export function getAllLinks(){
     return async function(dispatch){
@@ -18,6 +18,21 @@ export function addLink(info){
             const {status, data} = await createLink(info);
             if(status == "saved"){
                 dispatch(addLinkAction(data))
+            }
+        }catch(error){
+            console.error("error", error)
+        }
+    }
+}
+
+export function removeTagLink(linkId, tagId){
+    return async function(dispatch){
+        try{
+            const {status} = await removeTagLinkRequest(linkId, tagId);
+            if(status == "updated"){
+                dispatch(removeTagLinkAction({linkId, tagId}))
+            }else{
+                console.log('show toas "not updated"')
             }
         }catch(error){
             console.error("error", error)

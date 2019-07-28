@@ -5,7 +5,8 @@
     font-size: 16px;
     color: var(--gray);
     align-items: center;
-    border-radius: 4% / 50%;
+    box-sizing: border-box;
+    border-radius: 10px / 20px;
     background: var(--white);
     justify-content: space-around;
 }

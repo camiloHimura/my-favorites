@@ -36,6 +36,12 @@ export function createLink(info){
             .catch(catchError);
 }
 
+export function removeTagLinkRequest(linkID, tagID){
+    return instance.put(`/link/${linkID}/${tagID}`)
+            .then(({data}) => data)
+            .catch(catchError);
+}
+
 function catchError(error){
     console.log("---- my handle error ---", error);
     throw(error);

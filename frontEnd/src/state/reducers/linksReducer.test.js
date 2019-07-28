@@ -1,11 +1,11 @@
-import {ADD_LINK, LINKS_LOADED, REMOVE_LINK} from '../actions/actions-types';
+import {ADD_LINK, LINKS_LOADED, REMOVE_LINK, REMOVE_TAG_LINK} from '../actions/actions-types';
 import linksReducer from './linksReducer'
 
 function MockData(){
     return [
-        {id: '123', title: "test", url: "url test", tags: [1,2,3]},
-        {id: '1234', title: "test 2", url: "url test 2", tags: [1,2,3]},
-        {id: '12345', title: "test 3", url: "url test 3", tags: [1,2,3]},
+        {id: '123', title: "test", url: "url test", tags: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]},
+        {id: '1234', title: "test 2", url: "url test 2", tags: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]},
+        {id: '12345', title: "test 3", url: "url test 3", tags: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]},
     ]
 }
 
@@ -44,6 +44,30 @@ describe('Links reducer', () => {
         expect(state).toEqual(
             expect.not.arrayContaining([fistLink]),
         );
+    })
+    
+    describe('reciving a REMOVE_TAG_LINK type', () => {
+
+        it('getting tags id', () => {
+            const newLinks = MockData();
+            const newState = linksReducer(newLinks, {
+                                                        type: REMOVE_TAG_LINK, 
+                                                        payload: {linkId: '123', tagId: 3},
+                                                    });
+            const [firstLink] = newState;
+            expect(firstLink.tags).toEqual([{id: 1}, {id: 2}, {id: 4}]);
+        })
+        
+        it('not getting tags id', () => {
+            const newLinks = MockData();
+            const [firstLinkMock] = MockData();
+            const newState = linksReducer(newLinks, {
+                                                        type: REMOVE_TAG_LINK, 
+                                                        payload: {linkId: '123', tagId: 0},
+                                                    });
+            const [firstLink] = newState;
+            expect(firstLink.tags).toEqual(firstLinkMock.tags);
+        })
     })
 
 })

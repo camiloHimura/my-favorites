@@ -1,11 +1,25 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {LinkPropType} from '../../propsTypes';
 import './Link.css';
 
 import Tag from '../generals/Tag';
+import {removeTagLink} from "../../state/actions/";
+
+const mapDispachToProps = dispatch => {
+    return {
+        removeTagLink: (linkId, tagId) => dispatch(removeTagLink(linkId, tagId)),
+    }
+}
 
 function Link(props) {
-    const {id = 0, title, url, keywords = [], tags = []} = props;
+    const {id = 0, title, url, tags = []} = props;
+
+    function remove(tagId) {
+        'removeTag'
+        console.log('linkId', props.id,'tagId', tagId)
+        props.removeTagLink(props.id, tagId);
+    }
 
     return  <div className="link">
                 <div className="link__cont --title">{title}</div>
@@ -13,7 +27,7 @@ function Link(props) {
                 <div className="link__cont --flex --wrap">{tags.map((tag, index) => {
                     return <Tag key={`${id}-${index}`} 
                                 updateDisable={true} {...tag}
-                                onClose={info => console.log(tag)}
+                                onClose={info => remove(tag.id)}
                             />
                 })}</div>
             </div>
@@ -22,4 +36,4 @@ function Link(props) {
 
 Link.propTypes = LinkPropType
 
-export default Link ;
+export default connect(null, mapDispachToProps)(Link);

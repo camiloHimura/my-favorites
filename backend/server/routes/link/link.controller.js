@@ -3,6 +3,7 @@ const crud = require("../../utils/genericCrud");
 const createWithTag = require("./querys/createWithTag");
 const findAllWithTag = require("./querys/findAllWithTag");
 const findOneWithTag = require("./querys/findOneWithTag");
+const removeTag = require("./querys/removeTag");
 
 const format = data => {
     let {_id, title, url, tags} = data;
@@ -18,4 +19,5 @@ module.exports = {
     createWithTag: createWithTag(LinkModel, format),
     findOneWithTag: findOneWithTag(LinkModel, format),
     findAllWithTag: findAllWithTag(LinkModel, arrayFormat),
+    removeTag: removeTag(LinkModel, format),
 }

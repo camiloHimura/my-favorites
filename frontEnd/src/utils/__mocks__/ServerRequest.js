@@ -47,3 +47,10 @@ export const updateTagRequest = data => {
         resolve({status: 'updated', data});
     })
 };
+
+export function removeTagLinkRequest(linkID, tagID){
+    console.log('removeTagLinkRequest mock')
+    return new Promise((resolve, reject) => {
+        resolve({status: 'updated'});
+    })
+}

@@ -5,7 +5,7 @@ let linkSchema = new mongoose.Schema({
         type: String,
         required: [true, 'this path is Required'],
         validate: {
-            validator: item => item.length > 6,
+            validator: item => item.length > 3,
             message: 'Invalid title format.'
         }
     },

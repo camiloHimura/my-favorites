@@ -1,8 +1,8 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {getAllLinks, addLink} from './asyncLinkAction';
+import {getAllLinks, addLink, removeTagLink} from './asyncLinkAction';
 import {LINKS_LOADED} from '../actions/actions-types';
-import {addLinkAction} from '../actions'
+import {addLinkAction, removeTagLinkAction} from '../actions'
 
 jest.mock('../../utils/ServerRequest'); 
 
@@ -35,6 +35,14 @@ describe('async actions', () => {
             .then(() => {
                 const [firstAction] = store.getActions();
                 expect(firstAction).toEqual(addLinkAction(data));
+            });
+    })
+    
+    it('remove a tag in link', () => { 
+        return store.dispatch(removeTagLink('123', '3'))
+            .then(() => {
+                const [firstAction] = store.getActions();
+                expect(firstAction).toEqual(removeTagLinkAction({linkId: '123', tagId: '3'}));
             });
     })
 
