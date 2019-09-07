@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../../../setupTests';
 import { shallow, mount } from 'enzyme';
-import Switch from './Switch'
+import Switch from './Switch.jsx'
 
 var wrapper;
 beforeEach(() => {

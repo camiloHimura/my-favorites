@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropType from 'prop-types';
-import "./Switch.css"
+import styles from "./Switch.css"
 
 function Switch(props) {
 
