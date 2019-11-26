@@ -11,20 +11,16 @@ import Board from "../generals/Board";
 
 import {getAllTags, addTag, removeTag} from "../../state/actions";
 
-const mapStateToProps = state => {
-    return {
-            tags: state.tags, 
-            invalidTag: state.validation.invalidTag
-        }            
-}
+const mapStateToProps = state => ({
+        tags: state.tags, 
+        invalidTag: state.validation.invalidTag
+      })
 
-const mapDispachToProps = dispatch => {
-    return {
+const mapDispachToProps = dispatch => ({
         addTag: info => dispatch(addTag(info)),
         removeTag: id => dispatch(removeTag(id)),
         getAllTags: () => dispatch(getAllTags()),
-    }
-}
+      })
 
 function SideBar(props) {
     const [switchs, setSwitchs] = useState([{name: "Fun", name: "React"}])
@@ -49,12 +45,13 @@ function SideBar(props) {
                     <h2>Current Tags</h2>
                     <div className="sideBar__container__tags">
                         <Board
-                            isWrap={true} 
-                            options={props.tags} 
-                            Component={internalProps => <Tag {...internalProps} onClose={() => props.removeTag(internalProps.id)}/>}
-                            setOptions={info => props.addTag(info)}
-                            className="boardTags"
-                            placeHolder="Create Tag"/>
+                          isWrap={true} 
+                          options={props.tags} 
+                          className="boardTags"
+                          setOptions={props.addTag}
+                          placeHolder="Create Tag"
+                          Component={internalProps => <Tag {...internalProps} onClose={() => props.removeTag(internalProps.id)}/>}
+                        />
                         {/*props.invalidTag && "Type a valid Tag"*/}
                     </div>
                 </div>

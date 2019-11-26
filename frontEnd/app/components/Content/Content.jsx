@@ -28,12 +28,10 @@ function Content(props) {
 
     return  <section className="Content">                
                 <div className="contend">
-                    <Row className="--flexEnd">{() => <Search style={{"width": "30%"}}/>}</Row>
-                    <Row>{() => <CreateLink />}</Row>
+                    <Row className="--flexEnd"><Search style={{"width": "30%"}}/></Row>
+                    <Row><CreateLink/></Row>
 
-                    {props.links.map((info, index) =>  <Row key={`${info.date}-${index}`}>
-                                                            {() => <Link {...info}/>}
-                                                        </Row>)}
+                    {props.links.map((info, index) =>  <Row key={`${info.date}-${index}`}><Link {...info}/></Row>)}
                 </div>
             </section>
 }
