@@ -4,29 +4,22 @@ import PropTypes from "prop-types";
 import "./Tooltip.css";
 
 function Tooltip (props){
-    const {test, parentRef, hover} = props;
-    const [show, setShow] = useState(false);
+  const {text, parentRef, hover} = props;
+  const [show, setShow] = useState(false);
 
-    useEffect(() => {
-      const {clientWidth, scrollWidth} = parentRef.current;
-      console.log("parentRef", clientWidth, scrollWidth);
-      if(hover && clientWidth < scrollWidth){
-        setShow(true);
-        console.log("show", true);
-      }else{
-        setShow(false);
-        console.log("show", false);
-      }
-    }, [hover])
-
-    function checkOver(event){
-      console.log("event", event)
+  useEffect(() => {
+    const {clientWidth, scrollWidth} = parentRef.current;
+    if(hover && clientWidth < scrollWidth){
+      setShow(true);
+    }else{
+      setShow(false);
     }
+  }, [hover])
 
-    if(!show) {return null}
+  if(!show) {return null}
 
-    return  <div>
-              I'm Tooltip
+  return  <div className="Tooltip">
+              {text}
             </div>
 }
 

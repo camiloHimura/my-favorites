@@ -12,6 +12,7 @@
 }
 
 .link__cont{
+    position: relative;
     width: calc(100% / 3);
     box-sizing: border-box; 
 }

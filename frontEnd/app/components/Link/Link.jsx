@@ -22,10 +22,11 @@ function Link(props) {
 
   return  <div className="link">
             <div className="link__cont --title">{title}</div>
-            <div className="link__cont --ellipsis" ref={containerUrl} 
+            <div className="link__cont" 
               onMouseEnter={() => setIsContHover(true)} onMouseLeave={() => setIsContHover(false)}>
-
-                <a href={url} target="_blank">{url}</a>
+                <div className="--ellipsis" ref={containerUrl}>
+                  <a href={url} target="_blank">{url}</a>
+                </div>
                 <Tooltip text={url} hover={isContHover} parentRef={containerUrl}/>
             </div>
             <div className="link__cont --flex --wrap">{tags.map((tag, index) => {
