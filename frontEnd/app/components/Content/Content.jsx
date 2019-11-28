@@ -12,28 +12,28 @@ import CreateLink from "../CreateLink";
 import {getAllLinks} from "../../state/actions";
 
 const mapStateToProps = state => {
-    return {links: state.links}
-}
+        return {links: state.links}
+      }
 
 const mapDispachToProps = dispatch => {
-    return {
-        getAllLinks: () => dispatch(getAllLinks()),
-    }
-}
+        return {
+          getAllLinks: () => dispatch(getAllLinks()),
+        }
+      }
 
 function Content(props) {
-    useEffect(() => {
-        props.getAllLinks();
-    }, [])
+  useEffect(() => {
+      props.getAllLinks();
+  }, [])
 
-    return  <section className="Content">                
-                <div className="contend">
-                    <Row className="--flexEnd"><Search style={{"width": "30%"}}/></Row>
-                    <Row><CreateLink/></Row>
+  return  <section className="Content">                
+            <Row className="--flexEnd"><Search style={{"width": "30%"}}/></Row>
+            <Row><CreateLink/></Row>
 
-                    {props.links.map((info, index) =>  <Row key={`${info.date}-${index}`}><Link {...info}/></Row>)}
-                </div>
-            </section>
+            {props.links.map((info, index) => <Row key={`${info.date}-${index}`}>
+                                                <Link {...info}/>
+                                              </Row>)}
+          </section>
 }
 
 Content.propTypes = {

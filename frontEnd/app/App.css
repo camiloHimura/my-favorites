@@ -10,6 +10,7 @@
   --gray : #858585;
   --orange : #ee8d38;
   --light-gray : #b9b9b9;
+  --light-gray-4 : rgba(185, 185, 185, 0.4);;
   --white-6 : hsla(0, 0%, 100%, 0.6);
 }
 

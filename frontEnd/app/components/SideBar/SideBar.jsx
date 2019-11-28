@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
+
 import PropTypes from "prop-types";
-import {TagPropType} from "../../propsTypes";
 import {connect} from "react-redux";
+import {TagPropType} from "../../propsTypes";
 
 import "./SideBar.css"
 
 import Tag from "../generals/Tag";
-import Switch from "../generals/Switch";
 import Board from "../generals/Board";
+import Switch from "../generals/Switch";
 
 import {getAllTags, addTag, removeTag} from "../../state/actions";
 
