@@ -12,8 +12,11 @@ const mapDispachToProps = dispatch => ({
     removeTagLink: (linkId, tagId) => dispatch(removeTagLink(linkId, tagId)),
   })
 
+const fakeText = `Donec in venenatis metus. Suspendisse potenti. Cras ultricies turpis sit amet massa suscipit, in egestas sapien finibus. 
+  Quisque id massa pretium felis auctor mattis. Donec elementum est ut nisi finibus auctor.`;
+
 function Card(props) {
-  const {id = 0, title, url, tags = []} = props;
+  const {id = 0, title, url, tags = [], description = fakeText} = props;
   const containerUrl = useRef(null);
   const [isContHover, setIsContHover] = useState(false);
 
@@ -30,15 +33,12 @@ function Card(props) {
               <h2 className="title">{title}</h2>
             </a>
 
-            <p className="description --ellipsis">
-              Donec in venenatis metus. Suspendisse potenti. Cras ultricies turpis sit amet massa suscipit, in egestas sapien finibus. 
-              Quisque id massa pretium felis auctor mattis. Donec elementum est ut nisi finibus auctor. Duis pretium ipsum eget orci eleifend, 
-              quis luctus nisl suscipit. Proin odio velit, mattis sit amet eros vitae, tristique posuere sem.
-            </p>
-
-            {/* <div className="card__cont"onMouseEnter={() => setIsContHover(true)} onMouseLeave={() => setIsContHover(false)}>
-                <Tooltip text={url} hover={isContHover} parentRef={containerUrl}/>
-            </div> */}
+            <div className="contDescription">
+              <p className="description" ref={containerUrl} onMouseEnter={() => setIsContHover(true)} onMouseLeave={() => setIsContHover(false)}>
+                {description}
+              </p>
+              <Tooltip text={description} calcHeight={true} hover={isContHover} parentRef={containerUrl}/>
+            </div>
 
             <div className="card__cont contTags --flex --wrap">{
               tags.map((tag, index) => {

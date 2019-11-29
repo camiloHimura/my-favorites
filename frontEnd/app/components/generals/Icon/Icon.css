@@ -1,7 +1,11 @@
 .orange{
-    color: var(--orange)
+  color: var(--orange)
 }
 
 .pointer{
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.material-icons::selection{
+  background: transparent;
 }
