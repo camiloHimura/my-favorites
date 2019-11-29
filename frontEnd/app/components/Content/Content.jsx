@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {LinkPropType} from "../../propsTypes";
 import "./Content.css";
 
-import Link from "../Link";
+import Card from "../Card";
 import Search from "../Search";
 import Row from "../generals/Row";
 import CreateLink from "../CreateLink";
@@ -29,10 +29,9 @@ function Content(props) {
   return  <section className="Content">                
             <Row className="--flexEnd"><Search style={{"width": "30%"}}/></Row>
             <Row><CreateLink/></Row>
-
-            {props.links.map((info, index) => <Row key={`${info.date}-${index}`}>
-                                                <Link {...info}/>
-                                              </Row>)}
+            <Row className="--wrap --spaceEvenly">
+              {props.links.map((info, index) => <Card key={`card-${index}`} {...info}/>)}
+            </Row>
           </section>
 }
 

@@ -1,4 +1,4 @@
-export default function Link(PropTypes, {Tag}){
+export default function Card(PropTypes, {Tag}){
     return {
         id: PropTypes.oneOfType([
                 PropTypes.string,

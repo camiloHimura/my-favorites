@@ -1,8 +1,4 @@
-.MyFavorites{
-  display: flex;
-  font-size: 12px;
-  flex-wrap: wrap;
-  
+:root{
   --black : #262626;
   --white : #fff;
   --red : #ed5355;
@@ -12,6 +8,14 @@
   --light-gray : #b9b9b9;
   --light-gray-4 : rgba(185, 185, 185, 0.4);;
   --white-6 : hsla(0, 0%, 100%, 0.6);
+  
+  --color-border: var(--light-gray);
+}
+
+.MyFavorites{
+  display: flex;
+  font-size: 12px;
+  flex-wrap: wrap;
 }
 
 .--flex{
@@ -25,6 +29,9 @@
 }
 .--flexEnd{
   justify-content: flex-end;
+}
+.--spaceEvenly{
+  justify-content: space-evenly;
 }
 
 button{
@@ -45,4 +52,11 @@ button{
 
 .pointer{
   cursor: pointer;
+}
+
+.title{
+  font-size: 18px;
+  color: var(--blue);
+  text-align: center;
+  text-transform: capitalize;
 }
