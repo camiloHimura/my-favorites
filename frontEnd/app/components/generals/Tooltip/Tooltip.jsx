@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import "./Tooltip.css";
 
 function Tooltip (props){
-  const {text, parentRef, hover, calcHeight = false} = props;
   const [show, setShow] = useState(false);
+  const [animation, setAnimation] = useState(false);
+  const {text, parentRef, hover, calcHeight = false} = props;
 
   useEffect(() => {
     const {clientWidth, scrollWidth, clientHeight, scrollHeight, } = parentRef.current;
@@ -13,6 +14,7 @@ function Tooltip (props){
 
     if(hover && isOutOfBox){
       setShow(true);
+      setTimeout(() => setAnimation(true), 10);
     }else{
       setShow(false);
     }
@@ -20,7 +22,7 @@ function Tooltip (props){
 
   if(!show) {return null}
 
-  return  <div className="Tooltip"> {text} </div>
+  return  <div className={`Tooltip ${animation? "show": ""}`}> {text} </div>
 }
 
 Tooltip.propType = {

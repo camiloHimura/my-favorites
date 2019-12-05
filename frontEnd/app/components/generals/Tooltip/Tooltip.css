@@ -8,9 +8,12 @@
   border-radius: 6px;
   margin-left: -100px;
   word-break: break-all;
-  background: var(--blue);
-  bottom: calc(100% + 8px);
   box-sizing: border-box;
+  background: var(--black);
+  bottom: calc(100% + 8px);
+  transition-delay: .5s;
+  transition: transform 0.2s;
+  transform: translate3d(0,10px,0) rotate3d(0,0,1,5deg);
 }
 
 .Tooltip::before{
@@ -20,7 +23,11 @@
   left: 10px;
   bottom: -5px;
   position: absolute;
-  border-top: 6px solid var(--blue);
+  border-top: 6px solid var(--black);
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
+}
+
+.show{
+  transform: translate3d(0,0,0);
 }

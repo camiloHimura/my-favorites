@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const {createWithTag, findAllWithTag, findOneWithTag, removeTag} = require("./link.controller");
+const {createWithTag, findAllWithTag, findOneWithTag, removeTag, findAndremove} = require("./link.controller");
 
 const LinkRouter = Router();
 
@@ -10,6 +10,7 @@ LinkRouter.route("/")
 LinkRouter.route("/:id")
     /* .put(create) */
     .get(findOneWithTag)
+    .delete(findAndremove)
 
 LinkRouter.route("/:id/:tagId")
     .put(removeTag)
