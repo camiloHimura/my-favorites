@@ -54,3 +54,10 @@ export function removeTagLinkRequest(linkID, tagID){
         resolve({status: 'updated'});
     })
 }
+
+export function removeLinkRequest(linkID){
+    console.log('removeLinkRequest mock')
+    return new Promise((resolve, reject) => {
+        resolve({status: 'removed'});
+    })
+}

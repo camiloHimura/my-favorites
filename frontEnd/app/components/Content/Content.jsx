@@ -16,13 +16,13 @@ const mapStateToProps = state => {
         return {links: state.links}
       }
 
-const mapDispachToProps = dispatch => {
-        return {
-          getAllLinks: () => dispatch(getAllLinks()),
-        }
-      }
+const mapDispachToProps = dispatch => ({
+        getAllLinks: () => dispatch(getAllLinks()),
+      })
+      
 
 function Content(props) {
+  console.log("Content links", props.links)
   useEffect(() => {
       props.getAllLinks();
   }, [])

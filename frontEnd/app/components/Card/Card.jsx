@@ -6,14 +6,14 @@ import './Card.css';
 import Icon from '../generals/Icon';
 import Tag from '../generals/Tag';
 import Tooltip from '../generals/Tooltip';
-import {removeTagLink} from "../../state/actions";
+import {removeTagLink, removeLink} from "../../state/actions";
 
 const mapDispachToProps = dispatch => ({
+    removeLink: (linkId) => dispatch(removeLink(linkId)),
     removeTagLink: (linkId, tagId) => dispatch(removeTagLink(linkId, tagId)),
   })
 
-const fakeText = `Donec in venenatis metus. Suspendisse potenti. Cras ultricies turpis sit amet massa suscipit, in egestas sapien finibus. 
-  Quisque id massa pretium felis auctor mattis. Donec elementum est ut nisi finibus auctor.`;
+const fakeText = `Donec in venenatis metus. Suspendisse potenti. Cras ultricies turpis sit amet massa suscipit, in egestas sapien finibus.`;
 
 function Card(props) {
   const {id = 0, title, url, tags = [], description = fakeText} = props;
@@ -24,8 +24,9 @@ function Card(props) {
     props.removeTagLink(props.id, tagId);
   }
   
-  function removeCard() {
+  function removeLink() {
     console.log("cardId", props.id)
+    props.removeLink(props.id);
   }
 
   return  <div className="card">
@@ -41,19 +42,18 @@ function Card(props) {
             </div>
 
             <div className="card__cont contTags --flex --wrap">{
-              tags.map((tag, index) => {
-                return <Tag key={`${id}-${index}`}
-                            updateDisable={true} {...tag}
-                            onClose={() => removeTag(tag.id)}
-                        />
-              })}
+              tags.map((tag, index) => <Tag key={`${id}-${index}`}
+                                            updateDisable={true} {...tag}
+                                            onClose={() => removeTag(tag.id)}
+                                        />
+              )}
             </div>
             <div className="card_options --flex">
               <div className="loading">
-                <Icon name="edit" onClick={removeCard} className={"edit iconHover"} pointer={true}/>
+                <Icon name="edit" onClick={removeLink} className={"edit iconHover"} pointer={true}/>
               </div>
               <div className="loading">
-                <Icon name="close" onClick={removeCard} className={"close iconHover"} pointer={true}/>
+                <Icon name="close" onClick={removeLink} className={"close iconHover"} pointer={true}/>
               </div>
             </div>
           </div>

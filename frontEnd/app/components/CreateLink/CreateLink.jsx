@@ -61,7 +61,7 @@ function CreateLink(props) {
 
     return  <div className="createLink --flex --wrap">
                 <div className="createLink__contInputs --flex">
-                    <input placeholder="Title" onFocus={removeInvalid} ref={inputTitle}/>
+                    <input className="createLink__contInputs__title" placeholder="Title" onFocus={removeInvalid} ref={inputTitle}/>
                     <input placeholder="Url" onFocus={removeInvalid} ref={inputUrl}/>
                 </div>
                 <button type="button" onClick={check}>Send</button>

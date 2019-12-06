@@ -13,6 +13,11 @@
     width: 90%;
 }
 
+.createLink__contInputs__title{
+    width: 40%;
+    margin-right: 10px;
+}
+
 .createLink__contTags{
     width: 100%;
     margin-top: 10px;

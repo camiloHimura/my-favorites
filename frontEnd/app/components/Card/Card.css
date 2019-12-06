@@ -7,13 +7,13 @@
   display: flex;
   padding: 10px;
   font-size: 16px;
-  color: var(--gray);
   transition: all .5s;
   align-items: center;
   box-sizing: border-box;
   flex-direction: column;
   justify-content: center;
   background: var(--white);
+  color: var(--paragraph-color);
   margin: calc(var(--cards-margin) / 2);
   width: calc(100% / var(--num-cards) - var(--cards-margin));
 }

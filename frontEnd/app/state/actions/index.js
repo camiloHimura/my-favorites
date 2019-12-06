@@ -2,7 +2,7 @@ import { ADD_TAG, REMOVE_TAG, INVALID_TAG, TAGS_LOADED, UPADTED_TAG, ADD_LINK, L
         REMOVE_LINK, INVALID_LINK, REMOVE_TAG_LINK} from "./actions-types";
 
 export { getAllTags, addTag, removeTag, updateTag} from "./asyncTagAction";
-export { getAllLinks, addLink, removeTagLink} from "./asyncLinkAction";
+export { getAllLinks, addLink, removeTagLink, removeLink} from "./asyncLinkAction";
 
 export function linkLoadedAction(payload) {
     return {type: LINKS_LOADED, payload}
