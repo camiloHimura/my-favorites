@@ -25,7 +25,7 @@ module.exports = {
     async start(){
         try{
             await db.connect();
-            App.listen(config.port, () => console.log("App Running"));
+            App.listen(config.port, () => console.log(`App Running port ${config.port}`));
         }catch(error){
             console.log("index error", error)
         }
