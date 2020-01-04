@@ -40,7 +40,7 @@ module.exports = env => {
     devServer: {
       historyApiFallback: true,
     },
-    mode: env.mode,
+    mode: 'development',
     plugins: [
       new HtmlWebpackPlugin ({
         template: 'app/index.html'
