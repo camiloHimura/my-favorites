@@ -1,0 +1,31 @@
+{
+  "name": "my-favorites",
+  "version": "1.0.0",
+  "description": "node api - mongo",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec npm run server",
+    "start:dev": "nodemon --exec env-cmd -f ./config/dev.env npm run server",
+    "start:prod": "NODE_ENV=prod nodemon --exec npm run server",
+    "server": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "mongo",
+    "express"
+  ],
+  "author": "camiloHimura",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.14",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.0.1"
+  }
+}
