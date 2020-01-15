@@ -12,7 +12,7 @@ function MockData(){
 describe('Links reducer', () => {
     it('return default store', () => {
         const newState = linksReducer(undefined, {});
-        expect(newState).toEqual([{id: '0', title: "test", url: "https://www.valentinog.com/blog/redux/", tags: [0]}])
+        expect(newState).toEqual([])
     })
     
     it('reciving a ADD_LINK type', () => {

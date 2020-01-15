@@ -10,7 +10,7 @@ const mapDispachToProps = dispatch => ({
         updateTag: (id, name, color) => dispatch(updateTag(id, name, color)),
       })
 
-function Tag(props){
+export function Tag(props){
     const inputEl = useRef(null);
     const [isEdit, setIsEdit] = useState(false);
     const {color = "0396A6", onClose, name = "", updateTag, id, updateDisable = false} = props;

@@ -6,5 +6,10 @@
   ],
   "moduleNameMapper": {
     "^.+\\.(css)$": "<rootDir>/app/utils/__mocks__/styleMock.js"
-  }
+  },
+  "setupFiles": [
+    "raf/polyfill",
+    "<rootDir>/app/test/jest.setup.js"
+  ],
+  "snapshotSerializers": ["enzyme-to-json/serializer"]
 }

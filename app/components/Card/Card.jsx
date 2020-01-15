@@ -15,7 +15,7 @@ const mapDispachToProps = dispatch => ({
 
 const fakeText = `Donec in venenatis metus. Suspendisse potenti. Cras ultricies turpis sit amet massa suscipit, in egestas sapien finibus.`;
 
-function Card(props) {
+export function Card(props) {
   const {id = 0, title, url, tags = [], description = fakeText} = props;
   const containerUrl = useRef(null);
   const [isContHover, setIsContHover] = useState(false);
