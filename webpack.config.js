@@ -4,17 +4,17 @@ var HtmlWebpackPlugin =  require('html-webpack-plugin');
 
 const ENV = process.env.NODE_ENV || 'develop';
 if(ENV === 'develop'){
-  require('dotenv').config({ path: '.env.dev'})
+  require('dotenv').config({ path: '.env.dev' })
 }
 
 module.exports = env => {
-  const isPRoduction = env.mode === 'production'
+  const isPRoduction = env.mode === 'production';
   return {
     entry: ['babel-polyfill', './app/index.js'],
     output: {
       publicPath: '/',
       filename: 'index_bundle.js',
-      path: path.resolve(__dirname , 'build'),
+      path: path.resolve(__dirname , 'public'),
     },
     module: {
       rules: [

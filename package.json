@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "npm run server",
+    "start:dev": "webpack-dev-server --open --env.mode development",
+    "start:prod": "webpack-dev-server --open --env.mode production",
+    "server": "node server/index.js",
     "build": "webpack --progress",
     "build:prod": "webpack -p --progress --env.mode production",
-    "start": "webpack-dev-server --open --env.mode development",
-    "start:prod": "webpack-dev-server --open --env.mode production",
     "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "heroku-postbuild": "npm run build:prod"
   },
   "keywords": [
     "react",
@@ -23,6 +26,7 @@
   "dependencies": {
     "axios": "^0.19.1",
     "babel-polyfill": "^6.26.0",
+    "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
