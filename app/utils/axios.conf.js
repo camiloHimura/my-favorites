@@ -1,14 +1,9 @@
-const axios = require('axios');
-const port = 8082;
-
-const config = {
-  port,
-  url: process.env.API_URL || `http://localhost:${port}/api`
-}
+import axios from 'axios';
+import { API_URL, API_TIMEOUT} from '../contans';
 
 const instance = axios.create({
-  baseURL: config.url,
-  timeout: 1000,
+  baseURL: API_URL,
+  timeout: API_TIMEOUT,
 });
 
 instance.interceptors.request.use(function (config) {
@@ -26,4 +21,4 @@ instance.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
-module.exports = instance;
+export default instance;

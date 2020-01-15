@@ -1,3 +1,11 @@
 import * as KEY_CODES  from './keyCodes.js';
 
-export {KEY_CODES};
+const PORT = 8082;
+const API_URL = process.env.API_URL || `http://localhost:${port}/api`;
+const API_TIMEOUT = 1000;
+
+export {PORT,
+        API_URL,
+        KEY_CODES,
+        API_TIMEOUT
+      };

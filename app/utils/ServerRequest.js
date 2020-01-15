@@ -1,13 +1,13 @@
-const instance = require("./axios.conf")
+import instance from './axios.conf';
 
 export function getTags(){
-  return instance.get("/tag")
+  return instance.get('/tag')
           .then(({data}) => data)
           .catch(catchError);
 }
 
 export function createTag(info){
-  return instance.put("/tag", info)
+  return instance.put('/tag', info)
           .then(({data}) => data)
           .catch(catchError);
       }
@@ -25,13 +25,13 @@ export function deleteTag(id){
 }
 
 export function getLinks(){
-  return instance.get("/link")
+  return instance.get('/link')
           .then(({data}) => data)
           .catch(catchError);
 }
 
 export function createLink(info){
-  return instance.put("/link", info)
+  return instance.put('/link', info)
           .then(({data}) => data)
           .catch(catchError);
 }
@@ -49,6 +49,6 @@ export function removeTagLinkRequest(linkID, tagID){
 }
 
 function catchError(error){
-    console.log("---- my handle error ---", error);
+    console.log('---- my handle error ---', error);
     throw(error);
 }

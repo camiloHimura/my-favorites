@@ -8,7 +8,7 @@ describe('Validation reducer', () => {
         expect(newState).toEqual({invalidTag: false, invalidLink: false});
     })
 
-    it('recivin INVALID_TAG type', () => {
+    it('reciving INVALID_TAG type', () => {
         const newState = validationReducer(undefined, {
                                                     type: INVALID_TAG, 
                                                     payload: true,
@@ -17,7 +17,7 @@ describe('Validation reducer', () => {
         expect(newState).toEqual({invalidTag: true, invalidLink: false});
     })
 
-    it('recivin INVALID_LINK type', () => {
+    it('reciving INVALID_LINK type', () => {
         const newState = validationReducer(undefined, {
                                                     type: INVALID_LINK, 
                                                     payload: true,
