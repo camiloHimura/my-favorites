@@ -25,7 +25,6 @@ export function Card(props) {
   }
   
   function removeLink() {
-    console.log("cardId", props.id)
     props.removeLink(props.id);
   }
 

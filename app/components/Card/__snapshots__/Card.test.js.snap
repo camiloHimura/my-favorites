@@ -40,22 +40,20 @@ exports[`take snapshot 1`] = `
     className="card__cont contTags --flex --wrap"
   >
     <Connect(Tag)
-      key="123-0"
+      id={123}
+      key="1991-0"
       onClose={[Function]}
       updateDisable={true}
     />
     <Connect(Tag)
-      key="123-1"
+      id={456}
+      key="1991-1"
       onClose={[Function]}
       updateDisable={true}
     />
     <Connect(Tag)
-      key="123-2"
-      onClose={[Function]}
-      updateDisable={true}
-    />
-    <Connect(Tag)
-      key="123-3"
+      id={789}
+      key="1991-2"
       onClose={[Function]}
       updateDisable={true}
     />
