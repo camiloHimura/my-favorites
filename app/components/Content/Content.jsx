@@ -20,17 +20,18 @@ const mapDispachToProps = dispatch => ({
         getAllLinks: () => dispatch(getAllLinks()),
       })
       
-
-function Content(props) {
-  console.log("Content links", props.links)
+export function Content(props) {
+  const {links, numLoadingCards = 9} = props;
+  //console.log("Content links", links)
   useEffect(() => {
+    console.log('props.getAllLinks()')
       props.getAllLinks();
   }, [])
 
-  const isLoadingLinks = props.links && props.links.length == 0;
-
+  const isLoadingLinks = links && links.length == 0;
+  
   function cardsLoading(){
-    return Array.from({length: 9})
+    return Array.from({length: numLoadingCards})
               .map((_, index) => <CardLoading key={`cardLoading-${index}`}/>)
   }
 
@@ -43,7 +44,7 @@ function Content(props) {
             <Row><CreateLink/></Row>
             
             <Row className="--wrap --spaceEvenly">
-              {isLoadingLinks? cardsLoading(): cardsLoaded(props.links)}
+              {isLoadingLinks? cardsLoading(): cardsLoaded(links)}
             </Row>
           </section>
 }

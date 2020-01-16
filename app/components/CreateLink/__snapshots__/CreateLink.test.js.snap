@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`take snapshot 1`] = `
+<div
+  className="createLink --flex --wrap"
+>
+  <div
+    className="createLink__contInputs --flex"
+  >
+    <input
+      className="createLink__contInputs__title"
+      onFocus={[Function]}
+      placeholder="Title"
+    />
+    <input
+      className="createLink__contInputs__url"
+      onFocus={[Function]}
+      placeholder="Url"
+    />
+  </div>
+  <button
+    className="createLink__send"
+    onClick={[Function]}
+    type="button"
+  >
+    Send
+  </button>
+  <div
+    className="createLink__contTags --flex"
+  >
+    <AutoComplete
+      autoHide={false}
+      clearAfterSelecting={true}
+      onSelected={[Function]}
+      placeHolder="Add Tags"
+      propertyFilter="name"
+    />
+    <div
+      className="contOptions"
+    />
+  </div>
+</div>
+`;

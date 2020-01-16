@@ -1,7 +1,7 @@
 import React from 'react';
 import './CardLoading.css';
 
-function CardLoading() {
+export function CardLoading() {
 
   return  <div className="cardLoading">
             <div className="cardLoading__title">

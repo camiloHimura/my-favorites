@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render snapshot of final links 1`] = `
+<section
+  className="Content"
+>
+  <Row
+    className="--flexEnd"
+  >
+    <Search
+      style={
+        Object {
+          "width": "30%",
+        }
+      }
+    />
+  </Row>
+  <Row>
+    <Connect(CreateLink) />
+  </Row>
+  <Row
+    className="--wrap --spaceEvenly"
+  >
+    <Connect(Card)
+      description="test description"
+      id="id test"
+      key="card-0"
+      title="title test"
+      url="test url"
+    />
+    <Connect(Card)
+      description="test description"
+      id="id test"
+      key="card-1"
+      title="title test"
+      url="test url"
+    />
+    <Connect(Card)
+      description="test description"
+      id="id test"
+      key="card-2"
+      title="title test"
+      url="test url"
+    />
+  </Row>
+</section>
+`;
+
+exports[`take snapshot 1`] = `
+<section
+  className="Content"
+>
+  <Row
+    className="--flexEnd"
+  >
+    <Search
+      style={
+        Object {
+          "width": "30%",
+        }
+      }
+    />
+  </Row>
+  <Row>
+    <Connect(CreateLink) />
+  </Row>
+  <Row
+    className="--wrap --spaceEvenly"
+  >
+    <CardLoading
+      key="cardLoading-0"
+    />
+    <CardLoading
+      key="cardLoading-1"
+    />
+    <CardLoading
+      key="cardLoading-2"
+    />
+    <CardLoading
+      key="cardLoading-3"
+    />
+    <CardLoading
+      key="cardLoading-4"
+    />
+    <CardLoading
+      key="cardLoading-5"
+    />
+    <CardLoading
+      key="cardLoading-6"
+    />
+    <CardLoading
+      key="cardLoading-7"
+    />
+    <CardLoading
+      key="cardLoading-8"
+    />
+    <CardLoading
+      key="cardLoading-9"
+    />
+  </Row>
+</section>
+`;
