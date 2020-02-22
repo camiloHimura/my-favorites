@@ -8,10 +8,28 @@ exports[`render snapshot of final links 1`] = `
     className="--flexEnd"
   >
     <Search
-      style={
-        Object {
-          "width": "30%",
-        }
+      getAllLinks={[MockFunction]}
+      links={
+        Array [
+          Object {
+            "description": "test description",
+            "id": "id test",
+            "title": "title test",
+            "url": "test url",
+          },
+          Object {
+            "description": "test description",
+            "id": "id test",
+            "title": "title test",
+            "url": "test url",
+          },
+          Object {
+            "description": "test description",
+            "id": "id test",
+            "title": "title test",
+            "url": "test url",
+          },
+        ]
       }
     />
   </Row>
@@ -54,11 +72,8 @@ exports[`take snapshot 1`] = `
     className="--flexEnd"
   >
     <Search
-      style={
-        Object {
-          "width": "30%",
-        }
-      }
+      getAllLinks={[MockFunction]}
+      links={Array []}
     />
   </Row>
   <Row>

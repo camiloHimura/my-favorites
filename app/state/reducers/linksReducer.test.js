@@ -1,5 +1,6 @@
 import {ADD_LINK, LINKS_LOADED, REMOVE_LINK, REMOVE_TAG_LINK} from '../actions/actions-types';
 import linksReducer from './linksReducer'
+import {searchLinkAction} from '../actions'
 
 function MockData(){
     return [
@@ -44,6 +45,32 @@ describe('Links reducer', () => {
         expect(state).toEqual(
             expect.not.arrayContaining([fistLink]),
         );
+    })
+    
+    it('search by links name', () => {
+      const links = MockData();
+      const newState = linksReducer(links, searchLinkAction('test'));
+      expect(newState.length).toBe(links.length);
+    })
+
+    it('search by unexisting name', () => {
+      const links = MockData();
+      const newState = linksReducer(links, searchLinkAction('noNames'));
+      expect(newState.length).toBe(0);
+    })
+
+    it('search by specific name', () => {
+      const links = MockData();
+      const ramdonLink = links[links.length - 1];
+      const [newState] = linksReducer(links, searchLinkAction(ramdonLink.title));
+      expect(newState).toEqual(ramdonLink);
+    })
+
+    it('search by specific uppercase', () => {
+      const links = MockData();
+      const ramdonLink = links[links.length - 1];
+      const [newState] = linksReducer(links, searchLinkAction(ramdonLink.title.toUpperCase()));
+      expect(newState).toEqual(ramdonLink);
     })
     
     describe('reciving a REMOVE_TAG_LINK type', () => {

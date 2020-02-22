@@ -10,7 +10,7 @@ import Row from "../generals/Row";
 import CreateLink from "../CreateLink";
 import CardLoading from "../CardLoading";
 
-import {getAllLinks} from "../../state/actions";
+import {getAllLinks, searchLinkAction} from "../../state/actions";
 
 const mapStateToProps = state => {
         return {links: state.links}
@@ -18,18 +18,17 @@ const mapStateToProps = state => {
 
 const mapDispachToProps = dispatch => ({
         getAllLinks: () => dispatch(getAllLinks()),
+        searchLink: text => dispatch(searchLinkAction(text)),
       })
       
 export function Content(props) {
-  const {links, numLoadingCards = 9} = props;
-  //console.log("Content links", links)
+  const {links = [], numLoadingCards = 9, searchLink, getAllLinks} = props;
+
   useEffect(() => {
-    console.log('props.getAllLinks()')
-      props.getAllLinks();
+    getAllLinks();
   }, [])
 
   const isLoadingLinks = links && links.length == 0;
-  
   function cardsLoading(){
     return Array.from({length: numLoadingCards})
               .map((_, index) => <CardLoading key={`cardLoading-${index}`}/>)
@@ -40,7 +39,7 @@ export function Content(props) {
   }
 
   return  <section className="Content">                
-            <Row className="--flexEnd"><Search style={{"width": "30%"}}/></Row>
+            <Row className="--flexEnd"><Search links={links} searchLink={searchLink} getAllLinks={getAllLinks}/></Row>
             <Row><CreateLink/></Row>
             
             <Row className="--wrap --spaceEvenly">

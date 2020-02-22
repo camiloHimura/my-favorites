@@ -10,5 +10,6 @@ export const UPADTE_LINK = "UPADTE_LINK";
 export const INVALID_LINK = "INVALID_LINK";
 export const LINKS_LOADED = "LINKS_LOADED";
 export const REMOVE_TAG_LINK = "REMOVE_TAG_LINK";
+export const SEARCH_LINK = "SEARCH_LINK";
 
 export const SWITCH_LOAGIND = "SWITCH_LOAGIND";

@@ -1,5 +1,5 @@
 import { ADD_TAG, REMOVE_TAG, INVALID_TAG, TAGS_LOADED, UPADTED_TAG, ADD_LINK, LINKS_LOADED, 
-        REMOVE_LINK, INVALID_LINK, REMOVE_TAG_LINK} from "./actions-types";
+        REMOVE_LINK, INVALID_LINK, REMOVE_TAG_LINK, SEARCH_LINK} from "./actions-types";
 
 export { getAllTags, addTag, removeTag, updateTag} from "./asyncTagAction";
 export { getAllLinks, addLink, removeTagLink, removeLink} from "./asyncLinkAction";
@@ -14,6 +14,10 @@ export function addLinkAction(payload) {
 
 export function removeLinkAction(payload) {
     return {type: REMOVE_LINK, payload}
+}
+
+export function searchLinkAction(payload) {
+    return {type: SEARCH_LINK, payload}
 }
 
 export function invalidLink(payload) {
@@ -43,4 +47,3 @@ export function removeTagAction(payload) {
 export function invalidTag(payload) {
     return {type: INVALID_TAG, payload}
 }
-
