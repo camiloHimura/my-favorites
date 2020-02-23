@@ -15,8 +15,8 @@ function App(){
                   ]
   
   return <div className="MyFavorites">
-            <Nav items={items}/>
-            <SideBar/>
+            {/* <Nav items={items}/>*/}
+             <SideBar/>
             <Content/>
           </div>
 }

@@ -27,6 +27,11 @@ h2.--filters{
     background: var(--blue);
 }
 
+.sideBar__options{
+    padding: 0px 10px;
+    max-width: 40px;
+    border-right: 1px solid var(--gray);
+}
 
 .sideBar__container{
     width: 100%;

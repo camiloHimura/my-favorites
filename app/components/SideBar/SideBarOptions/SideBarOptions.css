@@ -1,0 +1,11 @@
+button{
+  padding: 0px;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+.sideBarOptions{
+  padding: 0px 10px;
+  max-width: 40px;
+  border-right: 1px solid var(--gray);
+}

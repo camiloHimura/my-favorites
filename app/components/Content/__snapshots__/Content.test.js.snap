@@ -33,9 +33,6 @@ exports[`render snapshot of final links 1`] = `
       }
     />
   </Row>
-  <Row>
-    <Connect(CreateLink) />
-  </Row>
   <Row
     className="--wrap --spaceEvenly"
   >
@@ -75,9 +72,6 @@ exports[`take snapshot 1`] = `
       getAllLinks={[MockFunction]}
       links={Array []}
     />
-  </Row>
-  <Row>
-    <Connect(CreateLink) />
   </Row>
   <Row
     className="--wrap --spaceEvenly"

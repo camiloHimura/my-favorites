@@ -25,10 +25,6 @@ test('render loading links', () => {
   expect(Component.find('CardLoading')).toHaveLength(props.numLoadingCards);
 });
 
-test('render CreateLink component', () => {
-  expect(Component.find(CreateLink)).toHaveLength(1);
-});
-
 test('render loading links', () => {
   expect(Component.find('CardLoading')).toHaveLength(props.numLoadingCards);
 });

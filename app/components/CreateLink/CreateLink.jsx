@@ -26,7 +26,7 @@ export function CreateLink(props) {
   const inputTitle = useRef();
   const inputUrl = useRef();
   const [tags, setTags] = useState([]);
-
+  console.log('CreateLink props', props)
   function removeInvalid(event){
     event.target.classList.remove("invalid");
   }

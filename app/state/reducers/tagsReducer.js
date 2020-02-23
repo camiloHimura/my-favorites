@@ -1,6 +1,6 @@
 import {ADD_TAG, REMOVE_TAG, TAGS_LOADED, UPADTED_TAG} from "../actions/actions-types";
 
-export default function tagsReducer(state = [{id: 0, name: "test Tag", color: "ffff"}], action){
+export default function tagsReducer(state = [], action){
     switch(action.type){
         case TAGS_LOADED:
             return [...action.payload]
