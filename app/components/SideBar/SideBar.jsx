@@ -8,8 +8,7 @@ export default function SideBar(props) {
   const [SelectedComponent, setSelectedComponent] = useState(null)
 
   return  <section className="sideBar">
-            <SideBarOptions
-              setSelectedComponent={setSelectedComponent}/>
+            <SideBarOptions setSelectedComponent={setSelectedComponent}/>
             <div className="sideBar__container">
               {SelectedComponent && <SelectedComponent/>}
             </div>

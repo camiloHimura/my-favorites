@@ -6,17 +6,6 @@ import Icon from "../../generals/Icon";
 import CreateLink from "../../CreateLink";
 import TagBox from "../../TagBox";
 
-/* const Filters = <Fragment>
-  <h2 className="--filters">Filters</h2>
-    <Board
-      isWrap={true} 
-      options={switchs} 
-      Component={Switch}
-      setOptions={item => setSwitchs(prev => [item, ...prev])}
-      className="boardSwitchs"
-      placeHolder="Create Category"/>
-</Fragment> */
-
 export default function SideBarOptions(props) {
   const { setSelectedComponent } = props;
 
@@ -36,4 +25,3 @@ export default function SideBarOptions(props) {
 
 SideBarOptions.propTypes = {
 }
-

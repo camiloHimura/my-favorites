@@ -12,7 +12,7 @@ function MockData(){
 describe('Tag reducer', () => {
     it('return default store', () => {
         const newState = tagsReducer(undefined, {});
-        expect(newState).toEqual([{id: 0, name: "test Tag", color: "ffff"}]);
+        expect(newState).toEqual([]);
     })
     
     it('reciving a ADD_LINK type', () => {

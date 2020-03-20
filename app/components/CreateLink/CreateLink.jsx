@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {TagPropType} from "../../propsTypes";
@@ -6,7 +6,7 @@ import "./CreateLink.css"
 
 import Tag from "../generals/Tag";
 import AutoComplete from "../generals/AutoComplete";
-import {addLink, invalidLink} from "../../state/actions";
+import {addLink, invalidLink, getAllTags} from "../../state/actions";
 
 const mapStateToProps = state => {
   return {
@@ -19,6 +19,7 @@ const mapDispachToProps = dispatch => {
   return {
     addLink: info => dispatch(addLink(info)),
     invalidLink: () => dispatch(invalidLink()),
+    getAllTags: () => dispatch(getAllTags()),
   }
 }
 
@@ -26,7 +27,14 @@ export function CreateLink(props) {
   const inputTitle = useRef();
   const inputUrl = useRef();
   const [tags, setTags] = useState([]);
-  console.log('CreateLink props', props)
+  console.log('CreateLink props', props);
+
+  useEffect(() => {
+    if(!props.tags.length){
+      props.getAllTags();
+    }
+  }, []);
+
   function removeInvalid(event){
     event.target.classList.remove("invalid");
   }
@@ -59,26 +67,26 @@ export function CreateLink(props) {
     setTags([]);
   }
 
-  return  <div className="createLink --flex --wrap">
-              <div className="createLink__contInputs --flex">
-                  <input className="createLink__contInputs__title" placeholder="Title" onFocus={removeInvalid} ref={inputTitle}/>
-                  <input className="createLink__contInputs__url" placeholder="Url" onFocus={removeInvalid} ref={inputUrl}/>
-              </div>
-              <button className="createLink__send" type="button" onClick={check}>Send</button>
+  return  <div className="createLink">
+            <h2>Create Link</h2>
 
-              <div className="createLink__contTags --flex">
-                  <AutoComplete 
-                      autoHide={false}
-                      propertyFilter="name" 
-                      options={props.tags} 
-                      placeHolder="Add Tags"
-                      clearAfterSelecting={true}
-                      onSelected={tag => setTags([{...tag}, ...tags])}/>
+            <input className="createLink__contInputs__title" placeholder="Title" onFocus={removeInvalid} ref={inputTitle}/>
+            <input className="createLink__contInputs__url" placeholder="Url" onFocus={removeInvalid} ref={inputUrl}/>
+            <button className="createLink__send" type="button" onClick={check}>Send</button>
 
-                  <div className="contOptions">
-                      {tags.map((tag, index) => <Tag key={`${index}-boardTags`} {...tag}/>)}
-                  </div>
+            <div className="createLink__contTags --flex">
+              <AutoComplete 
+                  autoHide={false}
+                  propertyFilter="name" 
+                  options={props.tags} 
+                  placeHolder="Add Tags"
+                  clearAfterSelecting={true}
+                  onSelected={tag => setTags([{...tag}, ...tags])}/>
+
+              <div className="contOptions">
+                  {tags.map((tag, index) => <Tag key={`${index}-boardTags`} {...tag}/>)}
               </div>
+            </div>
           </div>
 }
 

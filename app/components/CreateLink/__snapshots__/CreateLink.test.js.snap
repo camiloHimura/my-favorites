@@ -2,22 +2,21 @@
 
 exports[`take snapshot 1`] = `
 <div
-  className="createLink --flex --wrap"
+  className="createLink"
 >
-  <div
-    className="createLink__contInputs --flex"
-  >
-    <input
-      className="createLink__contInputs__title"
-      onFocus={[Function]}
-      placeholder="Title"
-    />
-    <input
-      className="createLink__contInputs__url"
-      onFocus={[Function]}
-      placeholder="Url"
-    />
-  </div>
+  <h2>
+    Create Link
+  </h2>
+  <input
+    className="createLink__contInputs__title"
+    onFocus={[Function]}
+    placeholder="Title"
+  />
+  <input
+    className="createLink__contInputs__url"
+    onFocus={[Function]}
+    placeholder="Url"
+  />
   <button
     className="createLink__send"
     onClick={[Function]}

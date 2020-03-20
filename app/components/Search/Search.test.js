@@ -22,8 +22,8 @@ test('call getAllLinks', () => {
   component.find('input').simulate('input', { target: { value: '' } })
   expect(spyObj.getAllLinks).toHaveBeenCalled()
 });
-|
-||||est('call searchLink', () => {
+
+test('call searchLink', () => {
   component.find('input').simulate('input', { target: { value: 'test' } })
   expect(spyObj.searchLink).toHaveBeenCalled()
 });
