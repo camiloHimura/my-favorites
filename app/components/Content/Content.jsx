@@ -39,7 +39,9 @@ export function Content(props) {
   }
 
   return  <section className="Content">                
-            <Row className="--flexEnd"><Search links={links} searchLink={searchLink} getAllLinks={getAllLinks}/></Row>
+            <Row className="--flexEnd">
+              <Search links={links} searchLink={searchLink} getAllLinks={getAllLinks}/>
+            </Row>
             <Row className="--wrap --spaceEvenly">
               {isLoadingLinks? cardsLoading(): cardsLoaded(links)}
             </Row>

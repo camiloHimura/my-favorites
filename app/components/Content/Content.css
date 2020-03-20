@@ -1,5 +1,6 @@
 .Content{
-    width: 70%;
-    box-sizing: border-box;
-    padding: 20px 20px 20px 0px;
+  width: calc(100% - var(--sidebar-width));
+  box-sizing: border-box;
+  padding: 20px 20px 20px 0px;
+  margin-left: var(--sidebar-width);
 }

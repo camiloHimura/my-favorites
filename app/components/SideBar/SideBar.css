@@ -3,11 +3,12 @@
   --margin-right: 10px;
 
   display: flex;
-  padding: 20px 0px;
-  width: calc(30% - 20px);
+  position: fixed;
+  height: 100vh;
   box-sizing: border-box;
   margin-right: var(--margin-right);
   padding-right: var(--margin-right);
+  width: calc(var(--sidebar-width) - var(--margin-right));
 }
 
 h2{
@@ -35,6 +36,7 @@ h2.--filters{
   position: relative;
   align-items: center;
   flex-direction: column;
+  padding-top: var(--margin-right);
   padding-left: var(--margin-right);
 }
 

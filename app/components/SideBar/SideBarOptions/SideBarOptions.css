@@ -4,8 +4,22 @@ button{
   border: none;
   background: transparent;
 }
+
 .sideBarOptions{
-  padding: 0px 10px;
-  max-width: 40px;
-  border-right: 1px solid var(--gray);
+  width: 50px;
+  background: var(--white);
+}
+
+.sideBarOptions button{
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.--selected{
+  background: var(--light-blue);
+}
+.--selected i{
+  color: var(--white);
 }
