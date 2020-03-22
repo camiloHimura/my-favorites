@@ -16,6 +16,7 @@
 
 .autoComplete__contOptions > div{
     padding: 6px;
+    cursor: pointer;
 }
 
 .autoComplete__contOptions > div:hover,

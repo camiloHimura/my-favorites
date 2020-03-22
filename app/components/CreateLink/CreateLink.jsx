@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import {TagPropType} from "../../propsTypes";
 import "./CreateLink.css"
 
-import Tag from "../generals/Tag";
-import AutoComplete from "../generals/AutoComplete";
+import TagList from "../generals/TagList";
 import {addLink, invalidLink, getAllTags} from "../../state/actions";
 
 const mapStateToProps = state => {
@@ -26,8 +25,7 @@ const mapDispachToProps = dispatch => {
 export function CreateLink(props) {
   const inputTitle = useRef();
   const inputUrl = useRef();
-  const [tags, setTags] = useState([]);
-  console.log('CreateLink props', props);
+  const [savedTags, setSavedTags] = useState([]);
 
   useEffect(() => {
     if(!props.tags.length){
@@ -55,7 +53,7 @@ export function CreateLink(props) {
         props.addLink({
             title: inputTitle.current.value,
             url: inputUrl.current.value, 
-            tags: tags.map(tag => tag.id)
+            tags: savedTags.map(tag => tag.id)
         });
         clear();
     }
@@ -64,7 +62,7 @@ export function CreateLink(props) {
   function clear(){
     inputUrl.current.value = "";
     inputTitle.current.value = "";
-    setTags([]);
+    setSavedTags([]);
   }
 
   return  <div className="createLink">
@@ -74,19 +72,16 @@ export function CreateLink(props) {
             <input className="createLink__contInputs__url" placeholder="Url" onFocus={removeInvalid} ref={inputUrl}/>
             <button className="createLink__send" type="button" onClick={check}>Send</button>
 
-            <div className="createLink__contTags --flex">
-              <AutoComplete 
-                  autoHide={false}
-                  propertyFilter="name" 
-                  options={props.tags} 
-                  placeHolder="Add Tags"
-                  clearAfterSelecting={true}
-                  onSelected={tag => setTags([{...tag}, ...tags])}/>
-
-              <div className="contOptions">
-                  {tags.map((tag, index) => <Tag key={`${index}-boardTags`} {...tag}/>)}
-              </div>
-            </div>
+            <TagList
+              className="createLink__contTags --flex"
+              autoHide={false}
+              propertyFilter="name" 
+              tags={props.tags} 
+              placeHolder="Add Tags"
+              clearAfterSelecting={true}
+              savedTags={savedTags}
+              setSavedTags={setSavedTags}
+            />
           </div>
 }
 

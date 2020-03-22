@@ -24,19 +24,14 @@ exports[`take snapshot 1`] = `
   >
     Send
   </button>
-  <div
+  <TagList
+    autoHide={false}
     className="createLink__contTags --flex"
-  >
-    <AutoComplete
-      autoHide={false}
-      clearAfterSelecting={true}
-      onSelected={[Function]}
-      placeHolder="Add Tags"
-      propertyFilter="name"
-    />
-    <div
-      className="contOptions"
-    />
-  </div>
+    clearAfterSelecting={true}
+    placeHolder="Add Tags"
+    propertyFilter="name"
+    savedTags={Array []}
+    setSavedTags={[Function]}
+  />
 </div>
 `;
