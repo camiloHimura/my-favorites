@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, mounted } from 'enzyme';
 
 import { Content } from './Content';
-import CreateLink from '../CreateLink';
 import Card from '../Card';
 
 var Component;

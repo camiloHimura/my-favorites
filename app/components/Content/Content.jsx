@@ -7,14 +7,15 @@ import "./Content.css";
 import Card from "../Card";
 import Search from "../Search";
 import Row from "../generals/Row";
-import CreateLink from "../CreateLink";
 import CardLoading from "../CardLoading";
+import TagList from "../generals/TagList";
 
 import {getAllLinks, searchLinkAction} from "../../state/actions";
 
-const mapStateToProps = state => {
-        return {links: state.links}
-      }
+const mapStateToProps = state => ({
+  tags: state.tags,
+  links: state.links,
+})
 
 const mapDispachToProps = dispatch => ({
         getAllLinks: () => dispatch(getAllLinks()),
@@ -22,7 +23,7 @@ const mapDispachToProps = dispatch => ({
       })
       
 export function Content(props) {
-  const {links = [], numLoadingCards = 9, searchLink, getAllLinks} = props;
+  const {links = [], numLoadingCards = 9, searchLink, getAllLinks, tags} = props;
 
   useEffect(() => {
     getAllLinks();
@@ -38,9 +39,18 @@ export function Content(props) {
     return links.map((info, index) => <Card key={`card-${index}`} {...info}/>)
   }
 
-  return  <section className="Content">                
-            <Row className="--flexEnd">
+  return  <section className="Content">
+            <Row className="--flexColumn">
               <Search links={links} searchLink={searchLink} getAllLinks={getAllLinks}/>
+              <TagList
+                tags={tags} 
+                autoHide={false}
+                className="tagList"
+                propertyFilter="name"
+                clearAfterSelecting={true}
+                placeHolder="Filter By Tags"
+                onTagsSaved={tags => console.log(tags)}
+              />
             </Row>
             <Row className="--wrap --spaceEvenly">
               {isLoadingLinks? cardsLoading(): cardsLoaded(links)}

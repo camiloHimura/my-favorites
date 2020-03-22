@@ -98,7 +98,6 @@ function AutoComplete (props){
           </div>
 }
 
-
 AutoComplete.propTypes = {
   options: PropTypes.array.isRequired, 
   autoHide: PropTypes.bool, 

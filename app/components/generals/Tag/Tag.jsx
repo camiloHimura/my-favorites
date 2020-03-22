@@ -31,7 +31,7 @@ export function Tag(props){
     }
 
     return  <div className="Tag --ellipsis" style={{"background": `#${color}`}} onBlur={hideEdit}>
-              <Icon name="close" onClick={onClose} className={"close"} pointer={true}/>
+              <Icon name="close" onClick={() => onClose({id, name, color})} className={"close"} pointer={true}/>
               {!isEdit && <span className="pointer" onDoubleClick={activeEdit}>{name}</span>}
               {isEdit && <input className="editBox" placeholder={name} ref={inputEl} autoFocus onKeyPress={checkName}/>}
             </div>

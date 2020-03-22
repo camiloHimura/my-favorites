@@ -34,11 +34,11 @@ function BoardTags(props) {
 Colors.propTypes = {
   isWrap: PropTypes.bool, 
   Input: PropTypes.element,
-  options: PropTypes.array.isRequired,
   setOptions: PropTypes.func, 
   className: PropTypes.string, 
-  Component: PropTypes.element.isRequired, 
   placeHolder: PropTypes.string, 
+  options: PropTypes.array.isRequired,
+  Component: PropTypes.element.isRequired, 
 }
 
 export default BoardTags;

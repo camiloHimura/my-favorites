@@ -34,6 +34,9 @@
 .--flexEnd{
   justify-content: flex-end;
 }
+.--flexColumn{
+  flex-direction: column;
+}
 .--spaceEvenly{
   justify-content: space-evenly;
 }

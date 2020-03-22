@@ -48,12 +48,12 @@ export function Card(props) {
               )}
             </div>
             <div className="card_options --flex">
-              <div className="loading">
+{/*               <div className="loading">
                 <Icon name="edit" onClick={removeLink} className={"edit iconHover"} pointer={true}/>
               </div>
               <div className="loading">
                 <Icon name="close" onClick={removeLink} className={"close iconHover"} pointer={true}/>
-              </div>
+              </div> */}
             </div>
           </div>
 }

@@ -26,6 +26,7 @@ export function CreateLink(props) {
   const inputTitle = useRef();
   const inputUrl = useRef();
   const [savedTags, setSavedTags] = useState([]);
+  const [clearList, setClearList] = useState(false);
 
   useEffect(() => {
     if(!props.tags.length){
@@ -62,7 +63,7 @@ export function CreateLink(props) {
   function clear(){
     inputUrl.current.value = "";
     inputTitle.current.value = "";
-    setSavedTags([]);
+    setClearList(true)
   }
 
   return  <div className="createLink">
@@ -79,8 +80,8 @@ export function CreateLink(props) {
               tags={props.tags} 
               placeHolder="Add Tags"
               clearAfterSelecting={true}
-              savedTags={savedTags}
-              setSavedTags={setSavedTags}
+              onTagsSaved={setSavedTags}
+              clearList={clearList}
             />
           </div>
 }
