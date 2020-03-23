@@ -30,6 +30,12 @@ export function getLinks(){
           .catch(catchError);
 }
 
+export function getLinksByTags(tags){
+  return instance.get(`/link/byTags/${tags}`)
+          .then(({data}) => data)
+          .catch(catchError);
+}
+
 export function createLink(info){
   return instance.put('/link', info)
           .then(({data}) => data)

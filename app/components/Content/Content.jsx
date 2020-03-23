@@ -10,7 +10,7 @@ import Row from "../generals/Row";
 import CardLoading from "../CardLoading";
 import TagList from "../generals/TagList";
 
-import {getAllLinks, searchLinkAction} from "../../state/actions";
+import {getAllLinks, getAllLinksByTags, searchLinkAction} from "../../state/actions";
 
 const mapStateToProps = state => ({
   tags: state.tags,
@@ -18,12 +18,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispachToProps = dispatch => ({
-        getAllLinks: () => dispatch(getAllLinks()),
-        searchLink: text => dispatch(searchLinkAction(text)),
-      })
+  getAllLinks: () => dispatch(getAllLinks()),
+  getAllLinksByTags: tags => dispatch(getAllLinksByTags(tags)),
+  searchLink: text => dispatch(searchLinkAction(text)),
+})
       
 export function Content(props) {
-  const {links = [], numLoadingCards = 9, searchLink, getAllLinks, tags} = props;
+  const {links = [], numLoadingCards = 9, searchLink, getAllLinks, getAllLinksByTags, tags} = props;
 
   useEffect(() => {
     getAllLinks();
@@ -39,6 +40,24 @@ export function Content(props) {
     return links.map((info, index) => <Card key={`card-${index}`} {...info}/>)
   }
 
+  function formatTags(selectedTags = []){
+    const formatted = selectedTags.reduce((accum, {id}) => {
+                        if(accum === ''){ return id }
+                        return `${accum},${id}`
+                      }, '')
+    requestLinksByTags(formatted);
+  }
+  
+  function requestLinksByTags(tagsIds){
+    if(typeof tagsIds !== 'string' || tagsIds.startsWith(',') || tagsIds.endsWith(",")){
+      //todo add error hander
+      console.error('invalid format');
+      return;
+    }
+
+    getAllLinksByTags(tagsIds)
+  }
+
   return  <section className="Content">
             <Row className="--flexColumn">
               <Search links={links} searchLink={searchLink} getAllLinks={getAllLinks}/>
@@ -49,7 +68,7 @@ export function Content(props) {
                 propertyFilter="name"
                 clearAfterSelecting={true}
                 placeHolder="Filter By Tags"
-                onTagsSaved={tags => console.log(tags)}
+                onTagsSaved={formatTags}
               />
             </Row>
             <Row className="--wrap --spaceEvenly">

@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import {LINKS_LOADED} from '../actions/actions-types';
 import {addLinkAction, removeTagLinkAction, removeLinkAction} from '../actions'
-import {getAllLinks, addLink, removeTagLink, removeLink} from './asyncLinkAction';
+import {getAllLinks, getAllLinksByTags, addLink, removeTagLink, removeLink} from './asyncLinkAction';
 
 jest.mock('../../utils/ServerRequest'); 
 
@@ -13,8 +13,8 @@ describe('async actions', () => {
   var store;
 
   beforeEach(() =>{
-      const initialState = {};
-      store = mockStore(initialState);
+    const initialState = {};
+    store = mockStore(initialState);
   });
   
   afterEach(() => {
@@ -23,6 +23,14 @@ describe('async actions', () => {
 
   it('getAllLinks', () => {
       return store.dispatch(getAllLinks())
+          .then(() => {
+              const [firstAction] = store.getActions();
+              expect(firstAction.type).toBe(LINKS_LOADED);
+          });
+  })
+
+  it('getAllLinksByTags', () => {
+      return store.dispatch(getAllLinksByTags(''))
           .then(() => {
               const [firstAction] = store.getActions();
               expect(firstAction.type).toBe(LINKS_LOADED);

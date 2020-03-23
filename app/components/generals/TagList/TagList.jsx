@@ -15,8 +15,10 @@ function TagList(props) {
     }
   }, [clearList])
 
-  function onClose(info) {
-    console.log('closing for TagList', info)
+  function removeTag(tag) {
+    const filteredTags = savedTags.filter(({id}) => id !== tag.id);
+    setSavedTags(filteredTags);
+    onTagsSaved(filteredTags);
   }
   
   function addTags(selectedTag) {
@@ -37,7 +39,7 @@ function TagList(props) {
             />
 
             <div className="contOptions">
-                {savedTags.map((tag, index) => <Tag key={`${index}-boardTags`} updateDisable={true} onClose={onClose} {...tag}/>)}
+                {savedTags.map((tag, index) => <Tag key={`${index}-boardTags`} updateDisable={true} onClose={removeTag} {...tag}/>)}
             </div>
           </div>
 }
