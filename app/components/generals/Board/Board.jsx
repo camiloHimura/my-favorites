@@ -8,7 +8,7 @@ import Colors from '../../../utils/Colors';
 const {ENTER} = KEY_CODES;
 
 function BoardTags(props) {
-  let {options = [], setOptions, isWrap = false, placeHolder = "", Component, className, Input} = props;
+  let {options = [], setOptions, isWrap = false, placeHolder = "", Component, className} = props;
   
   const inputOptions = useRef();
 
@@ -22,10 +22,9 @@ function BoardTags(props) {
   }
 
   return  <div className={`board ${className} --flex ${isWrap? "--wrap": ""}`}>
-            {Input && <Input/>}
-            {!Input && <input placeholder={placeHolder} onKeyDown={addOption} ref={inputOptions}/>}
-            <div className="contOptions">
-                {options.map((option, index) => <Component key={`${index}-${className}`} {...option}/>)}
+            <input placeholder={placeHolder} onKeyDown={addOption} ref={inputOptions} data-test="input"/>
+            <div className="contOptions" data-test="container">
+                {options.map((option, index) => <Component key={`${index}-${className}`} {...option} data-test="element"/>)}
             </div>
           </div>
 
@@ -33,12 +32,11 @@ function BoardTags(props) {
 
 Colors.propTypes = {
   isWrap: PropTypes.bool, 
-  Input: PropTypes.element,
   setOptions: PropTypes.func, 
   className: PropTypes.string, 
   placeHolder: PropTypes.string, 
   options: PropTypes.array.isRequired,
-  Component: PropTypes.element.isRequired, 
+  Component: PropTypes.func.isRequired, 
 }
 
 export default BoardTags;

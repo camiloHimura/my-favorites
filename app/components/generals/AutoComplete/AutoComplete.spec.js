@@ -11,29 +11,27 @@ it('take snapshot', () => {
 });
 
 it('checking prop types', () => {
-  let valArray, valFunction, valBoolean, valObj, valString, valUndefined;
-
+  let response;
   const component = AutoComplete;
   const requiredValues = initialProps;
-  const values = [[], () => {}, false, {}, '', undefined];
 
-  [valArray] = setPropTypes({component, requiredValues, prop: 'options', values})
-  expect(valArray).toBeUndefined();
-
-  [,, valBoolean] = setPropTypes({component, requiredValues, prop: 'autoHide', values})
-  expect(valBoolean).toBeUndefined();
+  response = setPropTypes({component, requiredValues, prop: 'options', value: []})
+  expect(response).toBeUndefined();
   
-  [, valFunction] = setPropTypes({component, requiredValues, prop: 'onSelected', values})
-  expect(valFunction).toBeUndefined();
+  response = setPropTypes({component, requiredValues, prop: 'autoHide', value: true})
+  expect(response).toBeUndefined();
   
-  [,,,, valString] = setPropTypes({component, requiredValues, prop: 'placeHolder', values})
-  expect(valString).toBeUndefined();
-
-  [,,,, valString] = setPropTypes({component, requiredValues, prop: 'propertyFilter', values})
-  expect(valString).toBeUndefined();
-
-  [,, valBoolean,,] = setPropTypes({component, requiredValues, prop: 'clearAfterSelecting', values})
-  expect(valBoolean).toBeUndefined();
+  response = setPropTypes({component, requiredValues, prop: 'onSelected', value: () => {}})
+  expect(response).toBeUndefined();
+  
+  response = setPropTypes({component, requiredValues, prop: 'placeHolder', value: 'test'})
+  expect(response).toBeUndefined();
+  
+  response = setPropTypes({component, requiredValues, prop: 'propertyFilter', value: 'test 2'})
+  expect(response).toBeUndefined();
+  
+  response = setPropTypes({component, requiredValues, prop: 'clearAfterSelecting', value: true})
+  expect(response).toBeUndefined();
 });
 
 describe('hide and show options', () => {
