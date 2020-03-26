@@ -23,7 +23,7 @@ const mapDispachToProps = dispatch => ({
   searchLink: text => dispatch(searchLinkAction(text)),
 })
       
-export function Content(props) {
+function Content(props) {
   const {links = [], numLoadingCards = 9, searchLink, getAllLinks, getAllLinksByTags, tags} = props;
 
   useEffect(() => {
@@ -33,11 +33,11 @@ export function Content(props) {
   const isLoadingLinks = links && links.length == 0;
   function cardsLoading(){
     return Array.from({length: numLoadingCards})
-              .map((_, index) => <CardLoading key={`cardLoading-${index}`}/>)
+              .map((_, index) => <CardLoading key={`cardLoading-${index}`} data-test="cardLoading"/>)
   }
 
   function cardsLoaded(links){
-    return links.map((info, index) => <Card key={`card-${index}`} {...info}/>)
+    return links.map((info, index) => <Card key={`card-${index}`} {...info} data-test="card"/>)
   }
 
   function formatTags(selectedTags = []){
@@ -60,10 +60,11 @@ export function Content(props) {
 
   return  <section className="Content">
             <Row className="--flexColumn">
-              <Search links={links} searchLink={searchLink} getAllLinks={getAllLinks}/>
+              <Search links={links} searchLink={searchLink} getAllLinks={getAllLinks} data-test="search"/>
               <TagList
                 tags={tags} 
                 autoHide={false}
+                data-test="tagList"
                 className="tagList"
                 propertyFilter="name"
                 clearAfterSelecting={true}
