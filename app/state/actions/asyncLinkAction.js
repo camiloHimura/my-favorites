@@ -2,10 +2,10 @@ import {getLinks, getLinksByTags, createLink, removeTagLinkRequest, removeLinkRe
 import {linkLoadedAction, addLinkAction, removeTagLinkAction, removeLinkAction} from "./index.js"
 
 export function getAllLinks(){
-  return async function(dispatch){
+  return async function(dispatch) {
     try{
       let links = await getLinks();
-      dispatch(linkLoadedAction(links))
+      dispatch(linkLoadedAction(links));
     }catch(error){
       console.error("error", error)
     }
@@ -24,7 +24,6 @@ export function getAllLinksByTags(tags){
 }
 
 export function addLink(info){
-  console.log("addLink", info)
   return async function(dispatch){
     try{
       const {status, data} = await createLink(info);
@@ -54,7 +53,6 @@ export function removeTagLink(linkId, tagId){
 
 export function removeLink(linkId){
   return async function(dispatch){
-    console.log("removeLink", linkId)
     try{
       const {status} = await removeLinkRequest(linkId);
       if(status == "removed"){

@@ -41,8 +41,9 @@ test.skip('getAllLinks is called', () => {
 });
 
 test('render final links', () => {
-  Component = setUp(props, {links: [linkData, linkData, linkData]});
-  expect(findByTestAttr(Component, 'card').length).toBe(3);
+  const links = [linkData, linkData, linkData]
+  Component = setUp(props, {links});
+  expect(findByTestAttr(Component, 'card').length).toBe(links.length);
   expect(findByTestAttr(Component, 'card').at(0).props()).toEqual({...linkData, 'data-test': 'card'});
 });
 

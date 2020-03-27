@@ -4,8 +4,8 @@ import {validationMiddleware} from "../middleware"
 import ReduxThunk from "redux-thunk"
 
 const store = createStore(
-    rootReducer,
-    applyMiddleware(validationMiddleware, ReduxThunk)
+  rootReducer,
+  applyMiddleware(validationMiddleware, ReduxThunk)
 );
 
 export default store;

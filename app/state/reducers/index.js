@@ -5,7 +5,7 @@ import tags from "./tagsReducer";
 import validation from "./validationReducer";
 
 export default combineReducers({
-    tags,
-    links,
-    validation,
+  tags,
+  links,
+  validation,
 })

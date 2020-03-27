@@ -28,10 +28,10 @@ exports[`take snapshot 1`] = `
     autoHide={false}
     className="createLink__contTags --flex"
     clearAfterSelecting={true}
+    clearList={false}
+    onTagsSaved={[Function]}
     placeHolder="Add Tags"
     propertyFilter="name"
-    savedTags={Array []}
-    setSavedTags={[Function]}
   />
 </div>
 `;
