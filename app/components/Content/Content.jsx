@@ -50,7 +50,7 @@ function Content(props) {
   
   function requestLinksByTags(tagsIds){
     if(typeof tagsIds !== 'string' || tagsIds.startsWith(',') || tagsIds.endsWith(",")){
-      //todo add error hander
+      //todo add error handler
       console.error('invalid format');
       return;
     }
@@ -79,8 +79,8 @@ function Content(props) {
 }
 
 Content.propTypes = {
-    getAllLinks: PropTypes.func,
-    links: PropTypes.arrayOf(PropTypes.shape(CardPropType)),
+  getAllLinks: PropTypes.func,
+  links: PropTypes.arrayOf(PropTypes.shape(CardPropType)),
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(Content);

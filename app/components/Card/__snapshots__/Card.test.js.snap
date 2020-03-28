@@ -6,11 +6,13 @@ exports[`take snapshot 1`] = `
 >
   <a
     className="linkTitle"
+    data-test="link-url"
     href="url test"
     target="_blank"
   >
     <h2
       className="title"
+      data-test="title"
     >
       title test
     </h2>
@@ -20,6 +22,7 @@ exports[`take snapshot 1`] = `
   >
     <p
       className="description"
+      data-test="description"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -27,6 +30,7 @@ exports[`take snapshot 1`] = `
     </p>
     <Tooltip
       calcHeight={true}
+      data-test="cp-tooltip"
       hover={false}
       parentRef={
         Object {
@@ -40,18 +44,21 @@ exports[`take snapshot 1`] = `
     className="card__cont contTags --flex --wrap"
   >
     <Connect(Tag)
+      data-test="cp-tag"
       id={123}
       key="1991-0"
       onClose={[Function]}
       updateDisable={true}
     />
     <Connect(Tag)
+      data-test="cp-tag"
       id={456}
       key="1991-1"
       onClose={[Function]}
       updateDisable={true}
     />
     <Connect(Tag)
+      data-test="cp-tag"
       id={789}
       key="1991-2"
       onClose={[Function]}
@@ -66,6 +73,7 @@ exports[`take snapshot 1`] = `
     >
       <Icon
         className="edit iconHover"
+        data-test="btn-edit"
         name="edit"
         onClick={[Function]}
         pointer={true}
@@ -76,6 +84,7 @@ exports[`take snapshot 1`] = `
     >
       <Icon
         className="close iconHover"
+        data-test="btn-remove"
         name="close"
         onClick={[Function]}
         pointer={true}

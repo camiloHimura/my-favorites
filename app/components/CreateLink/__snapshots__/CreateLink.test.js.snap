@@ -1,37 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`take snapshot 1`] = `
-<div
-  className="createLink"
+<CreateLink
+  addLink={[MockFunction]}
+  getAllTags={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  tags={Array []}
 >
-  <h2>
-    Create Link
-  </h2>
-  <input
-    className="createLink__contInputs__title"
-    onFocus={[Function]}
-    placeholder="Title"
-  />
-  <input
-    className="createLink__contInputs__url"
-    onFocus={[Function]}
-    placeholder="Url"
-  />
-  <button
-    className="createLink__send"
-    onClick={[Function]}
-    type="button"
+  <div
+    className="createLink"
   >
-    Send
-  </button>
-  <TagList
-    autoHide={false}
-    className="createLink__contTags --flex"
-    clearAfterSelecting={true}
-    clearList={false}
-    onTagsSaved={[Function]}
-    placeHolder="Add Tags"
-    propertyFilter="name"
-  />
-</div>
+    <h2>
+      Create Link
+    </h2>
+    <input
+      className="createLink__contInputs__title"
+      data-test="inp-title"
+      onFocus={[Function]}
+      placeholder="Title"
+    />
+    <input
+      className="createLink__contInputs__url"
+      data-test="inp-url"
+      onFocus={[Function]}
+      placeholder="Url"
+    />
+    <button
+      className="createLink__send"
+      data-test="btn-send"
+      onClick={[Function]}
+      type="button"
+    >
+      Send
+    </button>
+    <TagList
+      autoHide={false}
+      className="createLink__contTags --flex"
+      clearAfterSelecting={true}
+      clearList={false}
+      data-test="cp-tagList"
+      onTagsSaved={[Function]}
+      placeHolder="Add Tags"
+      propertyFilter="name"
+      tags={Array []}
+    >
+      <div
+        className="createLink__contTags --flex"
+      >
+        <AutoComplete
+          autoHide={false}
+          clearAfterSelecting={true}
+          onSelected={[Function]}
+          options={Array []}
+          placeHolder="Add Tags"
+          propertyFilter="name"
+        >
+          <div
+            className="autoComplete"
+          >
+            <input
+              autoFocus={true}
+              data-test="input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Add Tags"
+              type="text"
+            />
+            <div
+              className="autoComplete__contOptions"
+              data-test="contOptions"
+            />
+          </div>
+        </AutoComplete>
+        <div
+          className="contOptions"
+        />
+      </div>
+    </TagList>
+  </div>
+</CreateLink>
 `;

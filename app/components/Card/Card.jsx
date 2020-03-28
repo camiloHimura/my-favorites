@@ -9,9 +9,10 @@ import Tooltip from '../generals/Tooltip';
 import {removeTagLink, removeLink} from "../../state/actions";
 
 const mapDispachToProps = dispatch => ({
-    removeLink: (linkId) => dispatch(removeLink(linkId)),
-    removeTagLink: (linkId, tagId) => dispatch(removeTagLink(linkId, tagId)),
-  })
+  editLink: (linkId) => console.log('editLink...', linkId),
+  removeLink: (linkId) => dispatch(removeLink(linkId)),
+  removeTagLink: (linkId, tagId) => dispatch(removeTagLink(linkId, tagId)),
+})
 
 const fakeText = `Donec in venenatis metus. Suspendisse potenti. Cras ultricies turpis sit amet massa suscipit, in egestas sapien finibus.`;
 
@@ -28,32 +29,42 @@ export function Card(props) {
     props.removeLink(props.id);
   }
 
+  function editLink() {
+    props.editLink(props.id);
+  }
+
   return  <div className="card">
-            <a className="linkTitle" href={url} target="_blank">
-              <h2 className="title">{title}</h2>
+            <a className="linkTitle" href={url} target="_blank" data-test='link-url'>
+              <h2 className="title" data-test='title'>{title}</h2>
             </a>
 
             <div className="contDescription">
-              <p className="description" ref={containerUrl} onMouseEnter={() => setIsContHover(true)} onMouseLeave={() => setIsContHover(false)}>
+              <p className="description" 
+                ref={containerUrl} 
+                onMouseEnter={() => setIsContHover(true)} 
+                onMouseLeave={() => setIsContHover(false)}
+                data-test='description'
+              >
                 {description}
               </p>
-              <Tooltip text={description} calcHeight={true} hover={isContHover} parentRef={containerUrl}/>
+              <Tooltip text={description} calcHeight={true} hover={isContHover} parentRef={containerUrl} data-test='cp-tooltip'/>
             </div>
 
             <div className="card__cont contTags --flex --wrap">{
               tags.map((tag, index) => <Tag key={`${id}-${index}`}
+                                            data-test='cp-tag'
                                             updateDisable={true} {...tag}
                                             onClose={() => removeTag(tag.id)}
                                         />
               )}
             </div>
             <div className="card_options --flex">
-{/*               <div className="loading">
-                <Icon name="edit" onClick={removeLink} className={"edit iconHover"} pointer={true}/>
+              <div className="loading">
+                <Icon name="edit" onClick={editLink} className={"edit iconHover"} pointer={true} data-test='btn-edit'/>
               </div>
               <div className="loading">
-                <Icon name="close" onClick={removeLink} className={"close iconHover"} pointer={true}/>
-              </div> */}
+                <Icon name="close" onClick={removeLink} className={"close iconHover"} pointer={true} data-test='btn-remove'/>
+              </div>
             </div>
           </div>
 }

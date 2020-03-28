@@ -47,6 +47,12 @@ test('render final links', () => {
   expect(findByTestAttr(Component, 'card').at(0).props()).toEqual({...linkData, 'data-test': 'card'});
 });
 
+test('passing tags to TagList component', () => {
+  const tags = Array.from({length: 3}, () => ({name: 'tagName', id: 123}));
+  Component = setUp(props, {tags});
+  expect(findByTestAttr(Component, 'tagList').prop('tags')).toBe(tags);
+});
+
 function setUp(props = {}, initialState = {}){
   const store = storeFactory(initialState);
   return shallow(<Content {...props} store={store}/>).dive().dive()

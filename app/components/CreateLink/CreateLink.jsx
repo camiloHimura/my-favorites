@@ -41,13 +41,13 @@ export function CreateLink(props) {
   function check() {
     let isValid = true;
     if(inputTitle.current.value === "") {
-        inputTitle.current.classList.add("invalid")
-        isValid = false;
+      inputTitle.current.classList.add("invalid")
+      isValid = false;
     }
     
     if(inputUrl.current.value === "") {
-        inputUrl.current.classList.add("invalid")
-        isValid = false;
+      inputUrl.current.classList.add("invalid")
+      isValid = false;
     }
 
     if(isValid){
@@ -69,15 +69,16 @@ export function CreateLink(props) {
   return  <div className="createLink">
             <h2>Create Link</h2>
 
-            <input className="createLink__contInputs__title" placeholder="Title" onFocus={removeInvalid} ref={inputTitle}/>
-            <input className="createLink__contInputs__url" placeholder="Url" onFocus={removeInvalid} ref={inputUrl}/>
-            <button className="createLink__send" type="button" onClick={check}>Send</button>
+            <input className="createLink__contInputs__title" placeholder="Title" onFocus={removeInvalid} ref={inputTitle} data-test='inp-title'/>
+            <input className="createLink__contInputs__url" placeholder="Url" onFocus={removeInvalid} ref={inputUrl} data-test='inp-url'/>
+            <button className="createLink__send" type="button" onClick={check} data-test='btn-send'>Send</button>
 
             <TagList
               className="createLink__contTags --flex"
               autoHide={false}
               propertyFilter="name" 
               tags={props.tags} 
+              data-test='cp-tagList'
               placeHolder="Add Tags"
               clearAfterSelecting={true}
               onTagsSaved={setSavedTags}
