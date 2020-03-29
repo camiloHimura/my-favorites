@@ -1,9 +1,0 @@
-input{
-    width: 100%;
-    padding: 10px;
-    outline: none;
-    text-align: center;
-    border-radius: 6px;
-    box-sizing: border-box;
-    border: 1px solid var(--light-gray);
-}

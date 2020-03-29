@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`take snapshot 1`] = `
+<input
+  onInput={[Function]}
+  placeholder="Search"
+  style={Object {}}
+  type="search"
+/>
+`;

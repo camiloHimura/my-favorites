@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`take snapshot 1`] = `
+<div
+  className="cardLoading"
+>
+  <div
+    className="cardLoading__title"
+  />
+  <div
+    className="cardLoading__description"
+  />
+  <div
+    className="cardLoading__tags"
+  >
+    <div
+      className="cardLoading__tags__tag"
+    />
+    <div
+      className="cardLoading__tags__tag"
+    />
+    <div
+      className="cardLoading__tags__tag"
+    />
+    <div
+      className="cardLoading__tags__tag"
+    />
+  </div>
+</div>
+`;
