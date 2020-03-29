@@ -50,7 +50,7 @@ test('render final links', () => {
 test('passing tags to TagList component', () => {
   const tags = Array.from({length: 3}, () => ({name: 'tagName', id: 123}));
   Component = setUp(props, {tags});
-  expect(findByTestAttr(Component, 'tagList').prop('tags')).toBe(tags);
+  expect(findByTestAttr(Component, 'tagList').prop('options')).toBe(tags);
 });
 
 function setUp(props = {}, initialState = {}){

@@ -62,7 +62,7 @@ function Content(props) {
             <Row className="--flexColumn">
               <Search links={links} searchLink={searchLink} getAllLinks={getAllLinks} data-test="search"/>
               <TagList
-                tags={tags} 
+                options={tags} 
                 autoHide={false}
                 data-test="tagList"
                 className="tagList"

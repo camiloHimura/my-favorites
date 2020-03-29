@@ -12,7 +12,7 @@ function isString(key){
 }
 
 export default {
-  save(key, value){
+  set(key, value){
     checkKey(key);
     const parseValue = isString(value)? value: JSON.stringify(value);
     localStorage.setItem(key, parseValue);
@@ -26,9 +26,10 @@ export default {
     checkKey(key);
     const value = JSON.parse(localStorage.getItem(key));
     return isString(value)? localStorage.getItem(key): value;
-    return value;
   },
   remove(key){
-    checkKey(key)
+    checkKey(key);
+    localStorage.removeItem(key);
+    return true;
   }
 }

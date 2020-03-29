@@ -6,8 +6,12 @@ import PropTypes from 'prop-types';
 import './TagList.css';
 
 function TagList(props) {
-  const [savedTags, setSavedTags] = useState([])
-  const {className, autoHide = true, tags = [], placeHolder, clearAfterSelecting = true, clearList = false, onTagsSaved} = props;
+  const {className, autoHide = true, options = [], placeHolder, clearAfterSelecting = true, clearList = false, onTagsSaved, initialSavedTags = []} = props;
+  const [savedTags, setSavedTags] = useState(initialSavedTags)
+
+  useEffect(() => {
+    console.log('initialSavedTags', initialSavedTags)
+  }, [initialSavedTags])
 
   useEffect(() => {
     if(clearList){
@@ -22,24 +26,40 @@ function TagList(props) {
   }
   
   function addTags(selectedTag) {
+    if(!isValidTag(selectedTag)){ return }
+
+    if(hasTag(savedTags, selectedTag)){ return }
+
     const newTags = [{...selectedTag}, ...savedTags];
     setSavedTags(newTags);
     onTagsSaved(newTags);
   }
 
+  function isValidTag(tag){
+    if(tag === null || typeof tag !== 'object'){
+      return false;
+    };
+
+    return options.some(option => option.id === tag.id);
+  }
+
+  function hasTag(container, tag){
+    return container.some(sTag => sTag.id === tag.id);
+  }
 
   return  <div className={className}>
             <AutoComplete 
-              options={tags}
+              options={options}
               autoHide={autoHide}
               onSelected={addTags}
               propertyFilter="name"
+              data-test='cp-autocomplete'
               placeHolder={placeHolder}
               clearAfterSelecting={clearAfterSelecting}
             />
 
             <div className="contOptions">
-                {savedTags.map((tag, index) => <Tag key={`${index}-boardTags`} updateDisable={true} onClose={removeTag} {...tag}/>)}
+                {savedTags.map((tag, index) => <Tag key={`${index}-boardTags`} updateDisable={true} onClose={removeTag} {...tag} data-test='cp-tag'/>)}
             </div>
           </div>
 }
@@ -47,11 +67,12 @@ function TagList(props) {
 TagList.propTypes = {
   className: PropTypes.string,
   autoHide: PropTypes.bool,
-  tags: PropTypes.array,
+  options: PropTypes.array,
   placeHolder: PropTypes.string,
   clearAfterSelecting: PropTypes.bool,
   clearList: PropTypes.bool,
   onTagsSaved: PropTypes.func,
+  initialSavedTags: PropTypes.array,
 }
 
 export default TagList;
