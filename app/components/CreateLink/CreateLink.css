@@ -1,0 +1,34 @@
+.createLink{
+  outline: none;
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.createLink > *:not(h2){
+  margin-top: 10px;
+}
+
+.createLink .createLink__contInputs{
+
+}
+
+.createLink__contInputs__title{
+}
+
+.createLink__contTags{
+  width: 100%;
+}
+
+.createLink__contTags .autoComplete{
+  width: 200px;
+  margin-right: 10px;
+}
+
+.createLink button{
+  padding: 10px;
+  margin-left: 10px;
+  color: var(--white);
+  background: var(--blue);
+  box-sizing: border-box;
+}

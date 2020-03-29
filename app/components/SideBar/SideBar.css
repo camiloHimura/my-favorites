@@ -1,0 +1,88 @@
+
+.sideBar{
+  --margin-right: 10px;
+
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  box-sizing: border-box;
+  margin-right: var(--margin-right);
+  padding-right: var(--margin-right);
+  width: calc(var(--sidebar-width) - var(--margin-right));
+}
+
+h2{
+  font-size: 14px;
+  color: var(--blue);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+h2.--filters{
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.logo{
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+  background: var(--blue);
+}
+
+.sideBar__container{
+  width: calc(100% - var(--sideBarOptions-width) - var(--margin-right));
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  padding-top: var(--margin-right);
+  padding-left: var(--margin-right);
+}
+.sideBar__container > *{
+  width: 100%;
+}
+
+.sideBar__container::before{
+  content: "";
+  top: 0%;
+  right: calc(var(--margin-right) * -1);
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  background: var(--light-gray);
+}
+
+.sideBar__container__options{
+  width: 100%;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.sideBar__container__tags{
+  width: 100%;
+  display: flex;
+}
+
+.sideBar .board{
+  margin: 0px;
+}
+
+.sideBar .board input{
+  width: 100%;
+  margin: 0px;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.boardSwitchs{
+  overflow: auto;
+  max-height: 34vh;
+}
+
+.boardSwitchs .contOptions{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
