@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {connect} from "react-redux";
-import PropTypes, { func } from "prop-types";
+import PropTypes from "prop-types";
 import {TagPropType} from "../../propsTypes";
 import LStorage from '../../utils/LStorage';
 import {CREATE_LINK} from '../../contans/LStorageNames';
@@ -69,12 +69,16 @@ export function CreateLink(props) {
     LStorage.remove(CREATE_LINK);
   }
 
+  function onTagsSaved(newTags){
+    setSavedTags(newTags);
+    updatedLS();
+  }
+
   function setUpLStorageLink(data = {}){
     const {title, url, tags} = data;
     inputTitle.current.value = title;
     inputUrl.current.value = url;
     setInitialSavedTags(tags);
-    console.log(data)
   }
 
   function updatedLS(){
@@ -83,7 +87,6 @@ export function CreateLink(props) {
     const title = inputTitle.current.value? inputTitle.current.value: LsTitle;
     const url = inputUrl.current.value? inputUrl.current.value: LsUrl;
     const tags = savedTags;
-    console.log('updatedLS savedTags', savedTags)
     LStorage.set(CREATE_LINK, {title, url, tags})
   }
 
@@ -115,7 +118,7 @@ export function CreateLink(props) {
               placeHolder="Add Tags"
               clearList={clearList}
               clearAfterSelecting={true}
-              onTagsSaved={setSavedTags}
+              onTagsSaved={onTagsSaved}
               initialSavedTags={initialSavedTags}
             />
           </div>

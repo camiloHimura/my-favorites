@@ -1,13 +1,17 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
 import { CreateLink } from './CreateLink';
-import { setPropTypes, findByTestAttr } from '../../utils/test/';
+import { storeFactory, setPropTypes, findByTestAttr } from '../../utils/test/';
 import {CREATE_LINK} from '../../contans/LStorageNames';
 
 import LStorage from '../../utils/LStorage';
+
 jest.mock('../../utils/LStorage')
+jest.mock("react-redux", () => ({
+  connect: (mapStateToProps, mapDispatchToProps) => (ReactComponent) => ReactComponent
+}));
 
 var Component;
 const initialProps = {
@@ -96,7 +100,7 @@ describe('saving link info in LStorage', () => {
 
     expect(findByTestAttr(Component, 'inp-title').instance().value).toBe(testLink.title)
     expect(findByTestAttr(Component, 'inp-url').instance().value).toBe(testLink.url)
-    expect(findByTestAttr(Component, 'cp-tagList').prop('initialSavedTags').length).toBe(testLink.tags.length)
+    expect(findByTestAttr(Component, 'cp-tagList').prop('initialSavedTags').length).toBe(testLink.tags.length);
   })
 
   it('saving info in LStorage and keep it if the link is not sent to the endpoint', () => {
@@ -134,6 +138,7 @@ describe('saving link info in LStorage', () => {
   })
 })
 
-function setUp(props = {}){
-  return mount(<CreateLink {...initialProps} {...props} />)
+function setUp(props = {}, initialState = {}){
+  const store = storeFactory(initialState);
+  return mount(<CreateLink {...initialProps} {...props} store={store}/>)
 }

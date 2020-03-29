@@ -10,7 +10,9 @@ function TagList(props) {
   const [savedTags, setSavedTags] = useState(initialSavedTags)
 
   useEffect(() => {
-    console.log('initialSavedTags', initialSavedTags)
+    if(initialSavedTags.length){
+      setSavedTags(initialSavedTags)
+    }
   }, [initialSavedTags])
 
   useEffect(() => {
