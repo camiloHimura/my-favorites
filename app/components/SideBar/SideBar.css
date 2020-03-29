@@ -29,15 +29,17 @@ h2.--filters{
   background: var(--blue);
 }
 
-
 .sideBar__container{
-  width: 100%;
+  width: calc(100% - var(--sideBarOptions-width) - var(--margin-right));
   display: flex;
   position: relative;
   align-items: center;
   flex-direction: column;
   padding-top: var(--margin-right);
   padding-left: var(--margin-right);
+}
+.sideBar__container > *{
+  width: 100%;
 }
 
 .sideBar__container::before{

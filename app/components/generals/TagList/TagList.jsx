@@ -11,7 +11,8 @@ function TagList(props) {
 
   useEffect(() => {
     if(initialSavedTags.length){
-      setSavedTags(initialSavedTags)
+      setSavedTags(initialSavedTags);
+      onTagsSaved(initialSavedTags);
     }
   }, [initialSavedTags])
 

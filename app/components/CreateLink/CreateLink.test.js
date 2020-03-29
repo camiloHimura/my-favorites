@@ -115,7 +115,6 @@ describe('saving link info in LStorage', () => {
     act(() => {
       findByTestAttr(Component, 'cp-tagList').prop('onTagsSaved')(testLink.tags);
     })
-    findByTestAttr(Component, 'inp-url').simulate('change');
 
     expect(LStorageLink).toEqual({...testLink});
   })

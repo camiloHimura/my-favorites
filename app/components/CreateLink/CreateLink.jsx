@@ -36,6 +36,10 @@ export function CreateLink(props) {
     }
   }, []);
 
+  useEffect(() => {
+    updatedLS();
+}, [savedTags]);
+
   function removeInvalid(event){
     event.target.classList.remove("invalid");
   }
@@ -69,11 +73,6 @@ export function CreateLink(props) {
     LStorage.remove(CREATE_LINK);
   }
 
-  function onTagsSaved(newTags){
-    setSavedTags(newTags);
-    updatedLS();
-  }
-
   function setUpLStorageLink(data = {}){
     const {title, url, tags} = data;
     inputTitle.current.value = title;
@@ -82,10 +81,8 @@ export function CreateLink(props) {
   }
 
   function updatedLS(){
-    const LsData = LStorage.get(CREATE_LINK) || {};
-    const {LsTitle = '', LsUrl = '', LsTags = []} = LsData;
-    const title = inputTitle.current.value? inputTitle.current.value: LsTitle;
-    const url = inputUrl.current.value? inputUrl.current.value: LsUrl;
+    const title = inputTitle.current.value;
+    const url = inputUrl.current.value;
     const tags = savedTags;
     LStorage.set(CREATE_LINK, {title, url, tags})
   }
@@ -100,14 +97,16 @@ export function CreateLink(props) {
               onFocus={removeInvalid}
               className="createLink__contInputs__title"
             />
-            <input placeholder="Url" 
-              ref={inputUrl} 
-              data-test='inp-url'
-              onChange={updatedLS}
-              onFocus={removeInvalid} 
-              className="createLink__contInputs__url"
-            />
-            <button className="createLink__send" type="button" onClick={check} data-test='btn-send'>Send</button>
+            <div className="--flex">
+              <input placeholder="Url" 
+                ref={inputUrl} 
+                data-test='inp-url'
+                onChange={updatedLS}
+                onFocus={removeInvalid} 
+                className="createLink__contInputs__url"
+                />
+              <button className="createLink__send" type="button" onClick={check} data-test='btn-send'>Send</button>
+            </div>
 
             <TagList
               className="createLink__contTags --flex"
@@ -118,7 +117,7 @@ export function CreateLink(props) {
               placeHolder="Add Tags"
               clearList={clearList}
               clearAfterSelecting={true}
-              onTagsSaved={onTagsSaved}
+              onTagsSaved={setSavedTags}
               initialSavedTags={initialSavedTags}
             />
           </div>

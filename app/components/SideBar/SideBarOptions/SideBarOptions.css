@@ -6,7 +6,7 @@ button{
 }
 
 .sideBarOptions{
-  width: 50px;
+  width: var(--sideBarOptions-width);
   background: var(--white);
 }
 

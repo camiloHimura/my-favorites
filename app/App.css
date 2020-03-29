@@ -14,6 +14,8 @@
   --paragraph-color: #4a4a4a;
 
   --sidebar-width: 30%;
+  --sideBarOptions-width: 50px;
+  --input-radius: 0px;
 }
 
 .MyFavorites{
