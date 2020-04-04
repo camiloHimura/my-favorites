@@ -1,5 +1,6 @@
 import { ADD_TAG, REMOVE_TAG, INVALID_TAG, TAGS_LOADED, UPADTED_TAG, ADD_LINK, LINKS_LOADED, 
-        REMOVE_LINK, INVALID_LINK, REMOVE_TAG_LINK, SEARCH_LINK} from "./actions-types";
+        REMOVE_LINK, INVALID_LINK, REMOVE_TAG_LINK, SEARCH_LINK, SET_LS_URL, SET_LS_TITLE, 
+        SET_LS_TAG, CLEAR_LS } from "./actions-types";
 
 export { getAllTags, addTag, removeTag, updateTag} from "./asyncTagAction";
 export { getAllLinks, getAllLinksByTags, addLink, removeTagLink, removeLink} from "./asyncLinkAction";
@@ -46,4 +47,20 @@ export function removeTagAction(payload) {
 
 export function invalidTag(payload) {
   return {type: INVALID_TAG, payload}
+}
+//Local Storage actions
+export function setLsUrlAction(payload) {
+  return {type: SET_LS_URL, payload}
+}
+
+export function setLsTitleAction(payload) {
+  return {type: SET_LS_TITLE, payload}
+}
+
+export function setLsTagsAction(payload) {
+  return {type: SET_LS_TAG, payload}
+}
+
+export function clearLsAction(payload) {
+  return {type: CLEAR_LS, payload}
 }

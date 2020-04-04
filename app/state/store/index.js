@@ -1,11 +1,11 @@
 import {createStore, applyMiddleware} from "redux";
 import rootReducer from "../reducers";
-import {validationMiddleware} from "../middleware"
+import {validationMiddleware, localStorageMiddleware} from "../middleware"
 import ReduxThunk from "redux-thunk"
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(validationMiddleware, ReduxThunk)
+  applyMiddleware(validationMiddleware, localStorageMiddleware, ReduxThunk)
 );
 
 export default store;
