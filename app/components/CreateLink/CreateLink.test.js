@@ -1,12 +1,9 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { act } from 'react-dom/test-utils';
 
-import { CreateLink } from './CreateLink';
-import { storeFactory, setPropTypes, findByTestAttr } from '../../utils/test/';
-import {CREATE_LINK} from '../../contans/LStorageNames';
-
-import LStorage from '../../utils/LStorage';
+import CreateLink from './CreateLink';
+import { setPropTypes, findByTestAttr } from '../../utils/test/';
+import { LINK_DEFAULTS } from '../../contans/LStorageNames';
 
 jest.mock('../../utils/LStorage')
 jest.mock("react-redux", () => ({
@@ -16,8 +13,14 @@ jest.mock("react-redux", () => ({
 var Component;
 const initialProps = {
   tags: [],
+  clearLs: jest.fn(),
   addLink: jest.fn(),
   getAllTags: jest.fn(),
+  setLsUrl: jest.fn(),
+  setLsTitle: jest.fn(),
+  setLsTagsAction: jest.fn(),
+  /* localStorage:  jest.fn().mockReturnValue(LINK_DEFAULTS) */
+  localStorage: LINK_DEFAULTS
 }
 
 describe('Initial set up', () => {
@@ -27,7 +30,7 @@ describe('Initial set up', () => {
   it('checking prop types', () => {
     let response;
     const component = CreateLink;
-    const requiredValues = {};
+    const requiredValues = {localStorage: {}};
     response = setPropTypes({component, requiredValues, prop: 'addLink', value:() => {}})
     expect(response).toBeUndefined();
     
@@ -68,76 +71,38 @@ describe('Initial set up', () => {
     it('sending form with valid title and invalid url', () => {
       const newLink = {title: 'test title', url: 'test url', tags: [{id : 1}, {id: 2}, {id: 3}]}
       findByTestAttr(Component, 'inp-title').instance().value = newLink.title;
+      findByTestAttr(Component, 'inp-title').simulate('change')
+
       findByTestAttr(Component, 'inp-url').instance().value = newLink.url;
-      //onTagsSaved update the internal state it must be wrapper in this helper 'act'
-      act(() => {
-        findByTestAttr(Component, 'cp-tagList').prop('onTagsSaved')(newLink.tags);
-      })
-  
-      const getTagId = tags => tags.map(tag => tag.id);
+      findByTestAttr(Component, 'inp-url').simulate('change')
+
+
       findByTestAttr(Component, 'btn-send').simulate('click');
-      expect(initialProps.addLink).toHaveBeenCalledWith({...newLink, tags: getTagId(newLink.tags)});
+      expect(initialProps.addLink).toHaveBeenCalled();
+      expect(initialProps.clearLs).toHaveBeenCalled();
       expect(findByTestAttr(Component, 'inp-title').instance().value).toBe('');
       expect(findByTestAttr(Component, 'inp-url').instance().value).toBe('');
     })
   })
 })
 
+//Todo move the below code to MY CODE app
+/* it('saving info in LStorage and keep it if the link is not sent to the endpoint', () => {
+  let LStorageLink;
+  LStorage.has.mockReturnValue(false);
+  LStorage.get.mockReturnValue({});
+  LStorage.set.mockImplementation((key, value) => LStorageLink = value);
+  Component = setUp();
 
-describe('saving link info in LStorage', () => {
-  const testLink = {title: 'testLink', url: 'testUrl', tags: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]};
-
-  it('checking the Lstorage when the component is rendered', () => {
-    LStorage.has.mockReturnValue(true);
-    Component = setUp();
-    expect(LStorage.has).toHaveBeenCalledWith(CREATE_LINK)
+  findByTestAttr(Component, 'inp-title').instance().value = testLink.title;
+  findByTestAttr(Component, 'inp-url').instance().value = testLink.url;
+  act(() => {
+    findByTestAttr(Component, 'cp-tagList').prop('onTagsSaved')(testLink.tags);
   })
 
-  it('rendering saved info in LStorage', () => {
-    LStorage.has.mockReturnValue(true);
-    LStorage.get.mockReturnValue(testLink);
-    Component = setUp();
+  expect(LStorageLink).toEqual({...testLink});
+}) */
 
-    expect(findByTestAttr(Component, 'inp-title').instance().value).toBe(testLink.title)
-    expect(findByTestAttr(Component, 'inp-url').instance().value).toBe(testLink.url)
-    expect(findByTestAttr(Component, 'cp-tagList').prop('initialSavedTags').length).toBe(testLink.tags.length);
-  })
-
-  it('saving info in LStorage and keep it if the link is not sent to the endpoint', () => {
-    let LStorageLink;
-    LStorage.has.mockReturnValue(false);
-    LStorage.get.mockReturnValue({});
-    LStorage.set.mockImplementation((key, value) => LStorageLink = value);
-    Component = setUp();
-
-    findByTestAttr(Component, 'inp-title').instance().value = testLink.title;
-    findByTestAttr(Component, 'inp-url').instance().value = testLink.url;
-    act(() => {
-      findByTestAttr(Component, 'cp-tagList').prop('onTagsSaved')(testLink.tags);
-    })
-
-    expect(LStorageLink).toEqual({...testLink});
-  })
-
-  it('saving info in LStorage and removed when the link is sent to de endpoint', () => {
-    LStorage.has.mockReturnValue(false);
-    LStorage.get.mockReturnValue(testLink);
-    Component = setUp();
-
-    findByTestAttr(Component, 'inp-title').instance().value = testLink.title;
-    findByTestAttr(Component, 'inp-url').instance().value = testLink.url;
-    findByTestAttr(Component, 'inp-url').simulate('change');
-    act(() => {
-      findByTestAttr(Component, 'cp-tagList').prop('onTagsSaved')(testLink.tags);
-    })
-    findByTestAttr(Component, 'btn-send').simulate('click');
-
-    expect(initialProps.addLink).toHaveBeenCalledWith({...testLink, tags: testLink.tags.map(tag => tag.id)});
-    expect(LStorage.remove).toHaveBeenCalled();
-  })
-})
-
-function setUp(props = {}, initialState = {}){
-  const store = storeFactory(initialState);
-  return mount(<CreateLink {...initialProps} {...props} store={store}/>)
+function setUp(props = {}){
+  return mount(<CreateLink {...initialProps} {...props}/>)
 }

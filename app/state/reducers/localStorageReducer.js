@@ -1,7 +1,12 @@
-import {SET_LS_URL, SET_LS_TITLE, SET_LS_TAG, CLEAR_LS} from "../actions/actions-types";
-const initialState = {url: '', title: '', tags: []}
+import {SET_LS_URL, SET_LS_TITLE, SET_LS_TAGS, CLEAR_LS} from '../actions/actions-types';
+import { CREATE_LINK, LINK_DEFAULTS } from '../../contans/LStorageNames';
+import LStorage from '../../utils/LStorage';
 
-export default function localStorageReducer(state = initialState, action) {
+export default function localStorageReducer(state, action) {
+  if(state === undefined){
+    state = LStorage.has(CREATE_LINK)? LStorage.get(CREATE_LINK): LINK_DEFAULTS;
+  }
+
   switch(action.type){
     case SET_LS_URL:
       return {...state, url: action.payload}
@@ -9,11 +14,11 @@ export default function localStorageReducer(state = initialState, action) {
     case SET_LS_TITLE:
       return {...state, title: action.payload}
     
-    case SET_LS_TAG:
+    case SET_LS_TAGS:
       return {...state, tags: action.payload}
     
     case CLEAR_LS:
-      return initialState
+      return LINK_DEFAULTS
     
     default: 
         return state;

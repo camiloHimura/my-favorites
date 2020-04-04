@@ -17,5 +17,5 @@ export const SWITCH_LOAGIND = "SWITCH_LOAGIND";
 //Local Storage links
 export const SET_LS_URL = "SET_LS_URL";
 export const SET_LS_TITLE = "SET_LS_TITLE";
-export const SET_LS_TAG = "SET_LS_TAG";
+export const SET_LS_TAGS = "SET_LS_TAGS";
 export const CLEAR_LS = "CLEAR_LS";

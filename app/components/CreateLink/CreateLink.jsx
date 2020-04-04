@@ -2,15 +2,14 @@ import React, {useRef, useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {TagPropType} from "../../propsTypes";
-import LStorage from '../../utils/LStorage';
-import {CREATE_LINK} from '../../contans/LStorageNames';
 import "./CreateLink.css"
 
 import TagList from "../generals/TagList";
-import {addLink, invalidLink, getAllTags} from "../../state/actions";
+import {addLink, invalidLink, getAllTags, setLsUrlAction, setLsTitleAction, setLsTagsAction, clearLsAction} from "../../state/actions";
 
 const mapStateToProps = state => ({
   tags: state.tags,
+  localStorage: state.localStorage,
   isInvalidLink: state.invalidLink
 })
 
@@ -18,27 +17,25 @@ const mapDispachToProps = dispatch => ({
   addLink: info => dispatch(addLink(info)),
   invalidLink: () => dispatch(invalidLink()),
   getAllTags: () => dispatch(getAllTags()),
+  clearLs: () => dispatch(clearLsAction()),
+  setLsUrl: url => dispatch(setLsUrlAction(url)),
+  setLsTitle: url => dispatch(setLsTitleAction(url)),
+  setLsTagsAction: tags => dispatch(setLsTagsAction(tags)),
 })
 
 export function CreateLink(props) {
   const inputTitle = useRef();
   const inputUrl = useRef();
-  const [savedTags, setSavedTags] = useState([]);
-  const [initialSavedTags, setInitialSavedTags] = useState([]);
   const [clearList, setClearList] = useState(false);
 
   useEffect(() => {
     if(!props.tags.length){
       props.getAllTags();
     }
-    if(LStorage.has(CREATE_LINK)){
-      setUpLStorageLink(LStorage.get(CREATE_LINK))
-    }
-  }, []);
 
-  useEffect(() => {
-    updatedLS();
-}, [savedTags]);
+    inputUrl.current.value = props.localStorage.url;
+    inputTitle.current.value = props.localStorage.title;
+  }, []);
 
   function removeInvalid(event){
     event.target.classList.remove("invalid");
@@ -60,8 +57,8 @@ export function CreateLink(props) {
       props.addLink({
           title: inputTitle.current.value,
           url: inputUrl.current.value, 
-          tags: savedTags.map(tag => tag.id)
-      });
+          tags: props.localStorage.tags.map(tag => tag.id)
+      }); 
       clear();
     }
   }
@@ -70,21 +67,15 @@ export function CreateLink(props) {
     inputUrl.current.value = "";
     inputTitle.current.value = "";
     setClearList(true);
-    LStorage.remove(CREATE_LINK);
+    props.clearLs()
   }
 
-  function setUpLStorageLink(data = {}){
-    const {title, url, tags} = data;
-    inputTitle.current.value = title;
-    inputUrl.current.value = url;
-    setInitialSavedTags(tags);
+  function updateTitle() {
+    props.setLsTitle(inputTitle.current.value);
   }
 
-  function updatedLS(){
-    const title = inputTitle.current.value;
-    const url = inputUrl.current.value;
-    const tags = savedTags;
-    LStorage.set(CREATE_LINK, {title, url, tags})
+  function updateUrl() {
+    props.setLsUrl(inputUrl.current.value);
   }
 
   return  <div className="createLink">
@@ -93,7 +84,7 @@ export function CreateLink(props) {
             <input placeholder="Title" 
               ref={inputTitle} 
               data-test='inp-title'
-              onChange={updatedLS}
+              onChange={updateTitle}
               onFocus={removeInvalid}
               className="createLink__contInputs__title"
             />
@@ -101,7 +92,7 @@ export function CreateLink(props) {
               <input placeholder="Url" 
                 ref={inputUrl} 
                 data-test='inp-url'
-                onChange={updatedLS}
+                onChange={updateUrl}
                 onFocus={removeInvalid} 
                 className="createLink__contInputs__url"
                 />
@@ -117,14 +108,15 @@ export function CreateLink(props) {
               placeHolder="Add Tags"
               clearList={clearList}
               clearAfterSelecting={true}
-              onTagsSaved={setSavedTags}
-              initialSavedTags={initialSavedTags}
+              onTagsSaved={props.setLsTagsAction}
+              initialSavedTags={props.localStorage.tags}
             />
           </div>
 }
 
 CreateLink.propTypes = {
   addLink: PropTypes.func,
+  localStorage: PropTypes.object.isRequired,
   tags: PropTypes.arrayOf(PropTypes.shape(TagPropType))
 }
 
