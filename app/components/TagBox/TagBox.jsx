@@ -9,7 +9,6 @@ import Tag from "../generals/Tag";
 import Board from "../generals/Board";
 import {getAllTags, addTag, removeTag} from "../../state/actions";
 
-
 const mapStateToProps = state => ({
   tags: state.tags,
   invalidTag: state.validation.invalidTag
