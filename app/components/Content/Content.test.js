@@ -3,7 +3,7 @@ import { shallow, mounted } from 'enzyme';
 
 import Content from './Content';
 
-import { storeFactory, setPropTypes, findByTestAttr } from '../../utils/test/';
+import { storeFactory, setPropTypes, findByTestAttr } from '../../utils/test';
 var Component;
 const props = {
         links: [],

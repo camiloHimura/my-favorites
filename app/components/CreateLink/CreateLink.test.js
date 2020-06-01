@@ -19,7 +19,6 @@ const initialProps = {
   setLsUrl: jest.fn(),
   setLsTitle: jest.fn(),
   setLsTagsAction: jest.fn(),
-  /* localStorage:  jest.fn().mockReturnValue(LINK_DEFAULTS) */
   localStorage: LINK_DEFAULTS
 }
 

@@ -10,7 +10,7 @@ it('take snapshot', () => {
   expect(setUp()).toMatchSnapshot();
 });
 
-it('checking props tipes', () => {
+it('checking props types', () => {
   const requiredValues = initialProps;
   let response;
 

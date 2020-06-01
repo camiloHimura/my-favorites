@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`take snapshot 1`] = `
+<i
+  className="material-icons   "
+  data-test="icon"
+  onClick={[MockFunction]}
+  style={Object {}}
+>
+  test
+</i>
+`;

@@ -15,4 +15,4 @@ function Search(props){
   return  <input style={style} type="search" placeholder="Search" onInput={search}/>
 }
 
-export default Search ;
+export default Search;

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import TagList from './TagList';
 
-import { setPropTypes, findByTestAttr } from '../../../utils/test/';
+import { setPropTypes, findByTestAttr } from '../../../utils/test';
 
 var Component;
 const Options = [{id: 1, name: 'test 1'}, {id: 2, name: 'test 2'}, {id: 3, name: 'test 3'}, {id: 4, name: 'test 4'}]

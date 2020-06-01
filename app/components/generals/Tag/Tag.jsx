@@ -30,10 +30,16 @@ export function Tag(props){
       }
     }
 
-    return  <div className="Tag --ellipsis" style={{"background": `#${color}`}} onBlur={hideEdit}>
-              <Icon name="close" onClick={() => onClose({id, name, color})} className={"close"} pointer={true}/>
-              {!isEdit && <span className="pointer" onDoubleClick={activeEdit}>{name}</span>}
-              {isEdit && <input className="editBox" placeholder={name} ref={inputEl} autoFocus onKeyPress={checkName}/>}
+    return  <div className="Tag --ellipsis" style={{"background": `#${color}`}} data-test="container" onBlur={hideEdit}>
+              <Icon 
+                name="close" 
+                pointer={true}
+                data-test="Icon"
+                className={"close"} 
+                onClick={() => onClose({id, name, color})} 
+              />
+                {!isEdit && <span className="pointer" onDoubleClick={activeEdit} data-test="tag-name">{name}</span>}
+                {isEdit && <input className="editBox" placeholder={name} ref={inputEl} autoFocus onKeyPress={checkName} data-test="input-edit"/>}
             </div>
 
 }
