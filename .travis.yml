@@ -1,12 +1,17 @@
 languaje: node_js
-node_js: 
-  - "node"
+node_js:
+- node
 dist: trusty
 cache:
   directories:
-    - node_modules
+  - node_modules
 install:
-  - npm install
-  - npm run build
+- npm install
+- npm run build
 script:
-  - npm run test
+- npm run test
+deploy:
+  app: my-links-frontend
+  provider: heroku
+  api_key:
+    secure: YURQjFp/nSx/pdpkmRM953NuxzIVjr1yQrkXsDPouw0zB+c53N0apFF8CKi6lf0G35JI2U+tXOyA9EUo876XTcZpH3wHa3El8kaYuGMCvb5HJ1dwjtucnYr57D3KEzfFeQ6eiLnahk8ZceDrUarUUTd+beldS6+E+6NIc3EwsKYUVMwGaP62FmWtrhyA1upvkHASiZvN6hotNdVueg4WXPkjBrkUO0qdrZGA7RaM0f8LeEh86RVw81yXWHzMgkXxK9WbcN/PsQb15iDKF40EZ10yg9v3N3mw79Cyin8cTPY4K4Wdu59dMA79uMoe+lSE5lTySBJ5fGbZ1K8fAxmNTtLvWSbkmeQLEJSfXzVEJQAZST7LQP1tseAd+0wyfNkqm6VgDseBXpFclwjW/ZH+LGDD4NtX9R/hrSFI57DLYhAoUoypVmzHuPH/hVYatkNn4E+ulzKKB39/o1YWENF1iAwSaCgbJMx3bxwIrpMwN+6Qq465zXCrJv3PD958A46eJYZ0s4NEKGEXn2k6mJEAuPhWrUnnsi4oNXX5yh9tBmJqPxhHGFz4v3zMiQtlRXh4A6grRPuHylk9LbLfN+6fdJ2Qhjws44GeN+XfkUtOrLn8P3WKngPQMjpyHsATqbW1ug1SpPrlyFv2lbv44gfjoe5+R9kznkBTDf3jPKFhxas=
