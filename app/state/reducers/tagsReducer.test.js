@@ -15,19 +15,19 @@ describe('Tag reducer', () => {
     expect(newState).toEqual([]);
   })
   
-  it('reciving a ADD_LINK type', () => {
+  it('receiving a ADD_LINK type', () => {
     const [newTag] = MockData();
     const newState = tagsReducer(undefined, addTagAction(newTag));
     expect(newState).toContain(newTag);
   })
 
-  it('reciving a TAGS_LOADED type', () => {
+  it('receiving a TAGS_LOADED type', () => {
     const newTags = MockData();
     const newState = tagsReducer(undefined, tagsLoadedAction(newTags));
     expect(newState).toEqual(newTags);
   })
   
-  it('reciving a REMOVE_TAG type', () => {
+  it('receiving a REMOVE_TAG type', () => {
     const newTags = MockData();
     const [firstTag] = MockData();
     const state = tagsReducer(newTags, removeTagAction(firstTag.id));
@@ -35,7 +35,7 @@ describe('Tag reducer', () => {
         expect.not.arrayContaining([firstTag]),
     );
   })
-  it('reciving a UPADTED_TAG type', () => {
+  it('receiving a UPADTED_TAG type', () => {
     const newTags = MockData();
     const updatedTag = {id: '1', name: "test Tag 1.1", color: "0000"};
     const state = tagsReducer(newTags, updateTagAction(updatedTag));

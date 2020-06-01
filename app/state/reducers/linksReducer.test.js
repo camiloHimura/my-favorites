@@ -16,7 +16,7 @@ describe('Links reducer', () => {
     expect(newState).toEqual([])
   })
   
-  it('reciving a ADD_LINK type', () => {
+  it('receiving a ADD_LINK type', () => {
       const [newLink] = MockData();
     const newState = linksReducer(undefined, {
                                                 type: ADD_LINK, 
@@ -25,7 +25,7 @@ describe('Links reducer', () => {
     expect(newState).toContain(newLink);
   })
 
-  it('reciving a LINKS_LOADED type', () => {
+  it('receiving a LINKS_LOADED type', () => {
     const newLinks = MockData();
     const newState = linksReducer(undefined, {
                                                 type: LINKS_LOADED, 
@@ -34,7 +34,7 @@ describe('Links reducer', () => {
     expect(newState).toEqual(newLinks);
   })
   
-  it('reciving a REMOVE_LINK type', () => {
+  it('receiving a REMOVE_LINK type', () => {
     const newLinks = MockData();
     let state = linksReducer(undefined, {type: LINKS_LOADED, payload: newLinks});
     const [fistLink] = MockData();
@@ -73,7 +73,7 @@ describe('Links reducer', () => {
     expect(newState).toEqual(ramdonLink);
   })
   
-  describe('reciving a REMOVE_TAG_LINK type', () => {
+  describe('receiving a REMOVE_TAG_LINK type', () => {
     it('getting tags id', () => {
       const newLinks = MockData();
       const newState = linksReducer(newLinks, {
