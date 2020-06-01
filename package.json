@@ -7,7 +7,7 @@
     "start:dev": "webpack-dev-server --open --env.mode development",
     "start:prod": "webpack-dev-server --open --env.mode production",
     "server": "node server/index.js",
-    "build": "webpack --progress",
+    "build": "webpack --progress --env.mode development",
     "build:prod": "webpack -p --progress --env.mode production",
     "test": "jest --config ./jest.config.json",
     "test:watch": "npm run test -- --watch",

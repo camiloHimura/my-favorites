@@ -8,7 +8,7 @@ if(ENV === 'develop'){
 }
 
 module.exports = env => {
-  const isPRoduction = env.mode === 'production';
+  const isPRoduction = env && env.mode === 'production';
   return {
     entry: ['babel-polyfill', './app/index.js'],
     output: {
@@ -47,7 +47,7 @@ module.exports = env => {
     devServer: {
       historyApiFallback: true,
     },
-    mode: env.mode,
+    mode: env.mode || 'development',
     devtool: isPRoduction ? 'source-map': 'cheap-module-eval-source-map',
     plugins: [
       new HtmlWebpackPlugin ({
