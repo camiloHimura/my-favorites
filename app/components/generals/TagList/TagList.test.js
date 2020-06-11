@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { act } from 'react-dom/test-utils';
 import TagList from './TagList';
 
 import { setPropTypes, findByTestAttr } from '../../../utils/test';

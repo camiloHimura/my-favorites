@@ -5,9 +5,10 @@
   display: flex;
   position: fixed;
   height: 100vh;
+  overflow: hidden;
   box-sizing: border-box;
   margin-right: var(--margin-right);
-  padding-right: var(--margin-right);
+  border-right: 1px solid var(--light-gray);
   width: calc(var(--sidebar-width) - var(--margin-right));
 }
 
@@ -35,21 +36,10 @@ h2.--filters{
   position: relative;
   align-items: center;
   flex-direction: column;
-  padding-top: var(--margin-right);
-  padding-left: var(--margin-right);
+  padding: var(--margin-right);
 }
 .sideBar__container > *{
   width: 100%;
-}
-
-.sideBar__container::before{
-  content: "";
-  top: 0%;
-  right: calc(var(--margin-right) * -1);
-  width: 1px;
-  height: 100%;
-  position: absolute;
-  background: var(--light-gray);
 }
 
 .sideBar__container__options{

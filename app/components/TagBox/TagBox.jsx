@@ -28,7 +28,7 @@ export function TagBox(props) {
   }, []);
 
   return  <section className="TagBox">
-            <h2>Current Tags</h2>
+            <h2 className="title">Current Tags</h2>
               <div className="TagBox__container__tags">
                     <Board
                       isWrap={true} 
