@@ -1,4 +1,5 @@
 import instance from './axios.conf';
+import {ERROR_TYPES, ERROR_MESSAGES} from "../contans";
 
 export function getTags(){
   return instance.get('/tag')
@@ -55,6 +56,12 @@ export function removeTagLinkRequest(linkID, tagID){
 }
 
 function catchError(error){
-    console.log('---- my handle error ---', error);
-    throw(error);
+  console.log('---- my handle error ---');
+  switch(true){
+    case error.message.toLocaleLowerCase().includes('network'):
+      throw({type: ERROR_TYPES.NETWORK, info: ERROR_MESSAGES.NETWORK_ERROR});
+    default: 
+      throw(error);
+  }
+
 }

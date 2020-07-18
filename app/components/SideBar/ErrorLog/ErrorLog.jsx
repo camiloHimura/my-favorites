@@ -3,25 +3,20 @@ import "./ErrorLog.css"
 import {connect} from "react-redux";
 
 const mapStateToProps = state => ({
-  invalidTag: state.validation.invalidTag
+  errors: state.errors
 })
 
 export function ErrorLog(props) {
-  const {erros} = props;
+  const {errors} = props;
+  console.log('errors', errors)
 
   return <div className="errorLog">
-    <div className="container">
-      <h4>type</h4>
-      <p>Info</p>
-    </div>
-    <div className="container">
-      <h4>type</h4>
-      <p>Info</p>
-    </div>
-    <div className="container">
-      <h4>type</h4>
-      <p>Info</p>
-    </div>
+    {errors.map((error, index) => {
+      return <div key={`error-${index}`} className="container">
+                <h4>{error.type}</h4>
+                <p>{error.info}</p>
+              </div>
+    })}
   </div>;
 }
 

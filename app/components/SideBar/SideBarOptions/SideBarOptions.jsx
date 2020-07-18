@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import {connect} from "react-redux";
 
 import "./SideBarOptions.css"
+import {setSideBarIndex, setSideBarErrorIndex} from"../../../state/actions"
 
 import Icon from "../../generals/Icon";
 import CreateLink from "../../CreateLink";
@@ -8,29 +10,36 @@ import TagBox from "../../TagBox";
 import ErrorLog from "../ErrorLog";
 
 const options = [
-  {index: 0, icon: 'add_circle', component: CreateLink},
-  {index: 1, icon: 'loyalty', component: TagBox},
-  {index: 2, icon: 'notification_important', component: ErrorLog}
+  {icon: 'add_circle', component: CreateLink},
+  {icon: 'loyalty', component: TagBox},
+  {icon: 'notification_important', component: ErrorLog}
 ]
-export default function SideBarOptions(props) {
-  const [ISelected, setIndex] = useState(0)
 
-  const { setSelectedComponent } = props;
+const mapStateToProps = state => ({
+  sideBar: state.sideBar
+});
 
+const mapDispachToProps = dispatch => ({
+  setSideBarIndex: info => dispatch(setSideBarIndex(info)),
+  setSideBarErrorIndex: info => dispatch(setSideBarErrorIndex(info)),
+})
+
+export function SideBarOptions(props) {
+  const { sideBar, setSelectedComponent, setSideBarIndex, setSideBarErrorIndex } = props;
+  
   useEffect(() => {
-    updatedSlection(2)
-    setSelectedComponent(ErrorLog)
+    setSideBarErrorIndex(2);
   }, []);
 
-  function updatedSlection(index){
-    setIndex(index)
-  }
+  useEffect(() => {
+    setSelectedComponent(options[sideBar.activeIndex].component)
+  }, [sideBar.activeIndex]);
 
   return  <section className="sideBarOptions">
-            {options.map(({index, icon, component}) => 
+            {options.map(({icon}, index) => 
               <button key={`options-${index}`} 
-                className={`--flex ${ISelected == index ? "--selected": ""}`} 
-                onClick={() => {updatedSlection(index); setSelectedComponent(component)}}>
+                className={`--flex ${sideBar.activeIndex == index ? "--selected": ""}`} 
+                onClick={() => {setSideBarIndex(index)}}>
                   <Icon name={icon}/>
               </button>
             )}
@@ -39,3 +48,5 @@ export default function SideBarOptions(props) {
 
 SideBarOptions.propTypes = {
 }
+
+export default connect(mapStateToProps, mapDispachToProps)(SideBarOptions);

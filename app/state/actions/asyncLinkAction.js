@@ -1,13 +1,14 @@
 import {getLinks, getLinksByTags, createLink, removeTagLinkRequest, removeLinkRequest} from "../../utils/ServerRequest";
-import {linkLoadedAction, addLinkAction, removeTagLinkAction, removeLinkAction} from "./index.js"
+import {linkLoadedAction, addLinkAction, removeTagLinkAction, removeLinkAction, addErrorAction} from "./index.js"
+import {ERROR_TYPES} from "../../contans"
 
 export function getAllLinks(){
   return async function(dispatch) {
     try{
       let links = await getLinks();
       dispatch(linkLoadedAction(links));
-    }catch(error){
-      console.error("error", error)
+    }catch(error) {
+      dispatch(addErrorAction({...error}))
     }
   }
 }
@@ -18,7 +19,7 @@ export function getAllLinksByTags(tags){
       let links = await getLinksByTags(tags);
       dispatch(linkLoadedAction(links))
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }
 }
@@ -31,7 +32,7 @@ export function addLink(info){
           dispatch(addLinkAction(data))
       }
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }
 }
@@ -46,7 +47,7 @@ export function removeTagLink(linkId, tagId){
           console.log('show toas "not updated"')
       }
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }
 }
@@ -61,7 +62,7 @@ export function removeLink(linkId){
           console.log('show toas "not updated"')
       }
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }
 }
@@ -74,7 +75,7 @@ export function removeLink(linkId){
                 dispatch(removeTagAction(id))
             }
         }catch(error){
-            console.error("error", error)
+            dispatch(addErrorAction({...error}))
         }
     }
 } */
