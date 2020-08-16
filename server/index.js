@@ -1,10 +1,9 @@
 const path = require('path');
 const express = require('express');
-const {PORT} = require('../app/contans');
 
 const publicPath = path.join(__dirname, '..', 'public')
 const App = express();
-const port = process.env.PORT || PORT;
+const port = process.env.PORT || 3000;
 
 App.use(express.static(publicPath));
 
