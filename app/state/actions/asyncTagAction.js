@@ -1,5 +1,5 @@
 import {getTags, createTag, deleteTag, updateTagRequest} from "../../utils/ServerRequest";
-import {tagsLoadedAction, addTagAction, removeTagAction, updateTagAction} from "./index.js"
+import {tagsLoadedAction, addTagAction, removeTagAction, updateTagAction, addErrorAction} from "./index.js"
 
 export function getAllTags(){
   return async function(dispatch){
@@ -7,7 +7,7 @@ export function getAllTags(){
       let tags = await getTags();
       dispatch(tagsLoadedAction(tags))
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }
 }
@@ -20,7 +20,7 @@ export function addTag(info){
           dispatch(addTagAction(data))
       }
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }
 }
@@ -33,7 +33,7 @@ export function removeTag(id){
           dispatch(removeTagAction(id))
       }
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }   
 }
@@ -46,7 +46,7 @@ export function updateTag(id, name){
           dispatch(updateTagAction(data))
       }
     }catch(error){
-      console.error("error", error)
+      dispatch(addErrorAction({...error}))
     }
   }   
 }

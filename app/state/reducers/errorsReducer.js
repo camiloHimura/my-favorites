@@ -3,11 +3,14 @@ import {INVALIR_ERROR_FORMAT, INVALIR_ERROR_TYPE} from '../../contans/ErrorMessa
 import {ERROR_TYPES} from '../../contans';
 
 
-export default function addErrorReducer(state = [], action){
-  console.log('new error', action)
-  switch(action.type){
+export default function addErrorReducer(state = [], action) {
+  if(action.type === ADD_ERROR){
+    console.log('new error', action)
+  }
+
+  switch(action.type) {
     case ADD_ERROR:
-      if(isValidFormat(action) && isValidType(action)){
+      if(isValidFormat(action) && isValidType(action)) {
         return [...state, action.payload]
       }
       return state;
@@ -34,7 +37,7 @@ function isValidFormat(action) {
 }
 
 function isValidType(action) {
-  if(!ERROR_TYPES.list.includes(action.payload.type)){
+  if(!ERROR_TYPES.list.includes(action.payload.type)) {
     console.warn(INVALIR_ERROR_TYPE);
     return false;
   }
