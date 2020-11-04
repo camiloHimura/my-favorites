@@ -1,15 +1,15 @@
 languaje: node_js
 node_js:
-- node
+  - 14
 dist: trusty
 cache:
   directories:
-  - node_modules
+    - node_modules
 install:
-- npm install
-- npm run build
+  - npm install
+  - npm run build
 script:
-- npm run test
+  - npm run test
 deploy:
   app: my-links-frontend
   provider: heroku

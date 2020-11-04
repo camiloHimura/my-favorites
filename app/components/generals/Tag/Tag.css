@@ -1,27 +1,27 @@
-.Tag{
-    display: flex;
-    font-size: 12px;
-    border-left: 14px;
-    width: fit-content;
-    position: relative;
-    color: var(--black);
-    align-items: center;
-    margin: 0px 4px 4px 0px;
-    border-radius: 6% / 18px;
-    padding: 6px 8px 6px 18px;
+.Tag {
+  display: flex;
+  font-size: 12px;
+  border-left: 14px;
+  width: fit-content;
+  position: relative;
+  color: var(--black);
+  align-items: center;
+  margin: 0px 4px 4px 0px;
+  border-radius: 6% / 18px;
+  padding: 6px 8px 6px 18px;
 }
 
-.Tag .close{
-    left: 4px;
-    font-size: 10px;
-    position: absolute;
-    color: var(--black);
+.Tag .close {
+  left: 4px;
+  font-size: 10px;
+  position: absolute;
+  color: var(--black);
 }
 
-.Tag input.editBox{
-    border: none;
-    padding: 0px;
-    max-width: 100px;
-    margin-bottom: 0px;
-    background: var(--white-6);
+.Tag input.editBox {
+  border: none;
+  padding: 0px;
+  max-width: 100px;
+  margin-bottom: 0px;
+  background: var(--white-6);
 }
