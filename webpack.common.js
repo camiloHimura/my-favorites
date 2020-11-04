@@ -31,6 +31,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      manifestUrl: "./manifest.json",
       template: "app/index.html",
     }),
     new webpack.DefinePlugin({

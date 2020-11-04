@@ -1,19 +1,18 @@
-import {ERROR_TYPES, ERROR_MESSAGES} from "../contans";
+import { ERROR_TYPES, ERROR_MESSAGES } from "../contans";
 
 export default function catchError(error) {
   const parseError = JSON.parse(JSON.stringify(error));
-  console.log('---- my handle error ---');
+  console.log("---- my handle error ---");
   console.log(error);
-  console.log('parseError', parseError);
 
-  switch(true){
-    case error.message.toLocaleLowerCase().includes('timeout of'):
-      throw({type: ERROR_TYPES.TIME_OUT, info: error.message});
+  switch (true) {
+    case error.message.toLocaleLowerCase().includes("timeout of"):
+      throw { type: ERROR_TYPES.TIME_OUT, info: error.message };
 
-    case error.message.toLocaleLowerCase().includes('network'):
-      throw({type: ERROR_TYPES.NETWORK, info: ERROR_MESSAGES.NETWORK_ERROR});
+    case error.message.toLocaleLowerCase().includes("network"):
+      throw { type: ERROR_TYPES.NETWORK, info: ERROR_MESSAGES.NETWORK_ERROR };
 
-    default: 
-      throw({type: ERROR_TYPES.DEFAULT, info: 'Error'});
+    default:
+      throw { type: ERROR_TYPES.DEFAULT, info: "Error" };
   }
 }
