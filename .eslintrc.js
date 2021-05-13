@@ -11,6 +11,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/strict',
   ],
+  parser: '',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

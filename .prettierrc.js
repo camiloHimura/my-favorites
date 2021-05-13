@@ -6,11 +6,11 @@ module.exports = {
   trailingComma: 'all',
   arrowParens: "always",
   overrides: [
-    {
-      files: '*.{js,jsx,tsx,ts,scss,json,html}',
-      options: {
-        tabWidth: 4,
+      {
+          files: '*.{js,jsx,tsx,ts,scss,json,html}',
+          options: {
+              tabWidth: 4,
+          },
       },
-    },
   ],
 };
