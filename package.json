@@ -2,6 +2,8 @@
   "name": "links",
   "version": "1.0.0",
   "main": "index.js",
+  "author": "",
+  "license": "ISC",
   "scripts": {
     "start": "npm run server",
     "start:dev": "webpack serve --config webpack.dev.js",
@@ -13,6 +15,11 @@
     "test:watch": "npm run test -- --watchAll",
     "heroku-postbuild": "npm run build:prod"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo ====> \"[Husky] camilo pre-commit\""
+    }
+  },
   "keywords": [
     "react",
     "redux",
@@ -21,13 +28,6 @@
     "styled-components",
     "react-router"
   ],
-  "author": "",
-  "license": "ISC",
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo ====> \"[Husky] camilo pre-commit\""
-    }
-  },
   "dependencies": {
     "axios": "^0.21.0",
     "express": "^4.17.1",
