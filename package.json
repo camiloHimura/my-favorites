@@ -14,8 +14,8 @@
     "test": "jest --config ./jest.config.json",
     "test:watch": "npm run test -- --watchAll",
     "format": "prettier --write .",
-    "pre-commit": "npm test",
-    "heroku-postbuild": "npm run build:prod"
+    "heroku-postbuild": "npm run build:prod",
+    "prepare": "husky install"
   },
   "keywords": [
     "react",
