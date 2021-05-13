@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "echo ====> \"[Husky] camilo pre-commit\"",
+    "pre-push": "yarn test"
+  }
+},
