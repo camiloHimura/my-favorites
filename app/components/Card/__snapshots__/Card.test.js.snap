@@ -8,6 +8,7 @@ exports[`take snapshot 1`] = `
     className="linkTitle"
     data-test="link-url"
     href="url test"
+    rel="noreferrer"
     target="_blank"
   >
     <h2
