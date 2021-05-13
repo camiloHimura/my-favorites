@@ -1,17 +1,17 @@
-.Content{
+.Content {
   width: calc(100% - var(--sidebar-width));
   box-sizing: border-box;
   padding: 20px 20px 20px 0px;
   margin-left: var(--sidebar-width);
 }
 
-.tagList{
+.tagList {
   margin-top: 4px;
   display: flex;
   flex-direction: row;
 }
 
-.tagList .autoComplete{
+.tagList .autoComplete {
   max-width: 200px;
   margin-right: 4px;
 }

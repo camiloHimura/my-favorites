@@ -1,4 +1,4 @@
-.Tooltip{
+.Tooltip {
   left: 50%;
   width: 200px;
   font-size: 14px;
@@ -11,13 +11,13 @@
   box-sizing: border-box;
   background: var(--black);
   bottom: calc(100% + 8px);
-  transition-delay: .5s;
+  transition-delay: 0.5s;
   transition: transform 0.2s;
-  transform: translate3d(0,10px,0) rotate3d(0,0,1,5deg);
+  transform: translate3d(0, 10px, 0) rotate3d(0, 0, 1, 5deg);
 }
 
-.Tooltip::before{
-  content: "";
+.Tooltip::before {
+  content: '';
   width: 0;
   height: 0;
   left: 10px;
@@ -28,6 +28,6 @@
   border-right: 6px solid transparent;
 }
 
-.show{
-  transform: translate3d(0,0,0);
+.show {
+  transform: translate3d(0, 0, 0);
 }

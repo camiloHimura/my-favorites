@@ -1,8 +1,8 @@
-.row{
-    display: flex;
-    margin-bottom: 20px;
+.row {
+  display: flex;
+  margin-bottom: 20px;
 }
 
-.row .material-icons.rowIcon{
-    color: var(--orange);
+.row .material-icons.rowIcon {
+  color: var(--orange);
 }

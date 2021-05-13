@@ -1,2 +1,2 @@
-import AutoComplete from "./AutoComplete.jsx";
+import AutoComplete from './AutoComplete.jsx';
 export default AutoComplete;

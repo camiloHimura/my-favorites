@@ -1,2 +1,2 @@
-import Board from "./Board.jsx";
+import Board from './Board.jsx';
 export default Board;

@@ -3,15 +3,15 @@ import { shallow } from 'enzyme';
 
 import Search from './Search';
 
-let spyObj = {}
+let spyObj = {};
 let component;
 
 beforeEach(() => {
   spyObj = {
     searchLink: jest.fn(),
-    getAllLinks: jest.fn(),  
-  }
-  component = shallow(<Search {...spyObj}/>);
+    getAllLinks: jest.fn(),
+  };
+  component = shallow(<Search {...spyObj} />);
 });
 
 test('take snapshot', () => {
@@ -19,11 +19,11 @@ test('take snapshot', () => {
 });
 
 test('call getAllLinks', () => {
-  component.find('input').simulate('input', { target: { value: '' } })
-  expect(spyObj.getAllLinks).toHaveBeenCalled()
+  component.find('input').simulate('input', { target: { value: '' } });
+  expect(spyObj.getAllLinks).toHaveBeenCalled();
 });
 
 test('call searchLink', () => {
-  component.find('input').simulate('input', { target: { value: 'test' } })
-  expect(spyObj.searchLink).toHaveBeenCalled()
+  component.find('input').simulate('input', { target: { value: 'test' } });
+  expect(spyObj.searchLink).toHaveBeenCalled();
 });
