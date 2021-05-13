@@ -1,4 +1,4 @@
-.card{
+.card {
   --num-cards: 3;
   --icon-size: 18px;
   --cards-margin: 10px;
@@ -7,7 +7,7 @@
   display: flex;
   padding: 10px;
   font-size: 16px;
-  transition: all .5s;
+  transition: all 0.5s;
   align-items: center;
   box-sizing: border-box;
   flex-direction: column;
@@ -18,57 +18,59 @@
   width: calc(100% / var(--num-cards) - var(--cards-margin));
 }
 
-.card div:empty{
+.card div:empty {
   display: none;
 }
 
-.linkTitle{
+.linkTitle {
   width: 100%;
   text-decoration: none;
 }
 
-.contDescription{
+.contDescription {
   width: 100%;
   position: relative;
 }
 
-.description{
+.description {
   font-size: 14px;
   overflow: hidden;
   max-height: 78px;
 }
 
-.linkTitle, .contDescription, .card_options{
+.linkTitle,
+.contDescription,
+.card_options {
   margin-top: var(--elemts-margin-top);
 }
 
-.contTags{
+.contTags {
   width: 100%;
   margin-top: 16px;
 }
 
-.card_options{
+.card_options {
   width: 60px;
 }
 
-.material-icons.iconHover{
+.material-icons.iconHover {
   opacity: 0.8;
   color: var(--blue);
   font-size: var(--icon-size);
 }
 
-.iconHover:hover{
+.iconHover:hover {
   opacity: 1;
 }
 
-.--removed{
+.--removed {
   width: 0px;
   margin: 0px;
   height: 0px;
   padding: 0px;
   overflow: hidden;
 }
-.loading{
+.loading {
   width: 24px;
   margin: 6px;
   height: 24px;
@@ -78,7 +80,7 @@
   align-items: center;
 }
 
-.loading::before{
+.loading::before {
   /* content: ''; */
   width: 28px;
   height: 28px;
@@ -88,7 +90,7 @@
   border: 4px solid var(--light-gray-4);
 }
 
-.loading::after{
+.loading::after {
   /* content: ""; */
   position: absolute;
   top: 48%;
@@ -109,18 +111,21 @@
 }
 
 @keyframes anim-effect-simo-2 {
-	0%, 5%, 95%, 100% {
-		opacity: 0;
-	}
-	10%, 90% {
-		opacity: 1;
-	}
+  0%,
+  5%,
+  95%,
+  100% {
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
 }
 
 @keyframes anim-effect-simo-3 {
-	100% {
-		-webkit-transform: rotate3d(0, 0, 1, 360deg);
-		transform: rotate3d(0, 0, 1, 360deg);
-	}
+  100% {
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
 }
-

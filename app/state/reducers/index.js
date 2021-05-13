@@ -1,11 +1,11 @@
-import {combineReducers} from "redux";
+import { combineReducers } from 'redux';
 
-import links from "./linksReducer";
-import tags from "./tagsReducer";
-import validation from "./validationReducer";
-import localStorage from "./localStorageReducer";
-import errors from "./errorsReducer";
-import sideBar from "./sideBarReducer";
+import links from './linksReducer';
+import tags from './tagsReducer';
+import validation from './validationReducer';
+import localStorage from './localStorageReducer';
+import errors from './errorsReducer';
+import sideBar from './sideBarReducer';
 
 export default combineReducers({
   tags,
@@ -13,5 +13,5 @@ export default combineReducers({
   errors,
   sideBar,
   validation,
-  localStorage
-})
+  localStorage,
+});

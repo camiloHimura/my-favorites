@@ -1,25 +1,25 @@
-button{
+button {
   padding: 0px;
   outline: none;
   border: none;
   background: transparent;
 }
 
-.sideBarOptions{
+.sideBarOptions {
   width: var(--sideBarOptions-width);
   background: var(--white);
 }
 
-.sideBarOptions button{
+.sideBarOptions button {
   width: 50px;
   height: 50px;
   align-items: center;
   justify-content: center;
 }
 
-.--selected{
+.--selected {
   background: var(--light-blue);
 }
-.--selected i{
+.--selected i {
   color: var(--white);
 }

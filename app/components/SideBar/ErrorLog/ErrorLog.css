@@ -1,16 +1,16 @@
-.errorLog .container{
+.errorLog .container {
   background: var(--white);
 }
 
-.errorLog > div{
+.errorLog > div {
   padding: 6px;
   margin-bottom: 20px;
 }
 
-.errorLog h4{
+.errorLog h4 {
   margin-bottom: 4px;
 }
 
-.errorLog > p{
+.errorLog > p {
   margin-bottom: 4px;
 }

@@ -1,2 +1,2 @@
-import SideBarOptions from "./SideBarOptions.jsx";
+import SideBarOptions from './SideBarOptions.jsx';
 export default SideBarOptions;

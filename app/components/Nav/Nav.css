@@ -1,36 +1,36 @@
-nav{
-    width: 100%;
-    display: flex;
-    margin-bottom: 20px;
-    background: var(--white);
+nav {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  background: var(--white);
 }
 
-nav > div{
-    flex-grow: 1;
-    padding: 4px;
-    display: flex;
-    cursor: pointer;
-    color: var(--blue);
-    align-items: center;
-    flex-direction: column;
+nav > div {
+  flex-grow: 1;
+  padding: 4px;
+  display: flex;
+  cursor: pointer;
+  color: var(--blue);
+  align-items: center;
+  flex-direction: column;
 }
 
-nav > div:hover{
-    color: var(--white);
-    background: var(--blue);
+nav > div:hover {
+  color: var(--white);
+  background: var(--blue);
 }
-nav > div:hover .material-icons{
-    color: var(--white);
-}
-
-nav .material-icons{
-    color: var(--blue);
+nav > div:hover .material-icons {
+  color: var(--white);
 }
 
-nav > div.--selected{
-    color: var(--white);
-    background: var(--blue);
+nav .material-icons {
+  color: var(--blue);
 }
-nav > div.--selected .material-icons{
-    color: var(--white);
+
+nav > div.--selected {
+  color: var(--white);
+  background: var(--blue);
+}
+nav > div.--selected .material-icons {
+  color: var(--white);
 }

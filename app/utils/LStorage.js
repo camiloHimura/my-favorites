@@ -1,35 +1,35 @@
-import {LSTORAGE_INVALID_KEY} from '../contans/ErrorMessages';
+import { LSTORAGE_INVALID_KEY } from '../contans/ErrorMessages';
 
-function checkKey(key){
-  if(!isString(key)){
-    throw Error(LSTORAGE_INVALID_KEY)
+function checkKey(key) {
+  if (!isString(key)) {
+    throw Error(LSTORAGE_INVALID_KEY);
   }
-  return true
+  return true;
 }
 
-function isString(key){
+function isString(key) {
   return typeof key === 'string';
 }
 
 export default {
-  set(key, value){
+  set(key, value) {
     checkKey(key);
-    const parseValue = isString(value)? value: JSON.stringify(value);
+    const parseValue = isString(value) ? value : JSON.stringify(value);
     localStorage.setItem(key, parseValue);
     return value;
   },
-  has(key){
+  has(key) {
     checkKey(key);
     return localStorage.hasOwnProperty(key);
   },
-  get(key){
+  get(key) {
     checkKey(key);
     const value = JSON.parse(localStorage.getItem(key));
-    return isString(value)? localStorage.getItem(key): value;
+    return isString(value) ? localStorage.getItem(key) : value;
   },
-  remove(key){
+  remove(key) {
     checkKey(key);
     localStorage.removeItem(key);
     return true;
-  }
-}
+  },
+};
