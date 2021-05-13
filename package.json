@@ -25,17 +25,9 @@
   "license": "ISC",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
     }
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --quiet --fix && yarn test"
-    ],
-    "*.{json,md,html}": [
-      "prettier --write"
-    ]
   },
   "dependencies": {
     "axios": "^0.21.0",
