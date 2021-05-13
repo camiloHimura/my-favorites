@@ -34,7 +34,7 @@ export function Card(props) {
   }
 
   return  <div className="card">
-            <a className="linkTitle" href={url} target="_blank" data-test='link-url'>
+            <a className="linkTitle" href={url} target="_blank" data-test='link-url' rel="noreferrer">
               <h2 className="title" data-test='title'>{title}</h2>
             </a>
 
