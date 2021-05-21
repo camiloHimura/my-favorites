@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { CardLoading } from './CardLoading';
 
-var Component;
+let Component;
 test('take snapshot', () => {
   Component = shallow(<CardLoading />);
   expect(Component).toMatchSnapshot();

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './Search.css';
 
 function Search(props) {
@@ -14,5 +15,11 @@ function Search(props) {
 
   return <input style={style} type="search" placeholder="Search" onInput={search} />;
 }
+
+Search.propTypes = {
+  style: PropTypes.object,
+  searchLink: PropTypes.func,
+  getAllLinks: PropTypes.func,
+};
 
 export default Search;

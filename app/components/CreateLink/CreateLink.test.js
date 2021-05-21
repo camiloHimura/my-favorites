@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import CreateLink from './CreateLink';
 import { setPropTypes, findByTestAttr } from '../../utils/test/';
@@ -7,10 +7,11 @@ import { LINK_DEFAULTS } from '../../contans/LStorageNames';
 
 jest.mock('../../utils/LStorage');
 jest.mock('react-redux', () => ({
+  // eslint-disable-next-line no-unused-vars
   connect: (mapStateToProps, mapDispatchToProps) => (ReactComponent) => ReactComponent,
 }));
 
-var Component;
+let Component;
 const initialProps = {
   tags: [],
   clearLs: jest.fn(),

@@ -129,7 +129,12 @@ export function CreateLink(props) {
 }
 
 CreateLink.propTypes = {
+  clearLs: PropTypes.func,
   addLink: PropTypes.func,
+  setLsUrl: PropTypes.func,
+  setLsTitle: PropTypes.func,
+  getAllTags: PropTypes.func,
+  setLsTagsAction: PropTypes.func,
   localStorage: PropTypes.object.isRequired,
   tags: PropTypes.arrayOf(PropTypes.shape(TagPropType)),
 };
