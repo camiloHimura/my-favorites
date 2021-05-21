@@ -33,6 +33,7 @@
 }
 
 .description {
+  cursor: default;
   font-size: 14px;
   overflow: hidden;
   max-height: 78px;
