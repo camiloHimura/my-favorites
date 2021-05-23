@@ -29,7 +29,6 @@ function Tooltip(props) {
 
 Tooltip.propTypes = {
   hover: PropTypes.bool.isRequired,
-  test: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   parentRef: PropTypes.any.isRequired,
   calcHeight: PropTypes.bool.isRequired,

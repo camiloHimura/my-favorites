@@ -8,5 +8,5 @@ export default function DynamicComponent(props) {
 }
 
 DynamicComponent.propTypes = {
-  component: PropTypes.element,
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.shape()]),
 };

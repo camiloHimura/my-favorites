@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Fun from '../../../utils/Fun';
 
 import './SideBarOptions.css';
 import { setSideBarIndex, setSideBarErrorIndex } from '../../../state/actions';
@@ -45,7 +46,7 @@ export function SideBarOptions(props) {
             setSideBarIndex(index);
           }}
         >
-          <Icon name={icon} />
+          <Icon name={icon} onClick={Fun.noon} />
         </button>
       ))}
     </section>
