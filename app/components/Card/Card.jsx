@@ -42,7 +42,7 @@ export function Card(props) {
       </a>
 
       <div className="contDescription">
-        <p
+        <button
           className="description"
           ref={containerUrl}
           onMouseEnter={() => setIsContHover(true)}
@@ -50,7 +50,7 @@ export function Card(props) {
           data-test="description"
         >
           {description}
-        </p>
+        </button>
         <Tooltip
           text={description}
           calcHeight={true}
@@ -65,7 +65,7 @@ export function Card(props) {
           <Tag
             key={`${id}-${index}`}
             data-test="cp-tag"
-            updateDisable={true}
+            isUpdateDisable={true}
             {...tag}
             onClose={() => removeTag(tag.id)}
           />

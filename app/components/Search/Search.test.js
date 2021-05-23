@@ -14,10 +14,6 @@ beforeEach(() => {
   component = shallow(<Search {...spyObj} />);
 });
 
-test('take snapshot', () => {
-  expect(component).toMatchSnapshot();
-});
-
 test('call getAllLinks', () => {
   component.find('input').simulate('input', { target: { value: '' } });
   expect(spyObj.getAllLinks).toHaveBeenCalled();

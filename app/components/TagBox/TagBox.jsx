@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TagPropType } from '../../propsTypes';
@@ -20,11 +20,12 @@ const mapDispachToProps = (dispatch) => ({
   getAllTags: () => dispatch(getAllTags()),
 });
 
-export function TagBox(props) {
+export function TagBox({ tags, getAllTags, addTag, removeTag }) {
   useEffect(() => {
-    if (!props.tags.length) {
-      props.getAllTags();
+    if (!tags.length) {
+      getAllTags();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -33,12 +34,12 @@ export function TagBox(props) {
       <div className="TagBox__container__tags">
         <Board
           isWrap={true}
-          options={props.tags}
+          options={tags}
           className="boardTags"
-          setOptions={props.addTag}
+          setOptions={addTag}
           placeHolder="Create Tag"
           Component={(internalProps) => (
-            <Tag {...internalProps} onClose={() => props.removeTag(internalProps.id)} />
+            <Tag {...internalProps} onClose={() => removeTag(internalProps.id)} />
           )}
         />
         {/*props.invalidTag && "Type a valid Tag"*/}

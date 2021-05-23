@@ -6,10 +6,6 @@ import AutoComplete from './AutoComplete';
 
 let initialProps = { options: [], onSelected: jest.fn() };
 
-it('take snapshot', () => {
-  expect(setUp()).toMatchSnapshot();
-});
-
 it('checking prop types', () => {
   let response;
   const component = AutoComplete;

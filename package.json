@@ -17,6 +17,14 @@
     "heroku-postbuild": "npm run build:prod",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.{js, jsx, ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "*.{json,md,html}": [
+      "prettier --write"
+    ]
+  },
   "keywords": [
     "react",
     "redux",

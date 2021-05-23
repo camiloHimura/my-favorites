@@ -20,7 +20,7 @@ export default {
   },
   has(key) {
     checkKey(key);
-    return localStorage.hasOwnProperty(key);
+    return Object.prototype.hasOwnProperty.call(localStorage, key);
   },
   get(key) {
     checkKey(key);

@@ -43,6 +43,7 @@ export function CreateLink(props) {
 
     inputUrl.current.value = props.localStorage.url;
     inputTitle.current.value = props.localStorage.title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function removeInvalid(event) {
@@ -129,7 +130,12 @@ export function CreateLink(props) {
 }
 
 CreateLink.propTypes = {
+  clearLs: PropTypes.func,
   addLink: PropTypes.func,
+  setLsUrl: PropTypes.func,
+  setLsTitle: PropTypes.func,
+  getAllTags: PropTypes.func,
+  setLsTagsAction: PropTypes.func,
   localStorage: PropTypes.object.isRequired,
   tags: PropTypes.arrayOf(PropTypes.shape(TagPropType)),
 };

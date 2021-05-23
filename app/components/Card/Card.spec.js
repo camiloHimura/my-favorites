@@ -2,9 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { Card } from './Card';
-import { setPropTypes, findByTestAttr } from '../../utils/test/';
+import { setPropTypes, findByTestAttr } from '../../utils/test';
 
-var Component;
 const spyObj = {
   editLink: jest.fn(),
   removeLink: jest.fn(),
@@ -33,11 +32,6 @@ it('checking prop types', () => {
 
   response = setPropTypes({ component, requiredValues, prop: 'tags', value: [] });
   expect(response).toBeUndefined();
-});
-
-test('take snapshot', () => {
-  Component = shallow(<Card {...data} />);
-  expect(Component).toMatchSnapshot();
 });
 
 test('render basic info', () => {

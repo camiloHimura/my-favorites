@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow, mounted } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Content from './Content';
 
 import { storeFactory, setPropTypes, findByTestAttr } from '../../utils/test';
-var Component;
+let Component;
 const props = {
   links: [],
   numLoadingCards: 10,

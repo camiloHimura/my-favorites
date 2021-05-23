@@ -13,10 +13,10 @@ const mapDispachToProps = (dispatch) => ({
 export function Tag(props) {
   const inputEl = useRef(null);
   const [isEdit, setIsEdit] = useState(false);
-  const { color = '0396A6', onClose, name = '', updateTag, id, updateDisable = false } = props;
+  const { color = '0396A6', onClose, name = '', updateTag, id, isUpdateDisable = false } = props;
 
   function activeEdit() {
-    if (updateDisable) {
+    if (isUpdateDisable) {
       return;
     }
     setIsEdit(true);
@@ -33,6 +33,7 @@ export function Tag(props) {
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       className="Tag --ellipsis"
       style={{ background: `#${color}` }}
@@ -47,16 +48,21 @@ export function Tag(props) {
         onClick={() => onClose({ id, name, color })}
       />
       {!isEdit && (
-        <span className="pointer" onDoubleClick={activeEdit} data-test="tag-name">
+        <button
+          className={isUpdateDisable ? 'noCursor' : ''}
+          onDoubleClick={activeEdit}
+          data-test="tag-name"
+        >
           {name}
-        </span>
+        </button>
       )}
       {isEdit && (
         <input
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus
           className="editBox"
           placeholder={name}
           ref={inputEl}
-          autoFocus
           onKeyPress={checkName}
           data-test="input-edit"
         />
@@ -65,6 +71,6 @@ export function Tag(props) {
   );
 }
 
-Tag.propType = TagPropType;
+Tag.propTypes = TagPropType;
 
 export default connect(null, mapDispachToProps)(Tag);

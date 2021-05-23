@@ -22,7 +22,7 @@ export default function addLinkReducer(state = [], action) {
     case REMOVE_LINK:
       return [...state.filter((item) => item.id != action.payload)];
 
-    case REMOVE_TAG_LINK:
+    case REMOVE_TAG_LINK: {
       const { linkId, tagId } = action.payload;
 
       return [
@@ -34,6 +34,7 @@ export default function addLinkReducer(state = [], action) {
           return item;
         }),
       ];
+    }
 
     default:
       return state;

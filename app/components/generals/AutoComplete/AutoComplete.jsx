@@ -80,7 +80,6 @@ function AutoComplete(props) {
     <div className="autoComplete">
       <input
         type="text"
-        autoFocus={true}
         ref={inputFilter}
         onChange={filter}
         onBlur={closeOptions}
@@ -92,14 +91,14 @@ function AutoComplete(props) {
       <div className="autoComplete__contOptions" ref={divOptions} data-test="contOptions">
         {showOptions &&
           options.map((opt, index) => (
-            <div
+            <button
               data-test="options"
               key={`${index}-autocomplete`}
               onMouseDown={() => clickOption(index)}
               className={`${indexSelector === index ? 'select' : ''}`}
             >
               {opt.name}
-            </div>
+            </button>
           ))}
       </div>
     </div>

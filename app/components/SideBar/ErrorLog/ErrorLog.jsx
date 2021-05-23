@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ErrorLog.css';
 import { connect } from 'react-redux';
 
@@ -23,5 +24,14 @@ export function ErrorLog(props) {
     </div>
   );
 }
+
+ErrorLog.propTypes = {
+  errors: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      info: PropTypes.string.isRequired,
+    }),
+  ),
+};
 
 export default connect(mapStateToProps)(ErrorLog);

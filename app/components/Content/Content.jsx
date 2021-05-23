@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { CardPropType } from '../../propsTypes';
+import { CardPropType, TagPropType } from '../../propsTypes';
 import './Content.css';
 
 import Card from '../Card';
@@ -33,9 +33,8 @@ function Content(props) {
     tags,
   } = props;
 
-  useEffect(() => {
-    getAllLinks();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => getAllLinks(), []);
 
   const isLoadingLinks = links && links.length == 0;
   function cardsLoading() {
@@ -97,6 +96,10 @@ function Content(props) {
 
 Content.propTypes = {
   getAllLinks: PropTypes.func,
+  searchLink: PropTypes.func,
+  getAllLinksByTags: PropTypes.func,
+  numLoadingCards: PropTypes.number,
+  tags: PropTypes.arrayOf(PropTypes.shape(TagPropType)),
   links: PropTypes.arrayOf(PropTypes.shape(CardPropType)),
 };
 

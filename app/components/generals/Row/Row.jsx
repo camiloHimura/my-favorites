@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import './Row.css';
 
 function Row({ icon, children, className }) {
@@ -11,9 +11,11 @@ function Row({ icon, children, className }) {
   );
 }
 
-Row.propType = {
-  icon: PropType.element,
-  children: PropType.func.isRequired,
+Row.propTypes = {
+  icon: PropTypes.element,
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
+    .isRequired,
 };
 
 export default Row;

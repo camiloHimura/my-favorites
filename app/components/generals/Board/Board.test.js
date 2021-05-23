@@ -1,14 +1,10 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 import { shallow } from 'enzyme';
 import Board from './Board';
-import Tag from '../Tag';
 import { setPropTypes, findByTestAttr } from '../../../utils/test';
 
-let initialProps = { options: [1, 2], Component: () => <h1></h1>, setOptions: jest.fn() };
-
-it('take snapshot', () => {
-  expect(setUp()).toMatchSnapshot();
-});
+let initialProps = { options: [1, 2], Component: () => <h1>test</h1>, setOptions: jest.fn() };
 
 it('checking props types', () => {
   const requiredValues = initialProps;

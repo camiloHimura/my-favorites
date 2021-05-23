@@ -18,7 +18,7 @@ function Tooltip(props) {
     } else {
       setShow(false);
     }
-  }, [hover]);
+  }, [calcHeight, hover, parentRef]);
 
   if (!show) {
     return null;
@@ -27,9 +27,11 @@ function Tooltip(props) {
   return <div className={`Tooltip ${animation ? 'show' : ''}`}> {text} </div>;
 }
 
-Tooltip.propType = {
-  test: PropTypes.string.isRequired,
+Tooltip.propTypes = {
+  hover: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
   parentRef: PropTypes.any.isRequired,
+  calcHeight: PropTypes.bool.isRequired,
 };
 
 export default Tooltip;

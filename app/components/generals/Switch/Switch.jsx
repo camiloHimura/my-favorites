@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropType from 'prop-types';
-import styles from './Switch.css';
+import './Switch.css';
 
 function Switch(props) {
   const { icon, name = '' } = props;
@@ -13,15 +13,15 @@ function Switch(props) {
   let className = active ? 'slice' : 'slice --active';
 
   return (
-    <div className="switch" onClick={swap}>
+    <button className="switch" onClick={swap}>
       {icon && <i className="material-icons">{icon}</i>}
       {name}
       <div className={className}></div>
-    </div>
+    </button>
   );
 }
 
-Switch.propType = {
+Switch.propTypes = {
   icon: PropType.element,
   name: PropType.string.isRequired,
 };
