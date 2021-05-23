@@ -43,6 +43,7 @@ export function CreateLink(props) {
 
     inputUrl.current.value = props.localStorage.url;
     inputTitle.current.value = props.localStorage.title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function removeInvalid(event) {

@@ -23,7 +23,7 @@ function TagList(props) {
       setSavedTags(initialSavedTags);
       onTagsSaved(initialSavedTags);
     }
-  }, [initialSavedTags]);
+  }, [initialSavedTags, onTagsSaved]);
 
   useEffect(() => {
     if (clearList) {
@@ -79,7 +79,7 @@ function TagList(props) {
         {savedTags.map((tag, index) => (
           <Tag
             key={`${index}-boardTags`}
-            updateDisable={true}
+            isUpdateDisable={true}
             onClose={removeTag}
             {...tag}
             data-test="cp-tag"

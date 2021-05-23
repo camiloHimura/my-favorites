@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import './SideBarOptions.css';
@@ -26,14 +27,13 @@ const mapDispachToProps = (dispatch) => ({
 
 export function SideBarOptions(props) {
   const { sideBar, setSelectedComponent, setSideBarIndex, setSideBarErrorIndex } = props;
-
   useEffect(() => {
     setSideBarErrorIndex(2);
-  }, []);
+  }, [setSideBarErrorIndex]);
 
   useEffect(() => {
     setSelectedComponent(options[sideBar.activeIndex].component);
-  }, [sideBar.activeIndex]);
+  }, [setSelectedComponent, sideBar.activeIndex]);
 
   return (
     <section className="sideBarOptions">
@@ -52,6 +52,14 @@ export function SideBarOptions(props) {
   );
 }
 
-SideBarOptions.propTypes = {};
+SideBarOptions.propTypes = {
+  setSideBarIndex: PropTypes.func,
+  setSideBarErrorIndex: PropTypes.func,
+  setSelectedComponent: PropTypes.func,
+  sideBar: PropTypes.shape({
+    activeIndex: PropTypes.number.isRequired,
+    errorIndex: PropTypes.number.isRequired,
+  }),
+};
 
 export default connect(mapStateToProps, mapDispachToProps)(SideBarOptions);

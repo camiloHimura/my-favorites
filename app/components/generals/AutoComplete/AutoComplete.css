@@ -14,13 +14,14 @@
   display: none;
 }
 
-.autoComplete__contOptions > div {
+.autoComplete__contOptions > button {
+  width: 100%;
   padding: 6px;
   cursor: pointer;
 }
 
-.autoComplete__contOptions > div:hover,
-.autoComplete__contOptions > div.select {
+.autoComplete__contOptions > button:hover,
+.autoComplete__contOptions > button.select {
   color: var(--white);
   background: var(--blue);
 }

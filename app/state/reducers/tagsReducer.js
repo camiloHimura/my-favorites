@@ -11,7 +11,7 @@ export default function tagsReducer(state = [], action) {
     case REMOVE_TAG:
       return [...state.filter((item) => item.id != action.payload)];
 
-    case UPADTED_TAG:
+    case UPADTED_TAG: {
       let newTags = state.map((tag) => {
         if (tag.id === action.payload.id) {
           const { id, name, color } = action.payload;
@@ -19,7 +19,9 @@ export default function tagsReducer(state = [], action) {
         }
         return tag;
       });
+
       return newTags;
+    }
 
     default:
       return state;

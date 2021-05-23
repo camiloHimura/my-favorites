@@ -4,8 +4,8 @@ import './SideBar.css';
 import SideBarOptions from './SideBarOptions';
 import DynamicComponent from './DynamicComponent';
 
-export default function SideBar(props) {
-  const [switchs, setSwitchs] = useState([{ name: 'Fun', name: 'React' }]);
+export default function SideBar() {
+  // const [switchs, setSwitchs] = useState([{ name: 'Fun', name: 'React' }]);
   const [selectedComponent, setSelectedComponent] = useState(null);
 
   return (

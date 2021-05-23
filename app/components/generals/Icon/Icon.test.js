@@ -8,9 +8,6 @@ let Component;
 beforeEach(() => {
   Component = setUp();
 });
-it('take snapshot', () => {
-  expect(Component).toMatchSnapshot();
-});
 
 it('checking props types', () => {
   const requiredValues = { name: 'test', onClick: () => {} };

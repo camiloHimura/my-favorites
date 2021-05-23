@@ -11,8 +11,9 @@ function Row({ icon, children, className }) {
   );
 }
 
-Row.propType = {
+Row.propTypes = {
   icon: PropType.element,
+  className: PropType.string,
   children: PropType.func.isRequired,
 };
 

@@ -65,7 +65,7 @@ export function Card(props) {
           <Tag
             key={`${id}-${index}`}
             data-test="cp-tag"
-            updateDisable={true}
+            isUpdateDisable={true}
             {...tag}
             onClose={() => removeTag(tag.id)}
           />

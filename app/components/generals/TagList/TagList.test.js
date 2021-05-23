@@ -4,7 +4,7 @@ import TagList from './TagList';
 
 import { setPropTypes, findByTestAttr } from '../../../utils/test';
 
-var Component;
+let Component;
 const Options = [
   { id: 1, name: 'test 1' },
   { id: 2, name: 'test 2' },

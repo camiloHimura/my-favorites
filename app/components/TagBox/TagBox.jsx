@@ -25,7 +25,7 @@ export function TagBox({ tags, getAllTags, addTag, removeTag }) {
     if (!tags.length) {
       getAllTags();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

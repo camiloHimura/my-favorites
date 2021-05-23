@@ -14,9 +14,6 @@ let component;
 beforeEach(() => {
   component = setUp();
 });
-it('take snapshot', () => {
-  expect(component).toMatchSnapshot();
-});
 
 it('render tag, no edit mode', () => {
   expect(findByTestAttr(component, 'Icon').length).toBe(1);
@@ -30,7 +27,7 @@ it('closing', () => {
 });
 
 it('disable to edit', () => {
-  const component = setUp({ updateDisable: true });
+  const component = setUp({ isUpdateDisable: true });
   findByTestAttr(component, 'tag-name').simulate('doubleClick');
   expect(findByTestAttr(component, 'tag-name').length).toBe(1);
   expect(findByTestAttr(component, 'input-edit').length).toBe(0);
@@ -46,7 +43,7 @@ describe('edit mode', () => {
     expect(findByTestAttr(component, 'input-edit').props().placeholder).toBe(initialProps.name);
   });
 
-  it('hiddin edit mode, onblur', () => {
+  it('hide edit mode, onblur', () => {
     findByTestAttr(component, 'container').simulate('blur');
     expect(findByTestAttr(component, 'tag-name').length).toBe(1);
     expect(findByTestAttr(component, 'input-edit').length).toBe(0);
@@ -62,9 +59,15 @@ describe('edit mode', () => {
     });
     expect(initialProps.updateTag).toHaveBeenCalled();
   });
+
+  it('has "noCursor"  class if "isUpdateDisable" is false', () => {
+    const component = setUp({ isUpdateDisable: true });
+    findByTestAttr(component, 'container').simulate('blur');
+    const button = findByTestAttr(component, 'tag-name');
+    expect(button.prop('className')).toBe('noCursor');
+  });
 });
 
 function setUp(props = {}) {
-  const initialState = {};
   return shallow(<Tag {...initialProps} {...props} />);
 }
