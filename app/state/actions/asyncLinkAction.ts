@@ -11,13 +11,13 @@ import {
   removeTagLinkAction,
   removeLinkAction,
   addErrorAction,
-} from './index.js';
-import { ERROR_TYPES } from '../../contans';
+} from './index';
+// import { ERROR_TYPES } from '../../contans';
 
 export function getAllLinks() {
   return async function (dispatch) {
     try {
-      let links = await getLinks();
+      const links = await getLinks();
       dispatch(linkLoadedAction(links));
     } catch (error) {
       dispatch(addErrorAction({ ...error }));
@@ -28,7 +28,7 @@ export function getAllLinks() {
 export function getAllLinksByTags(tags) {
   return async function (dispatch) {
     try {
-      let links = await getLinksByTags(tags);
+      const links = await getLinksByTags(tags);
       dispatch(linkLoadedAction(links));
     } catch (error) {
       dispatch(addErrorAction({ ...error }));

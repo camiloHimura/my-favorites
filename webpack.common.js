@@ -1,15 +1,20 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+/* eslint-disable @typescript-eslint/no-var-requires */
+let path = require('path');
+let webpack = require('webpack');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './app/index.js'],
+  entry: ['babel-polyfill', './app/index.tsx'],
   output: {
     publicPath: '/',
     filename: 'index_bundle.js',
     path: path.resolve(__dirname, 'public'),
     assetModuleFilename: 'assets/[hash][ext][query]',
+  },
+  resolve: {
+    // We need to add .tsx and .ts as file extensions to be resolved
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
   },
   module: {
     rules: [
@@ -25,6 +30,11 @@ module.exports = {
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
         type: 'asset/inline',
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
   },

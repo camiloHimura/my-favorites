@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Fun from '../../../utils/Fun';
-
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { aSetSideBarIndex, aSetSideBarErrorIndex } from '../../../state/actions';
+import { RootState } from '../../../state/store';
 import './SideBarOptions.css';
-import { setSideBarIndex, setSideBarErrorIndex } from '../../../state/actions';
 
 import Icon from '../../generals/Icon';
 import CreateLink from '../../CreateLink';
@@ -17,19 +16,19 @@ const options = [
   { icon: 'notification_important', component: ErrorLog },
 ];
 
-const mapStateToProps = (state) => ({
-  sideBar: state.sideBar,
-});
+const selectSideBar = (state: RootState) => state.sideBar;
 
-const mapDispachToProps = (dispatch) => ({
-  setSideBarIndex: (info) => dispatch(setSideBarIndex(info)),
-  setSideBarErrorIndex: (info) => dispatch(setSideBarErrorIndex(info)),
-});
+export interface iProps {
+  setSelectedComponent: React.Dispatch<React.FC>;
+}
 
-export function SideBarOptions(props) {
-  const { sideBar, setSelectedComponent, setSideBarIndex, setSideBarErrorIndex } = props;
+const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent }: iProps) => {
+  const sideBar = useAppSelector(selectSideBar);
+  const setSideBarIndex = useAppDispatch();
+  const setSideBarErrorIndex = useAppDispatch();
+
   useEffect(() => {
-    setSideBarErrorIndex(2);
+    setSideBarErrorIndex(aSetSideBarErrorIndex(2));
   }, [setSideBarErrorIndex]);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ export function SideBarOptions(props) {
           key={`options-${index}`}
           className={`--flex ${sideBar.activeIndex == index ? '--selected' : ''}`}
           onClick={() => {
-            setSideBarIndex(index);
+            setSideBarIndex(aSetSideBarIndex(index));
           }}
         >
           <Icon name={icon} onClick={Fun.noon} />
@@ -51,16 +50,6 @@ export function SideBarOptions(props) {
       ))}
     </section>
   );
-}
-
-SideBarOptions.propTypes = {
-  setSideBarIndex: PropTypes.func,
-  setSideBarErrorIndex: PropTypes.func,
-  setSelectedComponent: PropTypes.func,
-  sideBar: PropTypes.shape({
-    activeIndex: PropTypes.number.isRequired,
-    errorIndex: PropTypes.number.isRequired,
-  }),
 };
 
-export default connect(mapStateToProps, mapDispachToProps)(SideBarOptions);
+export default SideBarOptions;

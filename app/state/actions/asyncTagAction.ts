@@ -5,12 +5,12 @@ import {
   removeTagAction,
   updateTagAction,
   addErrorAction,
-} from './index.js';
+} from './index';
 
 export function getAllTags() {
   return async function (dispatch) {
     try {
-      let tags = await getTags();
+      const tags = await getTags();
       dispatch(tagsLoadedAction(tags));
     } catch (error) {
       dispatch(addErrorAction({ ...error }));
@@ -44,7 +44,7 @@ export function removeTag(id) {
   };
 }
 
-export function updateTag(id, name) {
+export function updateTag(id: string, name: string) {
   return async function (dispatch) {
     try {
       const { status, data } = await updateTagRequest(id, name);

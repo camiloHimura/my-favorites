@@ -7,8 +7,14 @@ import Icon from '../Icon';
 import { updateTag } from '../../../state/actions';
 
 const mapDispachToProps = (dispatch) => ({
-  updateTag: (id, name, color) => dispatch(updateTag(id, name, color)),
+  updateTag: (id: string, name: string) => dispatch(updateTag(id, name)),
 });
+
+export interface Tag {
+  id: string | number;
+  color: string;
+  name: string;
+}
 
 export function Tag(props) {
   const inputEl = useRef(null);
