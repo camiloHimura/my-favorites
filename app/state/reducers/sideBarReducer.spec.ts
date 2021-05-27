@@ -1,5 +1,5 @@
 import sideBarReducer from './sideBarReducer';
-import { setSideBarIndex } from '../actions';
+import { aSetSideBarIndex } from '../actions';
 
 describe('Error', () => {
   it('initial state', () => {
@@ -8,17 +8,12 @@ describe('Error', () => {
   });
 
   it('valid index', () => {
-    const newState = sideBarReducer(undefined, setSideBarIndex(3));
+    const newState = sideBarReducer(undefined, aSetSideBarIndex(3));
     expect(newState.activeIndex).toEqual(3);
   });
 
   it('invalid index double', () => {
-    const newState = sideBarReducer(undefined, setSideBarIndex(3.2));
-    expect(newState.activeIndex).toEqual(0);
-  });
-
-  it('invalid index string', () => {
-    const newState = sideBarReducer(undefined, setSideBarIndex('a'));
+    const newState = sideBarReducer(undefined, aSetSideBarIndex(3.2));
     expect(newState.activeIndex).toEqual(0);
   });
 });

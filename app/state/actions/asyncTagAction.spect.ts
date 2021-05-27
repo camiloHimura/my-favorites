@@ -9,7 +9,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('async actions', () => {
-  var store;
+  let store;
 
   beforeEach(() => {
     const initialState = {};
@@ -53,11 +53,11 @@ describe('async actions', () => {
   });
 
   it('updateTag', async () => {
-    const data = { id: '5d16801384deb893dbd11fd8', name: 'tutorial 2', color: '73B1BF' };
+    const data = { id: '5d16801384deb893dbd11fd8', name: 'tutorial 2' };
     const response = { data, status: 'updated' };
     setUpMoxios(200, response);
 
-    await store.dispatch(updateTag(response.data));
+    await store.dispatch(updateTag(response.data.id, response.data.name));
     const [firstAction] = store.getActions();
     expect(firstAction).toEqual(updateTagAction(response.data));
   });
@@ -65,7 +65,7 @@ describe('async actions', () => {
 
 function setUpMoxios(status, response) {
   moxios.wait(() => {
-    let request = moxios.requests.mostRecent();
+    const request = moxios.requests.mostRecent();
     request.respondWith({ status, response });
   });
 }

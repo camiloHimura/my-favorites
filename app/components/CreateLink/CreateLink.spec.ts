@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import CreateLink from './CreateLink';
-import { setPropTypes, findByTestAttr } from '../../utils/test/';
+import { setPropTypes, findByTestAttr } from '../../utils/test';
 import { LINK_DEFAULTS } from '../../contans/LStorageNames';
 
 jest.mock('../../utils/LStorage');

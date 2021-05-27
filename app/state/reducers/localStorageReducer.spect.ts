@@ -48,8 +48,8 @@ describe('standar initial state', () => {
 
 describe('localStorage initial state', () => {
   beforeEach(() => {
-    LStorage.has.mockReturnValue(true);
-    LStorage.get.mockReturnValue(newLink);
+    (LStorage.has as jest.Mock).mockReturnValue(true);
+    (LStorage.get as jest.Mock).mockReturnValue(newLink);
   });
 
   it('return default store', () => {

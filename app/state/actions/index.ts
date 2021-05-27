@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {
   ADD_TAG,
   REMOVE_TAG,
@@ -30,7 +31,7 @@ export {
 
 interface iAction<T> {
   type: string;
-  payload: T;
+  payload?: T;
 }
 
 export const linkLoadedAction = (payload) => ({ type: LINKS_LOADED, payload });
@@ -62,7 +63,7 @@ export const setLsTitleAction = (payload) => ({ type: SET_LS_TITLE, payload });
 
 export const setLsTagsAction = (payload) => ({ type: SET_LS_TAGS, payload });
 
-export const clearLsAction = (payload) => ({ type: CLEAR_LS, payload });
+export const clearLsAction = (): iAction<unknown> => ({ type: CLEAR_LS });
 
 export const addErrorAction = (payload) => ({ type: ADD_ERROR, payload });
 

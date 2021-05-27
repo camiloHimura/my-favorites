@@ -2,8 +2,8 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import instance from '../../utils/axios.conf';
-import { LINKS_LOADED } from '../actions/actions-types';
-import { addLinkAction, removeTagLinkAction, removeLinkAction } from '../actions';
+import { LINKS_LOADED } from './actions-types';
+import { addLinkAction, removeTagLinkAction, removeLinkAction } from '.';
 import {
   getAllLinks,
   getAllLinksByTags,
@@ -16,7 +16,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('async actions', () => {
-  var store;
+  let store;
 
   beforeEach(() => {
     const initialState = {};
@@ -55,7 +55,7 @@ describe('async actions', () => {
   describe('link operations', () => {
     it('addLink', async () => {
       const data = { id: '1991', title: 'test', url: 'url test', tags: [4, 3, 2, 1, 0] };
-      let response = { data, status: 'saved' };
+      const response = { data, status: 'saved' };
       setUpMoxios(200, response);
 
       await store.dispatch(addLink(data));
@@ -66,7 +66,7 @@ describe('async actions', () => {
     it('remove a tag in link', async () => {
       const linkId = '123';
       const tagId = '321';
-      let response = { linkId, tagId, status: 'updated' };
+      const response = { linkId, tagId, status: 'updated' };
       setUpMoxios(200, response);
 
       await store.dispatch(removeTagLink(linkId, tagId));
@@ -87,7 +87,7 @@ describe('async actions', () => {
 
 function setUpMoxios(status, response) {
   moxios.wait(() => {
-    let request = moxios.requests.mostRecent();
+    const request = moxios.requests.mostRecent();
     request.respondWith({ status, response });
   });
 }
