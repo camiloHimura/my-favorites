@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Tag from '../Tag';
 import AutoComplete from '../AutoComplete';
-import PropTypes from 'prop-types';
+import { iTag, iTagList } from '../../../interfaces';
 
 import './TagList.css';
 
-function TagList(props) {
-  const {
-    className,
-    autoHide = true,
-    options = [],
-    placeHolder,
-    clearAfterSelecting = true,
-    clearList = false,
-    onTagsSaved,
-    initialSavedTags = [],
-  } = props;
-  const [savedTags, setSavedTags] = useState(initialSavedTags);
+const TagList: React.FC<iTagList> = ({
+  className,
+  autoHide = true,
+  options = [],
+  placeHolder,
+  clearAfterSelecting = true,
+  clearList = false,
+  onTagsSaved,
+  initialSavedTags = [],
+}: iTagList) => {
+  const [savedTags, setSavedTags] = useState<iTag[]>(initialSavedTags);
 
   useEffect(() => {
     if (initialSavedTags.length) {
@@ -46,7 +45,7 @@ function TagList(props) {
       return;
     }
 
-    const newTags = [{ ...selectedTag }, ...savedTags];
+    const newTags: iTag[] = [{ ...selectedTag }, ...savedTags];
     setSavedTags(newTags);
     onTagsSaved(newTags);
   }
@@ -88,17 +87,6 @@ function TagList(props) {
       </div>
     </div>
   );
-}
-
-TagList.propTypes = {
-  className: PropTypes.string,
-  autoHide: PropTypes.bool,
-  options: PropTypes.array,
-  placeHolder: PropTypes.string,
-  clearAfterSelecting: PropTypes.bool,
-  clearList: PropTypes.bool,
-  onTagsSaved: PropTypes.func,
-  initialSavedTags: PropTypes.array,
 };
 
 export default TagList;

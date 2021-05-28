@@ -1,10 +1,14 @@
 {
-  "testRegex": "((\\.|/*.)(spec|test))\\.js?$",
+  "preset": "ts-jest",
+  "testRegex": "((\\.|/*.)(spec|test))\\.(tsx|ts)?$",
   "verbose": true,
   "testPathIgnorePatterns": ["/node_modules/"],
   "moduleNameMapper": {
     "^.+\\.(css)$": "<rootDir>/app/utils/__mocks__/styleMock.js"
   },
   "setupFiles": ["raf/polyfill", "<rootDir>/jest.setup.js"],
-  "snapshotSerializers": ["enzyme-to-json/serializer"]
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/ts-jest"
+  }
 }

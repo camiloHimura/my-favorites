@@ -16,11 +16,11 @@ const options = [
   { icon: 'notification_important', component: ErrorLog },
 ];
 
-const selectSideBar = (state: RootState) => state.sideBar;
-
 export interface iProps {
   setSelectedComponent: React.Dispatch<React.FC>;
 }
+
+const selectSideBar = (state: RootState) => state.sideBar;
 
 const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent }: iProps) => {
   const sideBar = useAppSelector(selectSideBar);

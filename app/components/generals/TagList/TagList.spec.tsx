@@ -3,24 +3,27 @@ import { shallow } from 'enzyme';
 import TagList from './TagList';
 
 import { setPropTypes, findByTestAttr } from '../../../utils/test';
+import { iTag, iTagList } from '../../../interfaces';
 
 let Component;
-const Options = [
+const Options: iTag[] = [
   { id: 1, name: 'test 1' },
   { id: 2, name: 'test 2' },
   { id: 3, name: 'test 3' },
   { id: 4, name: 'test 4' },
 ];
 
-const initialProps = {
+const initialProps: iTagList = {
   className: '',
   autoHide: true,
   options: Options,
   placeHolder: '',
-  clearAfterSelecting: true,
   clearList: false,
+  initialSavedTags: [],
+  clearAfterSelecting: true,
   onTagsSaved: jest.fn(),
 };
+
 describe('Initial set up', () => {
   let generalProps;
   beforeEach(() => {
@@ -52,6 +55,7 @@ describe('Initial set up', () => {
       component,
       requiredValues,
       prop: 'onTagsSaved',
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       value: () => {},
     });
     expect(response).toBeUndefined();

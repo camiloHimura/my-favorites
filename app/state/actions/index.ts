@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { iError, iAction } from '../../interfaces';
 import {
   ADD_TAG,
   REMOVE_TAG,
@@ -28,11 +29,6 @@ export {
   removeTagLink,
   removeLink,
 } from './asyncLinkAction';
-
-interface iAction<T> {
-  type: string;
-  payload?: T;
-}
 
 export const linkLoadedAction = (payload) => ({ type: LINKS_LOADED, payload });
 
@@ -65,7 +61,7 @@ export const setLsTagsAction = (payload) => ({ type: SET_LS_TAGS, payload });
 
 export const clearLsAction = (): iAction<unknown> => ({ type: CLEAR_LS });
 
-export const addErrorAction = (payload) => ({ type: ADD_ERROR, payload });
+export const addErrorAction = (payload: iError): iAction<iError> => ({ type: ADD_ERROR, payload });
 
 export const aSetSideBarIndex = (payload: number): iAction<number> => ({
   type: SHOW_INDEX,

@@ -4,7 +4,7 @@ import './SideBar.css';
 import SideBarOptions from './SideBarOptions';
 import DynamicComponent from './DynamicComponent';
 
-export default function SideBar() {
+const SideBar: React.FC = () => {
   // const [switchs, setSwitchs] = useState([{ name: 'Fun', name: 'React' }]);
   const [selectedComponent, setSelectedComponent] = useState(null);
 
@@ -16,4 +16,6 @@ export default function SideBar() {
       </div>
     </section>
   );
-}
+};
+
+export default SideBar;

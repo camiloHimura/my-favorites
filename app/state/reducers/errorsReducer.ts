@@ -1,8 +1,9 @@
 import { ADD_ERROR, REMOVE_ERROR } from '../actions/actions-types';
 import { INVALIR_ERROR_FORMAT, INVALIR_ERROR_TYPE } from '../../contans/ErrorMessages';
 import { ERROR_TYPES } from '../../contans';
+import { iAction, iError } from '../../interfaces';
 
-export default function addErrorReducer(state = [], action) {
+export default function addErrorReducer(state: iError[] = [], action: iAction<iError>): iError[] {
   if (action.type === ADD_ERROR) {
     console.log('new error', action);
   }
@@ -15,7 +16,7 @@ export default function addErrorReducer(state = [], action) {
       return state;
 
     case REMOVE_ERROR:
-      return state.filter((item) => item.id !== action.payload);
+      return state.filter((item) => item?.id !== (action.payload as unknown as string));
 
     default:
       return state;
