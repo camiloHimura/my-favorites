@@ -26,7 +26,7 @@ it('checking prop types', () => {
   const component = Content;
   const requiredValues = props;
 
-  response = setPropTypes({ component, requiredValues, prop: 'getAllLinks', value: () => {} });
+  response = setPropTypes({ component, requiredValues, prop: 'getAllLinks', value: () => { } });
   expect(response).toBeUndefined();
 
   response = setPropTypes({ component, requiredValues, prop: 'links', value: [] });

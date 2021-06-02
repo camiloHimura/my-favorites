@@ -10,13 +10,13 @@ beforeEach(() => {
 });
 
 it('checking props types', () => {
-  const requiredValues = { name: 'test', onClick: () => {} };
+  const requiredValues = { name: 'test', onClick: () => { } };
   let response;
 
   response = setPropTypes({ component: Icon, requiredValues, prop: 'name', value: 'test 2' });
   expect(response).toBeUndefined();
 
-  response = setPropTypes({ component: Icon, requiredValues, prop: 'onClick', value: () => {} });
+  response = setPropTypes({ component: Icon, requiredValues, prop: 'onClick', value: () => { } });
   expect(response).toBeUndefined();
 });
 

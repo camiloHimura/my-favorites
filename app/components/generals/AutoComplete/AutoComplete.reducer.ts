@@ -1,9 +1,27 @@
-export default function reducer(state = {}, action) {
+import { iTag } from "../../../interfaces";
+import { Actions } from "./AutoComplete";
+
+interface ActionType {
+  value?: string;
+  initOptions?: iTag[];
+  propertyFilter?: string;
+  type: Actions.set | Actions.filter | Actions.sweepUp | Actions.sweepDown | Actions.clear;
+}
+
+interface State {
+  options?: iTag[];
+  initOptions?: iTag[];
+  showOptions?: boolean;
+  indexSelector?: number;
+  propertyFilter?: string;
+}
+
+export default function reducer(state: State = {}, action: ActionType) {
   switch (action.type) {
-    case 'set':
+    case Actions.set:
       return { ...state, initOptions: action.initOptions };
 
-    case 'filter': {
+    case Actions.filter: {
       if (!Array.isArray(state.initOptions) || !action.propertyFilter) {
         return state;
       }
@@ -13,7 +31,7 @@ export default function reducer(state = {}, action) {
       );
       return { ...state, options, showOptions: options.length > 0 ? true : false };
     }
-    case 'sweepUp': {
+    case Actions.sweepUp: {
       if (!Array.isArray(state.options)) {
         return state;
       }
@@ -25,7 +43,7 @@ export default function reducer(state = {}, action) {
       }
       return { ...state, indexSelector };
     }
-    case 'sweepDown': {
+    case Actions.sweepDown: {
       if (!Array.isArray(state.options)) {
         return state;
       }
@@ -36,7 +54,7 @@ export default function reducer(state = {}, action) {
 
       return { ...state, indexSelector };
     }
-    case 'clear':
+    case Actions.clear:
       return { ...state, indexSelector: null, showOptions: false };
 
     default:

@@ -1,39 +1,12 @@
+import 'jsdom-global/register';
 import React from 'react';
 import { mount } from 'enzyme';
-import { setPropTypes, findByTestAttr } from '../../../utils/test';
+import { findByTestAttr } from '../../../utils/test';
 
 import AutoComplete from './AutoComplete';
+import { iAutoComplete } from '../../../interfaces';
 
-let initialProps = { options: [], onSelected: jest.fn() };
-
-it('checking prop types', () => {
-  let response;
-  const component = AutoComplete;
-  const requiredValues = initialProps;
-
-  response = setPropTypes({ component, requiredValues, prop: 'options', value: [] });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({ component, requiredValues, prop: 'autoHide', value: true });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({ component, requiredValues, prop: 'onSelected', value: () => {} });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({ component, requiredValues, prop: 'placeHolder', value: 'test' });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({ component, requiredValues, prop: 'propertyFilter', value: 'test 2' });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({
-    component,
-    requiredValues,
-    prop: 'clearAfterSelecting',
-    value: true,
-  });
-  expect(response).toBeUndefined();
-});
+let initialProps: iAutoComplete = { options: [], onSelected: jest.fn(), propertyFilter: '', clearAfterSelecting: false };
 
 describe('hide and show options', () => {
   const component = setUp({

@@ -3,8 +3,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Board from './Board';
 import { setPropTypes, findByTestAttr } from '../../../utils/test';
+import { iTag, iBoard } from '../../../interfaces';
 
-let initialProps = { options: [1, 2], Component: () => <h1>test</h1>, setOptions: jest.fn() };
+const tag: iTag = { name: 'test' };
+let initialProps: iBoard = {
+  isWrap: false,
+  className: '',
+  placeHolder: '',
+  options: [tag, tag],
+  setOptions: jest.fn(),
+  Component: () => <h1>test</h1>,
+};
 
 it('checking props types', () => {
   const requiredValues = initialProps;
@@ -17,7 +26,7 @@ it('checking props types', () => {
     component: Board,
     requiredValues,
     prop: 'setOptions',
-    value: () => {},
+    value: () => { },
   });
   expect(response).toBeUndefined();
 
@@ -39,7 +48,7 @@ it('checking props types', () => {
     component: Board,
     requiredValues,
     prop: 'Component',
-    value: () => {},
+    value: () => { },
   });
   expect(response).toBeUndefined();
 });
@@ -50,7 +59,7 @@ it('render input element', () => {
 });
 
 it('render container and elements', () => {
-  const options = [1, 2, 3, 4];
+  const options: iTag[] = [tag, tag, tag, tag];
   const wrapper = setUp({ options, Component: () => <h1>Home</h1> });
   const container = findByTestAttr(wrapper, 'container');
   const element = findByTestAttr(wrapper, 'element');
@@ -59,7 +68,7 @@ it('render container and elements', () => {
   expect(element.length).toBe(options.length);
 });
 
-function setUp(props = {}) {
+const setUp = (props = {}) => {
   const mergedProps = { ...initialProps, ...props };
   return shallow(<Board {...mergedProps} />);
 }

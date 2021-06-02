@@ -1,11 +1,19 @@
 import React, { useRef, useReducer, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import AutoReduce from './AutoComplete.reducer.js';
+import AutoReduce from './AutoComplete.reducer';
 import './AutoComplete.css';
+import { iAutoComplete } from '../../../interfaces';
 
-function AutoComplete(props) {
-  const divOptions = useRef();
-  const inputFilter = useRef();
+export enum Actions {
+  set,
+  filter,
+  sweepUp,
+  sweepDown,
+  clear,
+}
+
+const AutoComplete: React.FC<iAutoComplete> = (props) => {
+  const divOptions = useRef(null);
+  const inputFilter = useRef(null);
   let [state, setOptions] = useReducer(AutoReduce, { showOptions: false });
 
   const { options, showOptions, indexSelector } = state;
@@ -19,36 +27,36 @@ function AutoComplete(props) {
   } = props;
 
   useEffect(() => {
-    setOptions({ type: 'set', initOptions: [...initOptions] });
+    setOptions({ type: Actions.set, initOptions: [...initOptions] });
   }, [initOptions]);
 
-  function filter(event) {
+  const filter = (event) => {
     let element = event.target;
 
     if (element.value !== '' && element.value.length > 1) {
-      setOptions({ type: 'filter', initOptions, propertyFilter, value: element.value });
+      setOptions({ type: Actions.filter, initOptions, propertyFilter, value: element.value });
     } else {
-      setOptions({ type: 'clear' });
+      setOptions({ type: Actions.clear });
     }
   }
 
-  function sweepOptions(event) {
+  const sweepOptions = (event) => {
     if (showOptions == false) {
       return;
     }
 
     if (event.keyCode === 38) {
       event.preventDefault();
-      setOptions({ type: 'sweepUp' });
+      setOptions({ type: Actions.sweepUp });
     }
 
     if (event.keyCode === 40) {
       event.preventDefault();
-      setOptions({ type: 'sweepDown' });
+      setOptions({ type: Actions.sweepDown });
     }
 
     if (event.keyCode === 13 && Number.isInteger(indexSelector)) {
-      setOptions({ type: 'clear' });
+      setOptions({ type: Actions.clear });
       onSelected(options[indexSelector]);
 
       if (!clearAfterSelecting) {
@@ -59,9 +67,9 @@ function AutoComplete(props) {
     }
   }
 
-  function clickOption(index) {
+  const clickOption = (index) => {
     onSelected(options[index]);
-    setOptions({ type: 'clear' });
+    setOptions({ type: Actions.clear });
 
     if (!clearAfterSelecting) {
       inputFilter.current.value = options[index][propertyFilter];
@@ -70,9 +78,9 @@ function AutoComplete(props) {
     }
   }
 
-  function closeOptions() {
+  const closeOptions = () => {
     if (autoHide) {
-      setOptions({ type: 'clear' });
+      setOptions({ type: Actions.clear });
     }
   }
 
@@ -104,14 +112,5 @@ function AutoComplete(props) {
     </div>
   );
 }
-
-AutoComplete.propTypes = {
-  options: PropTypes.array.isRequired,
-  autoHide: PropTypes.bool,
-  onSelected: PropTypes.func.isRequired,
-  placeHolder: PropTypes.string,
-  propertyFilter: PropTypes.string,
-  clearAfterSelecting: PropTypes.bool,
-};
 
 export default AutoComplete;

@@ -1,3 +1,4 @@
+import 'jsdom-global/register';
 import React from 'react';
 import { mount } from 'enzyme';
 
@@ -7,8 +8,7 @@ import { LINK_DEFAULTS } from '../../contans/LStorageNames';
 
 jest.mock('../../utils/LStorage');
 jest.mock('react-redux', () => ({
-  // eslint-disable-next-line no-unused-vars
-  connect: (mapStateToProps, mapDispatchToProps) => (ReactComponent) => ReactComponent,
+  connect: (_mapStateToProps, _mapDispatchToProps) => (ReactComponent) => ReactComponent,
 }));
 
 let Component;
@@ -31,7 +31,7 @@ describe('Initial set up', () => {
     let response;
     const component = CreateLink;
     const requiredValues = { localStorage: {} };
-    response = setPropTypes({ component, requiredValues, prop: 'addLink', value: () => {} });
+    response = setPropTypes({ component, requiredValues, prop: 'addLink', value: () => { } });
     expect(response).toBeUndefined();
 
     response = setPropTypes({ component, requiredValues, prop: 'tags', value: [] });

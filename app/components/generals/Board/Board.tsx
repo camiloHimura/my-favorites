@@ -1,23 +1,30 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import './Board.css';
 
 import { KEY_CODES } from '../../../contans';
 import Colors from '../../../utils/Colors';
+import iBoard from '../../../interfaces/iBoard';
 
 const { ENTER } = KEY_CODES;
 
-function BoardTags(props) {
-  let { options = [], setOptions, isWrap = false, placeHolder = '', Component, className } = props;
-
-  const inputOptions = useRef();
+const BoardTags: React.FC<iBoard> = ({
+  className,
+  Component,
+  setOptions,
+  options = [],
+  isWrap = false,
+  placeHolder = '',
+}) => {
+  const inputOptions = useRef<HTMLInputElement>(null);
 
   function addOption(event) {
     let element = event.target;
 
     if (event.keyCode === ENTER && element.value !== '') {
       setOptions({ name: element.value, color: Colors.getRamdom() });
-      inputOptions.current.value = '';
+      if (inputOptions?.current) {
+        inputOptions.current.value = '';
+      }
     }
   }
 
@@ -32,14 +39,5 @@ function BoardTags(props) {
     </div>
   );
 }
-
-Colors.propTypes = {
-  isWrap: PropTypes.bool,
-  setOptions: PropTypes.func,
-  className: PropTypes.string,
-  placeHolder: PropTypes.string,
-  options: PropTypes.array.isRequired,
-  Component: PropTypes.func.isRequired,
-};
 
 export default BoardTags;

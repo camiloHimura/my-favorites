@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 let webpack = require('webpack');
@@ -18,7 +19,7 @@ module.exports = merge(common, {
   devServer: {
     hot: true,
     open: true,
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 8080,
     historyApiFallback: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
