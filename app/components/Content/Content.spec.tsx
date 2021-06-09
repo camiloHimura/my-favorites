@@ -9,9 +9,6 @@ import { searchLinkAction, getAllLinksAction, getAllLinksByTagsAction } from '..
 import { findByTestAttr, storeFactory } from '../../utils/test';
 
 import Content, { eContent } from './Content';
-/* import Row from '../generals/Row';
-import Search from '../Search';
-import TagList from '../generals/TagList'; */
 
 jest.mock('../Card', () => jest.fn((_) => `[Content]`));
 jest.mock('../Search', () => jest.fn((_) => `[Search]`));

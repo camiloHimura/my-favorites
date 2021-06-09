@@ -1,76 +1,100 @@
+import 'jsdom-global/register';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
-import { Card } from './Card';
-import { setPropTypes, findByTestAttr } from '../../utils/test';
+import Card from './Card';
+import { findByTestAttr, storeFactory } from '../../utils/test';
+import { iLink } from '../../interfaces';
+import { Provider } from 'react-redux';
+import { removeTagLinkAsyncAction, removeLinkAsyncAction } from '../../state/actions';
 
-const spyObj = {
-  editLink: jest.fn(),
-  removeLink: jest.fn(),
-  removeTagLink: jest.fn(),
-};
-const data = {
+jest.mock('../generals/Tag', () => jest.fn((_) => `[Tag]`));
+jest.mock('../generals/Tooltip', () => jest.fn((_) => `[Tooltip]`));
+
+const setUpDispatch = jest.fn();
+jest.mock('../../hooks/redux', () => ({
+  useAppDispatch: () => setUpDispatch,
+  useAppSelector: jest.fn(),
+}));
+
+jest.mock('../../state/actions', () => ({
+  removeTagLinkAsyncAction: jest.fn(),
+  removeLinkAsyncAction: jest.fn(),
+}));
+
+
+const data: iLink = {
   id: 1991,
   url: 'url test',
   title: 'title test',
-  tags: [{ id: 123 }, { id: 456 }, { id: 789 }],
-  description: 'fake description',
+  description: 'fake description 2',
+  tags: [{ id: 123, name: 'test', color: '#000' }, { id: 456, name: 'test', color: '#000' }, { id: 789, name: 'test', color: '#000' }],
 };
 
-it('checking prop types', () => {
-  let response;
-  const component = Card;
-  const requiredValues = { id: 123, title: '', url: '' };
-  response = setPropTypes({ component, requiredValues, prop: 'id', value: 123 });
-  expect(response).toBeUndefined();
+beforeEach(() => {
+  setUpDispatch.mockReset()
+})
 
-  response = setPropTypes({ component, requiredValues, prop: 'title', value: 'test' });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({ component, requiredValues, prop: 'url', value: 'url' });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({ component, requiredValues, prop: 'tags', value: [] });
-  expect(response).toBeUndefined();
-});
-
-test('render basic info', () => {
-  const Component = shallow(<Card {...data} />);
+it('Should render component basic info', () => {
+  const Component = setUp(data);
   expect(findByTestAttr(Component, 'title').text()).toBe(data.title);
-  expect(findByTestAttr(Component, 'link-url').props().href).toBe(data.url);
   expect(findByTestAttr(Component, 'description').text()).toBe(data.description);
+  expect((findByTestAttr(Component, 'link-url').props() as HTMLLinkElement).href).toBe(data.url);
+});
+;
+
+it('Tooltip should be hidden', () => {
+  const Component = setUp(data);
+  expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(false);
 });
 
-test('render tags', () => {
-  const Component = shallow(<Card {...data} />);
-  expect(findByTestAttr(Component, 'cp-tag')).toHaveLength(data.tags.length);
+it('Toogle tooltip, (updated setIsContHover)', () => {
+  const Component = setUp(data);
+  const buttton = findByTestAttr(Component, 'description');
+  expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(false)
+    ;
+  buttton.simulate('mouseEnter');
+  expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(true);
+
+  buttton.simulate('mouseLeave');
+  expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(false);
 });
 
-test('tooltip should be hidden', () => {
-  const Component = shallow(<Card {...data} />);
-  expect(findByTestAttr(Component, 'cp-tooltip').props().hover).toBe(false);
+it('Should render Tags with the proper props', () => {
+  const Component = setUp(data);
+  const tags = findByTestAttr(Component, 'cp-tag');
+
+  expect(tags).toHaveLength(data.tags.length);
+
+  expect(tags.at(0).props()).toEqual(
+    expect.objectContaining({
+      ...data.tags[0],
+      'data-test': 'cp-tag',
+      isUpdateDisable: true,
+      onClose: expect.any(Function),
+    })
+  );
 });
 
-test('show tooltip tooltip', () => {
-  const Component = shallow(<Card {...data} />);
-  findByTestAttr(Component, 'description').simulate('mouseEnter');
-  expect(findByTestAttr(Component, 'cp-tooltip').props().hover).toBe(true);
+it('Should call "removeTagLinkAsyncAction" when Tag "onClose" is fired', () => {
+  const Component = setUp(data);
+  const index = 0;
+  const onClose = findByTestAttr(Component, 'cp-tag').at(index).prop('onClose') as Function;
+  onClose();
+
+  expect(setUpDispatch).toHaveBeenCalled();
+  expect(removeTagLinkAsyncAction).toHaveBeenCalledWith(data.id, data.tags[index].id);
 });
 
-test('trigger remove link', () => {
-  const Component = shallow(<Card {...data} {...spyObj} />);
+it('trigger remove link', () => {
+  const Component = setUp(data);
   findByTestAttr(Component, 'btn-remove').simulate('click');
-  expect(spyObj.removeLink).toHaveBeenLastCalledWith(data.id);
+
+  expect(setUpDispatch).toHaveBeenCalled();
+  expect(removeLinkAsyncAction).toHaveBeenCalledWith(data.id);
 });
 
-test('trigger edit link', () => {
-  const Component = shallow(<Card {...data} {...spyObj} />);
-  findByTestAttr(Component, 'btn-edit').simulate('click');
-  expect(spyObj.editLink).toHaveBeenLastCalledWith(data.id);
-});
-
-test('remove a tag', () => {
-  const Component = shallow(<Card {...data} {...spyObj} />);
-  findByTestAttr(Component, 'cp-tag').at(0).prop('onClose')();
-  expect(spyObj.removeTagLink).toHaveBeenLastCalledWith(data.id, data.tags[0].id);
-});
+const setUp = (props: iLink = {}) => {
+  const mockStore = storeFactory({});
+  return mount(<Provider store={mockStore}> <Card {...props} /> </Provider>);
+};

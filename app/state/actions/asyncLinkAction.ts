@@ -1,5 +1,6 @@
 import { Dispatch } from 'react';
 import { iAction, iError, iLink, } from '../../interfaces';
+import { iTagLink } from '../../interfaces/iTagLink';
 import {
   getLinks,
   getLinksByTags,
@@ -34,6 +35,32 @@ export const getAllLinksByTagsAction = (tags: string) => async (dispatch: Dispat
   }
 }
 
+export const removeLinkAsyncAction = (linkId: string) => async (dispatch: Dispatch<iAction<string | iError>>) => {
+  try {
+    const { status } = await removeLinkRequest(linkId);
+    if (status == 'removed') {
+      dispatch(removeLinkAction(linkId));
+    } else {
+      console.log('show toas "not updated"');
+    }
+  } catch (error) {
+    dispatch(addErrorAction({ ...error }));
+  }
+}
+
+export const removeTagLinkAsyncAction = (linkId: string, tagId: string) => async (dispatch: Dispatch<iAction<iTagLink | iError>>) => {
+  try {
+    const { status } = await removeTagLinkRequest(linkId, tagId);
+    if (status == 'updated') {
+      dispatch(removeTagLinkAction({ linkId, tagId }));
+    } else {
+      console.log('show toas "not updated"');
+    }
+  } catch (error) {
+    dispatch(addErrorAction({ ...error }));
+  }
+}
+
 export function addLink(info) {
   return async function (dispatch) {
     try {
@@ -47,35 +74,6 @@ export function addLink(info) {
   };
 }
 
-export function removeTagLink(linkId, tagId) {
-  return async function (dispatch) {
-    try {
-      const { status } = await removeTagLinkRequest(linkId, tagId);
-      if (status == 'updated') {
-        dispatch(removeTagLinkAction({ linkId, tagId }));
-      } else {
-        console.log('show toas "not updated"');
-      }
-    } catch (error) {
-      dispatch(addErrorAction({ ...error }));
-    }
-  };
-}
-
-export function removeLink(linkId) {
-  return async function (dispatch) {
-    try {
-      const { status } = await removeLinkRequest(linkId);
-      if (status == 'removed') {
-        dispatch(removeLinkAction(linkId));
-      } else {
-        console.log('show toas "not updated"');
-      }
-    } catch (error) {
-      dispatch(addErrorAction({ ...error }));
-    }
-  };
-}
 
 /* export function removeTag(id){
     return async function(dispatch){

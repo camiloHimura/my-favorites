@@ -108,7 +108,7 @@ export function CreateLink(props) {
           onFocus={removeInvalid}
           className="createLink__contInputs__url"
         />
-        <button className="createLink__send" type="button" onClick={check} data-test="btn-send">
+        <button className="createLink__send button" type="button" onClick={check} data-test="btn-send">
           Send
         </button>
       </div>

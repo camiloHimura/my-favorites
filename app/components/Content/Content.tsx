@@ -27,7 +27,7 @@ const Content: React.FC<iContent> = ({ numLoadingCards = 9 }) => {
 
   const dispatchGetAllLinks: Dispatch<any> = useAppDispatch();
   const dispatchGetAllLinksByTags: Dispatch<any> = useAppDispatch();
-  const dispatchSearchLink: Dispatch<any> = useAppDispatch();
+  const dispatchSearchLink = useAppDispatch();
 
   const getAllLinks = () => dispatchGetAllLinks(getAllLinksAction());
   const searchLink = (text: string) => dispatchSearchLink(searchLinkAction(text));

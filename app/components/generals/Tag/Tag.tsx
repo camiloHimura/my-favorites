@@ -10,12 +10,6 @@ const mapDispachToProps = (dispatch) => ({
   updateTag: (id: string, name: string) => dispatch(updateTag(id, name)),
 });
 
-export interface Tag {
-  id: string | number;
-  color: string;
-  name: string;
-}
-
 export function Tag(props) {
   const inputEl = useRef(null);
   const [isEdit, setIsEdit] = useState(false);

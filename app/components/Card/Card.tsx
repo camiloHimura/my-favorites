@@ -1,36 +1,27 @@
-import React, { useRef, useState } from 'react';
-import { connect } from 'react-redux';
-import { CardPropType } from '../../propsTypes';
+import React, { Dispatch, useRef } from 'react';
 import './Card.css';
 
 import Icon from '../generals/Icon';
 import Tag from '../generals/Tag';
 import Tooltip from '../generals/Tooltip';
-import { removeTagLink, removeLink } from '../../state/actions';
-
-const mapDispachToProps = (dispatch) => ({
-  editLink: (linkId) => console.log('editLink...', linkId),
-  removeLink: (linkId) => dispatch(removeLink(linkId)),
-  removeTagLink: (linkId, tagId) => dispatch(removeTagLink(linkId, tagId)),
-});
+import { removeTagLinkAsyncAction, removeLinkAsyncAction } from '../../state/actions';
+import { iLink } from '../../interfaces';
+import { useAppDispatch } from '../../hooks/redux';
 
 const fakeText = `Donec in venenatis metus. Suspendisse potenti. Cras ultricies turpis sit amet massa suscipit, in egestas sapien finibus.`;
 
-export function Card(props) {
-  const { id = 0, title, url, tags = [], description = fakeText } = props;
-  const containerUrl = useRef(null);
-  const [isContHover, setIsContHover] = useState(false);
+const Card: React.FC<iLink> = ({ id = '0', title, url, tags = [], description = fakeText }) => {
+  const containerUrl = useRef<HTMLButtonElement>(null);
+  const [isContHover, setIsContHover] = React.useState(false);
 
-  function removeTag(tagId) {
-    props.removeTagLink(props.id, tagId);
-  }
+  const dispatchRemoveLink: Dispatch<any> = useAppDispatch();
+  const dispatchRemoveTag: Dispatch<any> = useAppDispatch();
+  const removeLink = () => dispatchRemoveLink(removeLinkAsyncAction(id as string));
+  const removeTag = (tagId: string) => dispatchRemoveTag(removeTagLinkAsyncAction(id as string, tagId));
 
-  function removeLink() {
-    props.removeLink(props.id);
-  }
-
-  function editLink() {
-    props.editLink(props.id);
+  const editLink = () => {
+    // Todo edit link method backed
+    console.log('editLink...', id);
   }
 
   return (
@@ -63,11 +54,11 @@ export function Card(props) {
       <div className="card__cont contTags --flex --wrap">
         {tags.map((tag, index) => (
           <Tag
-            key={`${id}-${index}`}
             data-test="cp-tag"
+            key={`${id}-${index}`}
             isUpdateDisable={true}
+            onClose={() => removeTag(tag.id as string)}
             {...tag}
-            onClose={() => removeTag(tag.id)}
           />
         ))}
       </div>
@@ -95,6 +86,4 @@ export function Card(props) {
   );
 }
 
-Card.propTypes = CardPropType;
-
-export default connect(null, mapDispachToProps)(Card);
+export default Card;

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { iError, iAction, iLink } from '../../interfaces';
+import { iTagLink } from '../../interfaces/iTagLink';
 import {
   ADD_TAG,
   REMOVE_TAG,
@@ -26,21 +27,21 @@ export {
   getAllLinksAction,
   getAllLinksByTagsAction,
   addLink,
-  removeTagLink,
-  removeLink,
+  removeTagLinkAsyncAction,
+  removeLinkAsyncAction,
 } from './asyncLinkAction';
 
 export const linkLoadedAction = (payload: iLink[]): iAction<iLink[]> => ({ type: LINKS_LOADED, payload });
 
 export const addLinkAction = (payload) => ({ type: ADD_LINK, payload });
 
-export const removeLinkAction = (payload) => ({ type: REMOVE_LINK, payload });
+export const removeLinkAction = (payload: string): iAction<string> => ({ type: REMOVE_LINK, payload });
 
 export const searchLinkAction = (payload: string): iAction<string> => ({ type: SEARCH_LINK, payload });
 
 export const invalidLink = (payload) => ({ type: INVALID_LINK, payload });
 
-export const removeTagLinkAction = (payload) => ({ type: REMOVE_TAG_LINK, payload });
+export const removeTagLinkAction = (payload: iTagLink): iAction<iTagLink> => ({ type: REMOVE_TAG_LINK, payload });
 
 export const tagsLoadedAction = (payload) => ({ type: TAGS_LOADED, payload });
 
