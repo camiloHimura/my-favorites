@@ -1,15 +1,16 @@
+import { iAction, iTag } from '../../interfaces';
 import { ADD_TAG, REMOVE_TAG, TAGS_LOADED, UPADTED_TAG } from '../actions/actions-types';
 
-export default function tagsReducer(state = [], action) {
+export default function tagsReducer(state: iTag[] = [], action: iAction<iTag>): iTag[] {
   switch (action.type) {
     case TAGS_LOADED:
-      return [...action.payload];
+      return [...action.payload as unknown as iTag[]];
 
     case ADD_TAG:
       return [...state, action.payload];
 
     case REMOVE_TAG:
-      return [...state.filter((item) => item.id != action.payload)];
+      return [...state.filter((item) => item.id !== action.payload as unknown as string)];
 
     case UPADTED_TAG: {
       let newTags = state.map((tag) => {

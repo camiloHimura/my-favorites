@@ -1,7 +1,7 @@
 import React from 'react';
 import './CardLoading.css';
 
-export function CardLoading() {
+const CardLoading: React.FC = () => {
   return (
     <div className="cardLoading">
       <div className="cardLoading__title"></div>
@@ -17,7 +17,5 @@ export function CardLoading() {
     </div>
   );
 }
-
-CardLoading.propTypes = {};
 
 export default CardLoading;

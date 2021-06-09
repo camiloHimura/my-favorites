@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { iError, iAction } from '../../interfaces';
+import { iError, iAction, iLink } from '../../interfaces';
 import {
   ADD_TAG,
   REMOVE_TAG,
@@ -23,20 +23,20 @@ import {
 
 export { getAllTags, addTag, removeTag, updateTag } from './asyncTagAction';
 export {
-  getAllLinks,
-  getAllLinksByTags,
+  getAllLinksAction,
+  getAllLinksByTagsAction,
   addLink,
   removeTagLink,
   removeLink,
 } from './asyncLinkAction';
 
-export const linkLoadedAction = (payload) => ({ type: LINKS_LOADED, payload });
+export const linkLoadedAction = (payload: iLink[]): iAction<iLink[]> => ({ type: LINKS_LOADED, payload });
 
 export const addLinkAction = (payload) => ({ type: ADD_LINK, payload });
 
 export const removeLinkAction = (payload) => ({ type: REMOVE_LINK, payload });
 
-export const searchLinkAction = (payload) => ({ type: SEARCH_LINK, payload });
+export const searchLinkAction = (payload: string): iAction<string> => ({ type: SEARCH_LINK, payload });
 
 export const invalidLink = (payload) => ({ type: INVALID_LINK, payload });
 
@@ -63,12 +63,12 @@ export const clearLsAction = (): iAction<unknown> => ({ type: CLEAR_LS });
 
 export const addErrorAction = (payload: iError): iAction<iError> => ({ type: ADD_ERROR, payload });
 
-export const aSetSideBarIndex = (payload: number): iAction<number> => ({
+export const setSideBarIndexAction = (payload: number): iAction<number> => ({
   type: SHOW_INDEX,
   payload,
 });
 
-export const aSetSideBarErrorIndex = (payload: number): iAction<number> => ({
+export const setSideBarErrorIndexAction = (payload: number): iAction<number> => ({
   type: ERROR_INDEX,
   payload,
 });

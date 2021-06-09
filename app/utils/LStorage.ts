@@ -15,12 +15,12 @@ export default {
   set(key, value) {
     checkKey(key);
     const parseValue = isString(value) ? value : JSON.stringify(value);
-    localStorage.setItem(key, parseValue);
+    localStorage && localStorage.setItem(key, parseValue);
     return value;
   },
   has(key) {
     checkKey(key);
-    return Object.prototype.hasOwnProperty.call(localStorage, key);
+    return localStorage && Object.prototype.hasOwnProperty.call(localStorage, key);
   },
   get(key) {
     checkKey(key);

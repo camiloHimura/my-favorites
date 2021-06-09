@@ -2,8 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Search from './Search';
+import { iSearch } from '../../interfaces';
 
-let spyObj = {};
+const searchLink = jest.fn();
+const getAllLinks = jest.fn();
+let spyObj: iSearch = {
+  searchLink,
+  getAllLinks
+};
 let component;
 
 beforeEach(() => {

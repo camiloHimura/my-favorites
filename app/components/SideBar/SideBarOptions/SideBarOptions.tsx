@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Fun from '../../../utils/Fun';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { aSetSideBarIndex, aSetSideBarErrorIndex } from '../../../state/actions';
+import { setSideBarIndexAction, setSideBarErrorIndexAction } from '../../../state/actions';
 import { RootState } from '../../../state/store';
 import './SideBarOptions.css';
 
@@ -28,7 +28,7 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent }: iProps) => {
   const setSideBarErrorIndex = useAppDispatch();
 
   useEffect(() => {
-    setSideBarErrorIndex(aSetSideBarErrorIndex(2));
+    setSideBarErrorIndex(setSideBarErrorIndexAction(2));
   }, [setSideBarErrorIndex]);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent }: iProps) => {
           key={`options-${index}`}
           className={`--flex ${sideBar.activeIndex == index ? '--selected' : ''}`}
           onClick={() => {
-            setSideBarIndex(aSetSideBarIndex(index));
+            setSideBarIndex(setSideBarIndexAction(index));
           }}
         >
           <Icon name={icon} onClick={Fun.noon} />

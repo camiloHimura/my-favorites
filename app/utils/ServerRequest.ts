@@ -36,7 +36,7 @@ export function getLinks() {
     .catch(catchError);
 }
 
-export function getLinksByTags(tags) {
+export function getLinksByTags(tags: string) {
   return instance
     .get(`/link/byTags/${tags}`)
     .then(({ data }) => data)

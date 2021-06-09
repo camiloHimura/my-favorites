@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+import { iAction, iError, iLink, } from '../../interfaces';
 import {
   getLinks,
   getLinksByTags,
@@ -14,26 +16,22 @@ import {
 } from './index';
 // import { ERROR_TYPES } from '../../contans';
 
-export function getAllLinks() {
-  return async function (dispatch) {
-    try {
-      const links = await getLinks();
-      dispatch(linkLoadedAction(links));
-    } catch (error) {
-      dispatch(addErrorAction({ ...error }));
-    }
-  };
+export const getAllLinksAction = () => async (dispatch: Dispatch<iAction<iLink[] | iError>>) => {
+  try {
+    const links = await getLinks();
+    dispatch(linkLoadedAction(links));
+  } catch (error: unknown) {
+    dispatch(addErrorAction({ ...error as iError }));
+  }
 }
 
-export function getAllLinksByTags(tags) {
-  return async function (dispatch) {
-    try {
-      const links = await getLinksByTags(tags);
-      dispatch(linkLoadedAction(links));
-    } catch (error) {
-      dispatch(addErrorAction({ ...error }));
-    }
-  };
+export const getAllLinksByTagsAction = (tags: string) => async (dispatch: Dispatch<iAction<iLink[] | iError>>) => {
+  try {
+    const links: iLink[] = await getLinksByTags(tags);
+    dispatch(linkLoadedAction(links));
+  } catch (error) {
+    dispatch(addErrorAction({ ...error }));
+  }
 }
 
 export function addLink(info) {
