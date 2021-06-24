@@ -18,7 +18,7 @@ function App() {
     <div className="MyFavorites">
       {/* <Nav items={items}/>*/}
       <SideBar />
-      <Content />
+      <Content numLoadingCards={9} />
     </div>
   );
 }

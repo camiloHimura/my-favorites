@@ -22,7 +22,7 @@ const TagList: React.FC<iTagList> = ({
       setSavedTags(initialSavedTags);
       onTagsSaved(initialSavedTags);
     }
-  }, [initialSavedTags, onTagsSaved]);
+  }, [initialSavedTags.length]);
 
   useEffect(() => {
     if (clearList) {

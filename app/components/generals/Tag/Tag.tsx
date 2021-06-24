@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { TagPropType } from '../../../propsTypes';
 import { connect } from 'react-redux';
 import './Tag.css';
 
@@ -71,6 +70,6 @@ export function Tag(props) {
   );
 }
 
-Tag.propTypes = TagPropType;
+// Tag.propTypes = TagPropType;
 
 export default connect(null, mapDispachToProps)(Tag);

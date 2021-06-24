@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { iError, iAction, iLink } from '../../interfaces';
+import { iError, iAction, iLink, iTag } from '../../interfaces';
 import { iTagLink } from '../../interfaces/iTagLink';
 import {
   ADD_TAG,
@@ -22,11 +22,11 @@ import {
   ERROR_INDEX,
 } from './actions-types';
 
-export { getAllTags, addTag, removeTag, updateTag } from './asyncTagAction';
+export { getAllTagsAsyncAction, addTag, removeTag, updateTag } from './asyncTagAction';
 export {
   getAllLinksAction,
   getAllLinksByTagsAction,
-  addLink,
+  addLinkAsyncAction,
   removeTagLinkAsyncAction,
   removeLinkAsyncAction,
 } from './asyncLinkAction';
@@ -43,7 +43,7 @@ export const invalidLink = (payload) => ({ type: INVALID_LINK, payload });
 
 export const removeTagLinkAction = (payload: iTagLink): iAction<iTagLink> => ({ type: REMOVE_TAG_LINK, payload });
 
-export const tagsLoadedAction = (payload) => ({ type: TAGS_LOADED, payload });
+export const tagsLoadedAction = (payload: boolean): iAction<boolean> => ({ type: TAGS_LOADED, payload });
 
 export const addTagAction = (payload) => ({ type: ADD_TAG, payload });
 
@@ -54,13 +54,13 @@ export const removeTagAction = (payload) => ({ type: REMOVE_TAG, payload });
 export const invalidTag = (payload) => ({ type: INVALID_TAG, payload });
 
 //Local Storage actions
-export const setLsUrlAction = (payload) => ({ type: SET_LS_URL, payload });
+export const setLsUrlAction = (payload: string): iAction<string> => ({ type: SET_LS_URL, payload });
 
-export const setLsTitleAction = (payload) => ({ type: SET_LS_TITLE, payload });
+export const setLsTitleAction = (payload: string): iAction<string> => ({ type: SET_LS_TITLE, payload });
 
-export const setLsTagsAction = (payload) => ({ type: SET_LS_TAGS, payload });
+export const setLsTagsAction = (payload: iTag[]): iAction<iTag[]> => ({ type: SET_LS_TAGS, payload });
 
-export const clearLsAction = (): iAction<unknown> => ({ type: CLEAR_LS });
+export const clearLsAction = (): iAction<undefined> => ({ type: CLEAR_LS });
 
 export const addErrorAction = (payload: iError): iAction<iError> => ({ type: ADD_ERROR, payload });
 

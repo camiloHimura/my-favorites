@@ -16,7 +16,7 @@ const newLink = {
 
 describe('standar initial state', () => {
   it('return default store', () => {
-    const newState = localStorageReducer(undefined, {});
+    const newState = localStorageReducer(undefined, {} as any);
     expect(newState).toEqual(LINK_DEFAULTS);
   });
 
@@ -53,7 +53,7 @@ describe('localStorage initial state', () => {
   });
 
   it('return default store', () => {
-    const newState = localStorageReducer(undefined, {});
+    const newState = localStorageReducer(undefined, {} as any);
     expect(newState.title).toBe(newLink.title);
     expect(newState.url).toBe(newLink.url);
     expect(newState.tags).toEqual(newLink.tags);

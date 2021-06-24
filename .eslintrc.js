@@ -23,6 +23,7 @@ module.exports = {
   },
   plugins: ['react', 'jsx-a11y'],
   rules: {
+    'react/prop-types': 0,
     'react-hooks/exhaustive-deps': 'error',
     'no-var': 'error',
     'brace-style': 'error',

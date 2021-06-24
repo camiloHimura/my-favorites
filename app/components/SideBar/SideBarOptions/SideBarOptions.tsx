@@ -6,34 +6,30 @@ import { RootState } from '../../../state/store';
 import './SideBarOptions.css';
 
 import Icon from '../../generals/Icon';
-import CreateLink from '../../CreateLink';
-import TagBox from '../../TagBox';
-import ErrorLog from '../ErrorLog';
-
-const options = [
-  { icon: 'add_circle', component: CreateLink },
-  { icon: 'loyalty', component: TagBox },
-  { icon: 'notification_important', component: ErrorLog },
-];
-
+import { iComponentOpt } from '../SideBar';
+// Todo Add test
 export interface iProps {
-  setSelectedComponent: React.Dispatch<React.FC>;
+  options: iComponentOpt[];
+  setSelectedComponent: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const selectSideBar = (state: RootState) => state.sideBar;
 
-const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent }: iProps) => {
+const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent, options }: iProps) => {
   const sideBar = useAppSelector(selectSideBar);
-  const setSideBarIndex = useAppDispatch();
-  const setSideBarErrorIndex = useAppDispatch();
+  const dispatchSetSideBarIndex = useAppDispatch();
+  const dispatchSetSideBarErrorIndex = useAppDispatch();
+
+  const setSideBarErrorIndex = () => dispatchSetSideBarIndex(setSideBarErrorIndexAction(2));
+  const setSideBarIndex = (index: number) => dispatchSetSideBarErrorIndex(setSideBarIndexAction(index));
 
   useEffect(() => {
-    setSideBarErrorIndex(setSideBarErrorIndexAction(2));
-  }, [setSideBarErrorIndex]);
+    setSideBarErrorIndex();
+  }, []);
 
   useEffect(() => {
-    setSelectedComponent(options[sideBar.activeIndex].component);
-  }, [setSelectedComponent, sideBar.activeIndex]);
+    setSelectedComponent(sideBar.activeIndex);
+  }, [sideBar.activeIndex]);
 
   return (
     <section className="sideBarOptions">
@@ -41,9 +37,7 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent }: iProps) => {
         <button
           key={`options-${index}`}
           className={`--flex ${sideBar.activeIndex == index ? '--selected' : ''}`}
-          onClick={() => {
-            setSideBarIndex(setSideBarIndexAction(index));
-          }}
+          onClick={() => setSideBarIndex(index)}
         >
           <Icon name={icon} onClick={Fun.noon} />
         </button>

@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TagPropType } from '../../propsTypes';
 
 import './TagBox.css';
 
 import Tag from '../generals/Tag';
 import Board from '../generals/Board';
-import { getAllTags, addTag, removeTag } from '../../state/actions';
+import { getAllTagsAsyncAction, addTag, removeTag } from '../../state/actions';
 
 const mapStateToProps = (state) => ({
   tags: state.tags,
@@ -17,7 +16,7 @@ const mapStateToProps = (state) => ({
 const mapDispachToProps = (dispatch) => ({
   addTag: (info) => dispatch(addTag(info)),
   removeTag: (id) => dispatch(removeTag(id)),
-  getAllTags: () => dispatch(getAllTags()),
+  getAllTags: () => dispatch(getAllTagsAsyncAction()),
 });
 
 export function TagBox({ tags, getAllTags, addTag, removeTag }) {
@@ -48,12 +47,12 @@ export function TagBox({ tags, getAllTags, addTag, removeTag }) {
   );
 }
 
-TagBox.propTypes = {
+/* TagBox.propTypes = {
   invalidTag: PropTypes.bool,
   removeTag: PropTypes.func,
   addTag: PropTypes.func,
   getAllTags: PropTypes.func,
   tags: PropTypes.arrayOf(PropTypes.shape(TagPropType)),
-};
+}; */
 
 export default connect(mapStateToProps, mapDispachToProps)(TagBox);

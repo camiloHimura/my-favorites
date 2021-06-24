@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+import { iAction, iError } from '../../interfaces';
 import { getTags, createTag, deleteTag, updateTagRequest } from '../../utils/ServerRequest';
 import {
   tagsLoadedAction,
@@ -7,15 +9,13 @@ import {
   addErrorAction,
 } from './index';
 
-export function getAllTags() {
-  return async function (dispatch) {
-    try {
-      const tags = await getTags();
-      dispatch(tagsLoadedAction(tags));
-    } catch (error) {
-      dispatch(addErrorAction({ ...error }));
-    }
-  };
+export const getAllTagsAsyncAction = () => async (dispatch: Dispatch<iAction<boolean | iError>>) => {
+  try {
+    const tags = await getTags();
+    dispatch(tagsLoadedAction(tags));
+  } catch (error) {
+    dispatch(addErrorAction({ ...error }));
+  }
 }
 
 export function addTag(info) {

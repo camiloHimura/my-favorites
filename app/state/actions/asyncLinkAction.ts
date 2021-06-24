@@ -1,5 +1,6 @@
 import { Dispatch } from 'react';
 import { iAction, iError, iLink, } from '../../interfaces';
+import { iNewLink } from '../../interfaces/iLink';
 import { iTagLink } from '../../interfaces/iTagLink';
 import {
   getLinks,
@@ -61,17 +62,15 @@ export const removeTagLinkAsyncAction = (linkId: string, tagId: string) => async
   }
 }
 
-export function addLink(info) {
-  return async function (dispatch) {
-    try {
-      const { status, data } = await createLink(info);
-      if (status == 'saved') {
-        dispatch(addLinkAction(data));
-      }
-    } catch (error) {
-      dispatch(addErrorAction({ ...error }));
+export const addLinkAsyncAction = (info: iNewLink) => async (dispatch: Dispatch<iAction<iNewLink[] | iError>>) => {
+  try {
+    const { status, data } = await createLink(info);
+    if (status == 'saved') {
+      dispatch(addLinkAction(data));
     }
-  };
+  } catch (error) {
+    dispatch(addErrorAction({ ...error }));
+  }
 }
 
 

@@ -1,6 +1,8 @@
+import { iAction } from '../../interfaces';
+import iValidation from '../../interfaces/iValidation';
 import { INVALID_TAG, INVALID_LINK } from '../actions/actions-types';
 
-export default function addLinkReducer(state = { invalidTag: false, invalidLink: false }, action) {
+export default function ValidationReducer(state: iValidation = {}, action: iAction<iValidation>): iValidation {
   switch (action.type) {
     case INVALID_TAG:
       return Object.assign({}, state, { invalidTag: action.payload });

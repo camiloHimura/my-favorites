@@ -1,5 +1,4 @@
 import React from 'react';
-import { IconPropType } from '../../../propsTypes';
 import './Icon.css';
 
 function Icon(props) {
@@ -20,6 +19,6 @@ function Icon(props) {
   );
 }
 
-Icon.propTypes = IconPropType;
+// Icon.propTypes = IconPropType;
 
 export default Icon;

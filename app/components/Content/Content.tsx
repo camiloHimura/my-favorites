@@ -13,14 +13,14 @@ import Search from '../Search';
 import TagList from '../generals/TagList';
 
 export enum eContent {
-  tagListClass = "tagList",
-  tagListPlaceHolder = "Filter By Tags",
+  tagListClass = 'tagList',
+  tagListPlaceHolder = 'Filter By Tags',
 }
 
 const selectLinks = (state: RootState) => state.links;
 const selectTags = (state: RootState) => state.tags;
 
-const Content: React.FC<iContent> = ({ numLoadingCards = 9 }) => {
+const Content: React.FC<iContent> = ({ numLoadingCards = 2 }) => {
   const links = useAppSelector(selectLinks);
   const tags = useAppSelector(selectTags);
   const isLoadingLinks = links?.length == 0;
@@ -31,10 +31,12 @@ const Content: React.FC<iContent> = ({ numLoadingCards = 9 }) => {
 
   const getAllLinks = () => dispatchGetAllLinks(getAllLinksAction());
   const searchLink = (text: string) => dispatchSearchLink(searchLinkAction(text));
-  const getAllLinksByTags = (tagsIds: string) => dispatchGetAllLinksByTags(getAllLinksByTagsAction(tagsIds));
+  const getAllLinksByTags = (tagsIds: string) =>
+    dispatchGetAllLinksByTags(getAllLinksByTagsAction(tagsIds));
 
   useEffect(() => {
     getAllLinks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const cardsLoading = () =>
@@ -47,20 +49,15 @@ const Content: React.FC<iContent> = ({ numLoadingCards = 9 }) => {
 
   const getTagsIds = (selectedTags: iTag[] = []) =>
     selectedTags.reduce((accum, { id }): string => {
-      return accum === '' ? id as string : `${accum},${id}`
-    }, '')
+      return accum === '' ? (id as string) : `${accum},${id}`;
+    }, '');
 
-  const requestLinksByTags = (selectedTags: iTag[]) =>
-    getAllLinksByTags(getTagsIds(selectedTags));
+  const requestLinksByTags = (selectedTags: iTag[]) => getAllLinksByTags(getTagsIds(selectedTags));
 
   return (
     <section className="Content">
       <Row className="--flexColumn">
-        <Search
-          onSearchLink={searchLink}
-          onGetAllLinks={getAllLinks}
-          data-test="cp-search"
-        />
+        <Search onSearchLink={searchLink} onGetAllLinks={getAllLinks} data-test="cp-search" />
         <TagList
           options={tags}
           autoHide={false}
@@ -76,6 +73,6 @@ const Content: React.FC<iContent> = ({ numLoadingCards = 9 }) => {
       </Row>
     </section>
   );
-}
+};
 
 export default Content;

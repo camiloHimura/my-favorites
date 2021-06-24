@@ -31,16 +31,16 @@ const linkData: iLink = {
   url: 'test url',
   title: 'title test',
   description: 'test description',
-}
+};
 
 const getLinks = (length: number): iLink[] =>
   Array.from({ length }, (_, index) => ({
     ...linkData,
     id: index,
-  }))
+  }));
 
 const getTags = (length: number): iTag[] =>
-  Array.from({ length }, (_, index) => ({ name: 'tagName', id: index }))
+  Array.from({ length }, (_, index) => ({ name: 'tagName', id: index }));
 
 beforeEach(() => {
   setUpDispatch.mockReset();
@@ -72,10 +72,9 @@ it('Should render Cards with the proper props', () => {
     expect.objectContaining({
       ...linkData,
       'data-test': 'cp-card',
-    })
+    }),
   );
 });
-
 
 it('Should pass the proper props To TagList', () => {
   const tags = getTags(4);
@@ -85,12 +84,12 @@ it('Should pass the proper props To TagList', () => {
   expect(findByTestAttr(Component, 'cp-tagList').props()).toEqual({
     options: tags,
     autoHide: false,
-    'data-test': "cp-tagList",
+    'data-test': 'cp-tagList',
     clearAfterSelecting: true,
     className: eContent.tagListClass,
     onTagsSaved: expect.any(Function),
-    placeHolder: eContent.tagListPlaceHolder
-  })
+    placeHolder: eContent.tagListPlaceHolder,
+  });
 });
 
 it('Should call "getAllLinksByTagsAction" when TagList "onTagsSaved" is fired', () => {
@@ -108,10 +107,10 @@ it('Should pass the proper props To Search', () => {
   const Component = setUp({ links: [] });
 
   expect(findByTestAttr(Component, 'cp-search').props()).toEqual({
-    'data-test': "cp-search",
+    'data-test': 'cp-search',
     onSearchLink: expect.any(Function),
-    onGetAllLinks: expect.any(Function)
-  })
+    onGetAllLinks: expect.any(Function),
+  });
 });
 
 it('Should call "searchLinkAction" when Search "onSearchLink" is fired', () => {
@@ -135,8 +134,13 @@ it('Should call "getAllLinksAction" when Search "onGetAllLinks" is fired', () =>
 });
 
 const setUp = (initialState = {}, props: iContent = { numLoadingCards: 2 }) => {
-  (useAppSelector as jest.Mock).mockImplementation(selector => selector(initialState));
+  (useAppSelector as jest.Mock).mockImplementation((selector) => selector(initialState));
   const mockStore = storeFactory(initialState);
 
-  return mount(<Provider store={mockStore}> <Content {...props} /> </Provider>);
+  return mount(
+    <Provider store={mockStore}>
+      {' '}
+      <Content {...props} />{' '}
+    </Provider>,
+  );
 };

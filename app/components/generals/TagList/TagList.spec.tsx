@@ -38,7 +38,8 @@ describe('Initial set up', () => {
   it('adding and rendering tags', () => {
     const selectedOptions = Options[0];
     const Autocomplete = findByTestAttr(Component, 'cp-autocomplete');
-    Autocomplete.prop('onSelected')(selectedOptions);
+    const onSelected = Autocomplete.prop('onSelected') as Function;
+    onSelected(selectedOptions);
 
     expect(Autocomplete.prop('options')).toEqual(Options);
     expect(generalProps.onTagsSaved).toHaveBeenCalledWith([selectedOptions]);
@@ -48,7 +49,8 @@ describe('Initial set up', () => {
   it('adding an options different to the props options', () => {
     const selectedOptions = 'different option';
     const Autocomplete = findByTestAttr(Component, 'cp-autocomplete');
-    Autocomplete.prop('onSelected')(selectedOptions);
+    const onSelected = Autocomplete.prop('onSelected') as Function;
+    onSelected(selectedOptions);
 
     expect(generalProps.onTagsSaved).not.toHaveBeenCalled();
     expect(findByTestAttr(Component, 'cp-tag').length).toBe(0);
@@ -62,16 +64,18 @@ describe('Initial set up', () => {
   it('adding alredy saved tag', () => {
     Component = setUp({ ...generalProps, initialSavedTags: Options });
     const Autocomplete = findByTestAttr(Component, 'cp-autocomplete');
-    Autocomplete.prop('onSelected')(Options[0]);
-    Autocomplete.prop('onSelected')(Options[0]);
-    Autocomplete.prop('onSelected')(Options[0]);
+    const onSelected = Autocomplete.prop('onSelected') as Function;
+    onSelected(Options[0]);
+    onSelected(Options[0]);
+    onSelected(Options[0]);
 
     expect(findByTestAttr(Component, 'cp-tag').length).toBe(Options.length);
   });
 
   it('removing one tag', () => {
     Component = setUp({ ...generalProps, initialSavedTags: Options });
-    findByTestAttr(Component, 'cp-tag').at(0).prop('onClose')(Options[0]);
+    const onClose = findByTestAttr(Component, 'cp-tag').at(0).prop('onClose') as Function;;
+    onClose(Options[0]);
 
     expect(findByTestAttr(Component, 'cp-tag').length).toBe(Options.length - 1);
   });
