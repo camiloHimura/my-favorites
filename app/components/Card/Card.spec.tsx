@@ -22,18 +22,21 @@ jest.mock('../../state/actions', () => ({
   removeLinkAsyncAction: jest.fn(),
 }));
 
-
 const data: iLink = {
   id: 1991,
   url: 'url test',
   title: 'title test',
   description: 'fake description 2',
-  tags: [{ id: 123, name: 'test', color: '#000' }, { id: 456, name: 'test', color: '#000' }, { id: 789, name: 'test', color: '#000' }],
+  tags: [
+    { id: 123, name: 'test', color: '#000' },
+    { id: 456, name: 'test', color: '#000' },
+    { id: 789, name: 'test', color: '#000' },
+  ],
 };
 
 beforeEach(() => {
-  setUpDispatch.mockReset()
-})
+  setUpDispatch.mockReset();
+});
 
 it('Should render component basic info', () => {
   const Component = setUp(data);
@@ -41,8 +44,6 @@ it('Should render component basic info', () => {
   expect(findByTestAttr(Component, 'description').text()).toBe(data.description);
   expect((findByTestAttr(Component, 'link-url').props() as HTMLLinkElement).href).toBe(data.url);
 });
-;
-
 it('Tooltip should be hidden', () => {
   const Component = setUp(data);
   expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(false);
@@ -51,8 +52,7 @@ it('Tooltip should be hidden', () => {
 it('Toogle tooltip, (updated setIsContHover)', () => {
   const Component = setUp(data);
   const buttton = findByTestAttr(Component, 'description');
-  expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(false)
-    ;
+  expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(false);
   buttton.simulate('mouseEnter');
   expect(findByTestAttr(Component, 'cp-tooltip').prop('hover')).toBe(true);
 
@@ -72,14 +72,14 @@ it('Should render Tags with the proper props', () => {
       'data-test': 'cp-tag',
       isUpdateDisable: true,
       onClose: expect.any(Function),
-    })
+    }),
   );
 });
 
 it('Should call "removeTagLinkAsyncAction" when Tag "onClose" is fired', () => {
   const Component = setUp(data);
   const index = 0;
-  const onClose = findByTestAttr(Component, 'cp-tag').at(index).prop('onClose') as Function;
+  const onClose = findByTestAttr(Component, 'cp-tag').at(index).prop('onClose') as () => void;
   onClose();
 
   expect(setUpDispatch).toHaveBeenCalled();
@@ -96,5 +96,10 @@ it('trigger remove link', () => {
 
 const setUp = (props: iLink = {}) => {
   const mockStore = storeFactory({});
-  return mount(<Provider store={mockStore}> <Card {...props} /> </Provider>);
+  return mount(
+    <Provider store={mockStore}>
+      {' '}
+      <Card {...props} />{' '}
+    </Provider>,
+  );
 };

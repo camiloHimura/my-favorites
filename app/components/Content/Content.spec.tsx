@@ -26,6 +26,8 @@ jest.mock('../../hooks/redux', () => ({
   useAppSelector: jest.fn(),
 }));
 
+type AppFunction<T> = (tags: T) => void;
+
 const linkData: iLink = {
   tags: [],
   url: 'test url',
@@ -96,7 +98,9 @@ it('Should call "getAllLinksByTagsAction" when TagList "onTagsSaved" is fired', 
   // ids 0,1,2,3....
   const tags = getTags(2);
   const Component = setUp({ tags, links: getLinks(1) });
-  const onTagsSaved = findByTestAttr(Component, 'cp-tagList').prop('onTagsSaved') as Function;
+  const onTagsSaved = findByTestAttr(Component, 'cp-tagList').prop('onTagsSaved') as AppFunction<
+    iTag[]
+  >;
   onTagsSaved(tags);
 
   expect(setUpDispatch).toHaveBeenCalled();
@@ -116,7 +120,9 @@ it('Should pass the proper props To Search', () => {
 it('Should call "searchLinkAction" when Search "onSearchLink" is fired', () => {
   const linkTest = 'test';
   const Component = setUp({ links: [] });
-  const onSearchLink = findByTestAttr(Component, 'cp-search').prop('onSearchLink') as Function;
+  const onSearchLink = findByTestAttr(Component, 'cp-search').prop(
+    'onSearchLink',
+  ) as AppFunction<string>;
   onSearchLink(linkTest);
 
   expect(setUpDispatch).toHaveBeenCalled();
@@ -125,7 +131,9 @@ it('Should call "searchLinkAction" when Search "onSearchLink" is fired', () => {
 
 it('Should call "getAllLinksAction" when Search "onGetAllLinks" is fired', () => {
   const Component = setUp({ links: [] });
-  const onGetAllLinks = findByTestAttr(Component, 'cp-search').prop('onGetAllLinks') as Function;
+  const onGetAllLinks = findByTestAttr(Component, 'cp-search').prop(
+    'onGetAllLinks',
+  ) as AppFunction<void>;
   onGetAllLinks();
 
   expect(setUpDispatch).toHaveBeenCalled();

@@ -1,3 +1,4 @@
+import { iTag } from '../interfaces';
 import instance from './axios.conf';
 import catchError from './CatchError';
 
@@ -8,7 +9,7 @@ export function getTags() {
     .catch(catchError);
 }
 
-export function createTag(info) {
+export function createTag(info: iTag) {
   return instance
     .put('/tag', info)
     .then(({ data }) => data)
@@ -22,7 +23,7 @@ export function updateTagRequest(id, name) {
     .catch(catchError);
 }
 
-export function deleteTag(id) {
+export function deleteTag(id: string) {
   return instance
     .delete(`/tag/${id}`)
     .then(({ data }) => data)

@@ -4,10 +4,11 @@ import './Board.css';
 import { KEY_CODES } from '../../../contans';
 import Colors from '../../../utils/Colors';
 import iBoard from '../../../interfaces/iBoard';
+import { iTag } from '../../../interfaces';
 
 const { ENTER } = KEY_CODES;
 
-const BoardTags: React.FC<iBoard> = ({
+const BoardTags: React.FC<iBoard<iTag>> = ({
   className,
   Component,
   setOptions,
@@ -18,7 +19,7 @@ const BoardTags: React.FC<iBoard> = ({
   const inputOptions = useRef<HTMLInputElement>(null);
 
   function addOption(event) {
-    let element = event.target;
+    const element = event.target;
 
     if (event.keyCode === ENTER && element.value !== '') {
       setOptions({ name: element.value, color: Colors.getRamdom() });
@@ -38,6 +39,6 @@ const BoardTags: React.FC<iBoard> = ({
       </div>
     </div>
   );
-}
+};
 
 export default BoardTags;

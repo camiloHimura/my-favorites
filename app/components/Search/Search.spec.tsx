@@ -8,7 +8,7 @@ const onSearchLink = jest.fn();
 const onGetAllLinks = jest.fn();
 let spyObj: iSearch = {
   onSearchLink,
-  onGetAllLinks
+  onGetAllLinks,
 };
 let component;
 
