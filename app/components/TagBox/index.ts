@@ -1,2 +1,1 @@
-import TagBox from './TagBox';
-export default TagBox;
+export { default } from './TagBox';

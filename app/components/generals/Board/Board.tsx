@@ -18,16 +18,18 @@ const BoardTags: React.FC<iBoard<iTag>> = ({
 }) => {
   const inputOptions = useRef<HTMLInputElement>(null);
 
-  function addOption(event) {
-    const element = event.target;
+  const addOption = (
+    event: React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    const element = event.target as HTMLInputElement;
 
-    if (event.keyCode === ENTER && element.value !== '') {
+    if ((event as any).keyCode === ENTER && element.value !== '') {
       setOptions({ name: element.value, color: Colors.getRamdom() });
       if (inputOptions?.current) {
         inputOptions.current.value = '';
       }
     }
-  }
+  };
 
   return (
     <div className={`board ${className} --flex ${isWrap ? '--wrap' : ''}`}>

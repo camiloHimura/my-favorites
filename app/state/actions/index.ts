@@ -26,7 +26,7 @@ export {
   getAllTagsAsyncAction,
   addTagAsyncAction,
   removeTagAsyncAction,
-  updateTag,
+  updateTagAsyncAction,
 } from './asyncTagAction';
 export {
   getAllLinksAction,
@@ -67,7 +67,7 @@ export const tagsLoadedAction = (payload: boolean): iAction<boolean> => ({
 
 export const addTagAction = (payload: iTag): iAction<iTag> => ({ type: ADD_TAG, payload });
 
-export const updateTagAction = (payload) => ({ type: UPADTED_TAG, payload });
+export const updateTagAction = (payload: iTag): iAction<iTag> => ({ type: UPADTED_TAG, payload });
 
 export const removeTagAction = (payload: string): iAction<string> => ({
   type: REMOVE_TAG,

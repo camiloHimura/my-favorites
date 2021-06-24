@@ -17,12 +17,13 @@ const Card: React.FC<iLink> = ({ id = '0', title, url, tags = [], description = 
   const dispatchRemoveLink: Dispatch<any> = useAppDispatch();
   const dispatchRemoveTag: Dispatch<any> = useAppDispatch();
   const removeLink = () => dispatchRemoveLink(removeLinkAsyncAction(id as string));
-  const removeTag = (tagId: string) => dispatchRemoveTag(removeTagLinkAsyncAction(id as string, tagId));
+  const removeTag = (tagId: string) =>
+    dispatchRemoveTag(removeTagLinkAsyncAction(id as string, tagId));
 
   const editLink = () => {
     // Todo edit link method backed
     console.log('editLink...', id);
-  }
+  };
 
   return (
     <div className="card">
@@ -84,6 +85,6 @@ const Card: React.FC<iLink> = ({ id = '0', title, url, tags = [], description = 
       </div>
     </div>
   );
-}
+};
 
 export default Card;

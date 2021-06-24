@@ -1,2 +1,1 @@
-import CreateLink from './CreateLink';
-export default CreateLink;
+export { default } from './CreateLink';

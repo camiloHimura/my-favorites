@@ -22,6 +22,7 @@ const TagList: React.FC<iTagList> = ({
       setSavedTags(initialSavedTags);
       onTagsSaved(initialSavedTags);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSavedTags.length]);
 
   useEffect(() => {

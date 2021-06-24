@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import './Tooltip.css';
 
-function Tooltip(props) {
+interface iProp {
+  hover: boolean;
+  text: string;
+  parentRef: any;
+  calcHeight: boolean;
+}
+
+const Tooltip: React.FC<iProp> = (props) => {
   const [show, setShow] = useState(false);
   const [animation, setAnimation] = useState(false);
   const { text, parentRef, hover, calcHeight = false } = props;
@@ -25,13 +31,6 @@ function Tooltip(props) {
   }
 
   return <div className={`Tooltip ${animation ? 'show' : ''}`}> {text} </div>;
-}
-
-Tooltip.propTypes = {
-  hover: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
-  parentRef: PropTypes.any.isRequired,
-  calcHeight: PropTypes.bool.isRequired,
 };
 
 export default Tooltip;

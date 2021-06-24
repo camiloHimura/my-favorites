@@ -43,8 +43,8 @@ export const removeTagAsyncAction = (id: string) => async (dispatch: AppDispatch
   }
 };
 
-export function updateTag(id: string, name: string) {
-  return async function (dispatch) {
+export const updateTagAsyncAction =
+  (id: string | number, name: string) => async (dispatch: AppDispatch<iTag>) => {
     try {
       const { status, data } = await updateTagRequest(id, name);
       if (status == 'updated') {
@@ -54,4 +54,3 @@ export function updateTag(id: string, name: string) {
       dispatch(addErrorAction({ ...error }));
     }
   };
-}

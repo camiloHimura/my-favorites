@@ -14,7 +14,7 @@ export enum Actions {
 const AutoComplete: React.FC<iAutoComplete> = (props) => {
   const divOptions = useRef(null);
   const inputFilter = useRef(null);
-  let [state, setOptions] = useReducer(AutoReduce, { showOptions: false });
+  const [state, setOptions] = useReducer(AutoReduce, { showOptions: false });
 
   const { options, showOptions, indexSelector } = state;
   const {
@@ -31,14 +31,14 @@ const AutoComplete: React.FC<iAutoComplete> = (props) => {
   }, [initOptions]);
 
   const filter = (event) => {
-    let element = event.target;
+    const element = event.target;
 
     if (element.value !== '' && element.value.length > 1) {
       setOptions({ type: Actions.filter, initOptions, propertyFilter, value: element.value });
     } else {
       setOptions({ type: Actions.clear });
     }
-  }
+  };
 
   const sweepOptions = (event) => {
     if (showOptions == false) {
@@ -65,7 +65,7 @@ const AutoComplete: React.FC<iAutoComplete> = (props) => {
         inputFilter.current.value = '';
       }
     }
-  }
+  };
 
   const clickOption = (index) => {
     onSelected(options[index]);
@@ -76,13 +76,13 @@ const AutoComplete: React.FC<iAutoComplete> = (props) => {
     } else {
       inputFilter.current.value = '';
     }
-  }
+  };
 
   const closeOptions = () => {
     if (autoHide) {
       setOptions({ type: Actions.clear });
     }
-  }
+  };
 
   return (
     <div className="autoComplete">
@@ -111,6 +111,6 @@ const AutoComplete: React.FC<iAutoComplete> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default AutoComplete;

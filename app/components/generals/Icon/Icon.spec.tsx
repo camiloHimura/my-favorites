@@ -1,23 +1,13 @@
+import 'jsdom-global/register';
 import React from 'react';
 import Icon from './Icon';
 import { shallow } from 'enzyme';
 
-import { setPropTypes, findByTestAttr } from '../../../utils/test';
-const initialProps = { name: 'test', onClick: jest.fn() };
+import { findByTestAttr } from '../../../utils/test';
+const initialProps = { name: 'test', onClick: jest.fn(), pointer: true };
 let Component;
 beforeEach(() => {
   Component = setUp();
-});
-
-it('checking props types', () => {
-  const requiredValues = { name: 'test', onClick: () => { } };
-  let response;
-
-  response = setPropTypes({ component: Icon, requiredValues, prop: 'name', value: 'test 2' });
-  expect(response).toBeUndefined();
-
-  response = setPropTypes({ component: Icon, requiredValues, prop: 'onClick', value: () => { } });
-  expect(response).toBeUndefined();
 });
 
 it('onclick prop is called', () => {

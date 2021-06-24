@@ -1,35 +1,43 @@
-import React, { useState, useRef } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useRef, Dispatch } from 'react';
 import './Tag.css';
 
 import Icon from '../Icon';
-import { updateTag } from '../../../state/actions';
+import { updateTagAsyncAction } from '../../../state/actions';
+import { iTag } from '../../../interfaces';
+import { useAppDispatch } from '../../../hooks/redux';
 
-const mapDispachToProps = (dispatch) => ({
-  updateTag: (id: string, name: string) => dispatch(updateTag(id, name)),
-});
+interface iProps {
+  id?: string | number;
+  name: string;
+  color?: string;
+  isUpdateDisable?: boolean;
+  onClose: (tag: iTag) => void;
+}
 
-export function Tag(props) {
+const Tag: React.FC<iProps> = (props) => {
   const inputEl = useRef(null);
   const [isEdit, setIsEdit] = useState(false);
-  const { color = '0396A6', onClose, name = '', updateTag, id, isUpdateDisable = false } = props;
+  const dispatchUpdateTag: Dispatch<any> = useAppDispatch();
 
-  function activeEdit() {
+  const updateTag = (id: string | number, name: string) =>
+    dispatchUpdateTag(updateTagAsyncAction(id, name));
+
+  const { color = '0396A6', onClose, name = '', id, isUpdateDisable = false } = props;
+
+  const activeEdit = () => {
     if (isUpdateDisable) {
       return;
     }
     setIsEdit(true);
-  }
+  };
 
-  function hideEdit() {
-    setIsEdit(false);
-  }
+  const hideEdit = () => setIsEdit(false);
 
-  function checkName(event) {
+  const checkName = (event) => {
     if (event.key == 'Enter' && inputEl.current.value !== '') {
-      updateTag(id, inputEl.current.value, color);
+      updateTag(id, inputEl.current.value);
     }
-  }
+  };
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -68,8 +76,6 @@ export function Tag(props) {
       )}
     </div>
   );
-}
+};
 
-// Tag.propTypes = TagPropType;
-
-export default connect(null, mapDispachToProps)(Tag);
+export default Tag;

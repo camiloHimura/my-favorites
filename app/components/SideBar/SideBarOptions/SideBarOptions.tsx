@@ -21,15 +21,17 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent, options }: iPr
   const dispatchSetSideBarErrorIndex = useAppDispatch();
 
   const setSideBarErrorIndex = () => dispatchSetSideBarIndex(setSideBarErrorIndexAction(2));
-  const setSideBarIndex = (index: number) => dispatchSetSideBarErrorIndex(setSideBarIndexAction(index));
+  const setSideBarIndex = (index: number) =>
+    dispatchSetSideBarErrorIndex(setSideBarIndexAction(index));
 
   useEffect(() => {
     setSideBarErrorIndex();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setSelectedComponent(sideBar.activeIndex);
-  }, [sideBar.activeIndex]);
+  }, [setSelectedComponent, sideBar.activeIndex]);
 
   return (
     <section className="sideBarOptions">

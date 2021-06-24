@@ -6,7 +6,12 @@ import { findByTestAttr } from '../../../utils/test';
 import AutoComplete from './AutoComplete';
 import { iAutoComplete } from '../../../interfaces';
 
-let initialProps: iAutoComplete = { options: [], onSelected: jest.fn(), propertyFilter: '', clearAfterSelecting: false };
+const initialProps: iAutoComplete = {
+  options: [],
+  onSelected: jest.fn(),
+  propertyFilter: '',
+  clearAfterSelecting: false,
+};
 
 describe('hide and show options', () => {
   const component = setUp({
@@ -78,7 +83,7 @@ describe('options interactions', () => {
     findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
     expect(testProps.onSelected).toHaveBeenCalled();
     expect(findByTestAttr(component, 'options').length).toBe(0);
-    expect(findByTestAttr(component, 'input').instance().value).toContain(typedValue);
+    expect((findByTestAttr(component, 'input').instance() as any).value).toContain(typedValue);
   });
 
   it('press enter with an option selected, clearAfterSelecting = true', () => {
@@ -88,7 +93,7 @@ describe('options interactions', () => {
     findByTestAttr(component, 'input').simulate('keydown', { keyCode: 40 });
     findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
     expect(testProps.onSelected).toHaveBeenCalled();
-    expect(findByTestAttr(component, 'input').instance().value).toBe('');
+    expect((findByTestAttr(component, 'input').instance() as any).value).toBe('');
   });
 
   it('option clicked, clearAfterSelecting = false', () => {
@@ -98,7 +103,9 @@ describe('options interactions', () => {
     findByTestAttr(component, 'options').at(optionIndex).simulate('mousedown');
 
     expect(testProps.onSelected).toHaveBeenCalledWith(options[optionIndex]);
-    expect(findByTestAttr(component, 'input').instance().value).toBe(options[optionIndex].number);
+    expect((findByTestAttr(component, 'input').instance() as any).value).toBe(
+      options[optionIndex].number,
+    );
   });
 
   it('option clicked, clearAfterSelecting = true', () => {
@@ -109,7 +116,7 @@ describe('options interactions', () => {
     findByTestAttr(component, 'options').at(optionIndex).simulate('mousedown');
 
     expect(testProps.onSelected).toHaveBeenCalledWith(options[optionIndex]);
-    expect(findByTestAttr(component, 'input').instance().value).toBe('');
+    expect((findByTestAttr(component, 'input').instance() as any).value).toBe('');
   });
 });
 

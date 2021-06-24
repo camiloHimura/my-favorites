@@ -1,7 +1,16 @@
 import React from 'react';
 import './Icon.css';
 
-function Icon(props) {
+interface iProps {
+  style?: any;
+  name: string;
+  color?: string;
+  pointer: boolean;
+  onClick: () => void;
+  className?: string;
+}
+
+const Icon: React.FC<iProps> = (props) => {
   const { style = {}, name, color = '', pointer = false, onClick, className = '' } = props;
 
   return (
@@ -17,8 +26,6 @@ function Icon(props) {
       {name}
     </i>
   );
-}
-
-// Icon.propTypes = IconPropType;
+};
 
 export default Icon;
