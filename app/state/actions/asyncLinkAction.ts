@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { iAction, iError, iLink, } from '../../interfaces';
+import { iAction, iError, iLink } from '../../interfaces';
 import { iNewLink } from '../../interfaces/iLink';
 import { iTagLink } from '../../interfaces/iTagLink';
 import {
@@ -23,56 +23,60 @@ export const getAllLinksAction = () => async (dispatch: Dispatch<iAction<iLink[]
     const links = await getLinks();
     dispatch(linkLoadedAction(links));
   } catch (error: unknown) {
-    dispatch(addErrorAction({ ...error as iError }));
+    dispatch(addErrorAction({ ...(error as iError) }));
   }
-}
+};
 
-export const getAllLinksByTagsAction = (tags: string) => async (dispatch: Dispatch<iAction<iLink[] | iError>>) => {
-  try {
-    const links: iLink[] = await getLinksByTags(tags);
-    dispatch(linkLoadedAction(links));
-  } catch (error) {
-    dispatch(addErrorAction({ ...error }));
-  }
-}
-
-export const removeLinkAsyncAction = (linkId: string) => async (dispatch: Dispatch<iAction<string | iError>>) => {
-  try {
-    const { status } = await removeLinkRequest(linkId);
-    if (status == 'removed') {
-      dispatch(removeLinkAction(linkId));
-    } else {
-      console.log('show toas "not updated"');
+export const getAllLinksByTagsAction =
+  (tags: string) => async (dispatch: Dispatch<iAction<iLink[] | iError>>) => {
+    try {
+      const links: iLink[] = await getLinksByTags(tags);
+      dispatch(linkLoadedAction(links));
+    } catch (error) {
+      dispatch(addErrorAction({ ...error }));
     }
-  } catch (error) {
-    dispatch(addErrorAction({ ...error }));
-  }
-}
+  };
 
-export const removeTagLinkAsyncAction = (linkId: string, tagId: string) => async (dispatch: Dispatch<iAction<iTagLink | iError>>) => {
-  try {
-    const { status } = await removeTagLinkRequest(linkId, tagId);
-    if (status == 'updated') {
-      dispatch(removeTagLinkAction({ linkId, tagId }));
-    } else {
-      console.log('show toas "not updated"');
+export const removeLinkAsyncAction =
+  (linkId: string) => async (dispatch: Dispatch<iAction<string | iError>>) => {
+    try {
+      const { status } = await removeLinkRequest(linkId);
+      if (status == 'removed') {
+        dispatch(removeLinkAction(linkId));
+      } else {
+        console.log('show toas "not updated"');
+      }
+    } catch (error) {
+      dispatch(addErrorAction({ ...error }));
     }
-  } catch (error) {
-    dispatch(addErrorAction({ ...error }));
-  }
-}
+  };
 
-export const addLinkAsyncAction = (info: iNewLink) => async (dispatch: Dispatch<iAction<iNewLink[] | iError>>) => {
-  try {
-    const { status, data } = await createLink(info);
-    if (status == 'saved') {
-      dispatch(addLinkAction(data));
+export const removeTagLinkAsyncAction =
+  (linkId: string, tagId: string) => async (dispatch: Dispatch<iAction<iTagLink | iError>>) => {
+    try {
+      const { status } = await removeTagLinkRequest(linkId, tagId);
+      if (status == 'updated') {
+        dispatch(removeTagLinkAction({ linkId, tagId }));
+      } else {
+        console.log('show toas "not updated"');
+      }
+    } catch (error) {
+      dispatch(addErrorAction({ ...error }));
     }
-  } catch (error) {
-    dispatch(addErrorAction({ ...error }));
-  }
-}
+  };
 
+export const addLinkAsyncAction =
+  (info: iNewLink) => async (dispatch: Dispatch<iAction<iLink | iError>>) => {
+    try {
+      const { status, data } = await createLink(info);
+      console.log('new link', data);
+      if (status == 'saved') {
+        dispatch(addLinkAction(data));
+      }
+    } catch (error) {
+      dispatch(addErrorAction({ ...error }));
+    }
+  };
 
 /* export function removeTag(id){
     return async function(dispatch){

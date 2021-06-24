@@ -11,7 +11,7 @@ import {
 
 type AppDispatch<T> = Dispatch<iAction<T | iError>>;
 
-export const getAllTagsAsyncAction = () => async (dispatch: AppDispatch<boolean>) => {
+export const getAllTagsAsyncAction = () => async (dispatch: AppDispatch<iTag[]>) => {
   try {
     const tags = await getTags();
     dispatch(tagsLoadedAction(tags));

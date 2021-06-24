@@ -1,4 +1,4 @@
-import { iTag } from ".";
+import { iTag } from '.';
 
 export default interface iLink {
   id?: string | number;
@@ -9,5 +9,5 @@ export default interface iLink {
 }
 
 export interface iNewLink extends Omit<iLink, 'tags'> {
-  tags: string[]
+  tags: string[];
 }

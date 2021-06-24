@@ -1,14 +1,17 @@
-import { iTag } from '../interfaces';
+import { iLink, iTag } from '../interfaces';
+import { iNewLink } from '../interfaces/iLink';
 import instance from './axios.conf';
 import catchError from './CatchError';
 
-export function getTags() {
+type appPromise<T> = Promise<{ status: string; data: T }>;
+
+export function getTags(): Promise<iTag[]> {
   return instance
     .get('/tag')
     .then(({ data }) => data)
     .catch(catchError);
 }
-
+// Todo add return types
 export function createTag(info: iTag) {
   return instance
     .put('/tag', info)
@@ -44,7 +47,7 @@ export function getLinksByTags(tags: string) {
     .catch(catchError);
 }
 
-export function createLink(info) {
+export function createLink(info: iNewLink): appPromise<iLink> {
   return instance
     .put('/link', info)
     .then(({ data }) => data)

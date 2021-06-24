@@ -41,7 +41,10 @@ export const linkLoadedAction = (payload: iLink[]): iAction<iLink[]> => ({
   payload,
 });
 
-export const addLinkAction = (payload) => ({ type: ADD_LINK, payload });
+export const addLinkAction = (payload: iLink): iAction<iLink> => ({
+  type: ADD_LINK,
+  payload,
+});
 
 export const removeLinkAction = (payload: string): iAction<string> => ({
   type: REMOVE_LINK,
@@ -53,14 +56,17 @@ export const searchLinkAction = (payload: string): iAction<string> => ({
   payload,
 });
 
-export const invalidLink = (payload) => ({ type: INVALID_LINK, payload });
+export const invalidLink = (payload: boolean): iAction<boolean> => ({
+  type: INVALID_LINK,
+  payload,
+});
 
 export const removeTagLinkAction = (payload: iTagLink): iAction<iTagLink> => ({
   type: REMOVE_TAG_LINK,
   payload,
 });
 
-export const tagsLoadedAction = (payload: boolean): iAction<boolean> => ({
+export const tagsLoadedAction = (payload: iTag[]): iAction<iTag[]> => ({
   type: TAGS_LOADED,
   payload,
 });
@@ -74,7 +80,7 @@ export const removeTagAction = (payload: string): iAction<string> => ({
   payload,
 });
 
-export const invalidTag = (payload) => ({ type: INVALID_TAG, payload });
+export const invalidTag = (payload: boolean): iAction<boolean> => ({ type: INVALID_TAG, payload });
 
 //Local Storage actions
 export const setLsUrlAction = (payload: string): iAction<string> => ({ type: SET_LS_URL, payload });

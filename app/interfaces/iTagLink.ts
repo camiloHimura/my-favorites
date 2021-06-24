@@ -1,4 +1,4 @@
 export interface iTagLink {
-  linkId: string;
-  tagId: string;
+  linkId: string | number;
+  tagId: string | number;
 }

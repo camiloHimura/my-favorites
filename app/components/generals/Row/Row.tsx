@@ -3,9 +3,9 @@ import React from 'react';
 import './Row.css';
 
 interface iProps {
-  icon: React.FC;
+  icon?: React.FC;
   className: string;
-  children: React.FC | React.FC[];
+  children?: JSX.Element | JSX.Element[];
 }
 
 const Row: React.FC<iProps> = ({ icon, children, className }) => {
