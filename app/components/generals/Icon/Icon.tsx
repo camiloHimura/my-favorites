@@ -5,7 +5,7 @@ interface iProps {
   style?: any;
   name: string;
   color?: string;
-  pointer: boolean;
+  pointer?: boolean;
   onClick: () => void;
   className?: string;
 }

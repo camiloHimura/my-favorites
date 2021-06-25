@@ -7,7 +7,7 @@ import { iTag } from '../../../interfaces';
 import { useAppDispatch } from '../../../hooks/redux';
 
 interface iProps {
-  id?: string | number;
+  id?: string;
   name: string;
   color?: string;
   isUpdateDisable?: boolean;
@@ -19,8 +19,7 @@ const Tag: React.FC<iProps> = (props) => {
   const [isEdit, setIsEdit] = useState(false);
   const dispatchUpdateTag: Dispatch<any> = useAppDispatch();
 
-  const updateTag = (id: string | number, name: string) =>
-    dispatchUpdateTag(updateTagAsyncAction(id, name));
+  const updateTag = (id: string, name: string) => dispatchUpdateTag(updateTagAsyncAction(id, name));
 
   const { color = '0396A6', onClose, name = '', id, isUpdateDisable = false } = props;
 

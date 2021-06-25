@@ -7,10 +7,10 @@ import { iTag, iTagList } from '../../../interfaces';
 
 let Component;
 const Options: iTag[] = [
-  { id: 1, name: 'test 1' },
-  { id: 2, name: 'test 2' },
-  { id: 3, name: 'test 3' },
-  { id: 4, name: 'test 4' },
+  { id: '1', name: 'test 1' },
+  { id: '2', name: 'test 2' },
+  { id: '3', name: 'test 3' },
+  { id: '4', name: 'test 4' },
 ];
 
 const initialProps: iTagList = {
@@ -38,7 +38,7 @@ describe('Initial set up', () => {
   it('adding and rendering tags', () => {
     const selectedOptions = Options[0];
     const Autocomplete = findByTestAttr(Component, 'cp-autocomplete');
-    const onSelected = Autocomplete.prop('onSelected') as Function;
+    const onSelected = Autocomplete.prop('onSelected') as (tag: iTag) => void;
     onSelected(selectedOptions);
 
     expect(Autocomplete.prop('options')).toEqual(Options);
@@ -49,7 +49,7 @@ describe('Initial set up', () => {
   it('adding an options different to the props options', () => {
     const selectedOptions = 'different option';
     const Autocomplete = findByTestAttr(Component, 'cp-autocomplete');
-    const onSelected = Autocomplete.prop('onSelected') as Function;
+    const onSelected = Autocomplete.prop('onSelected') as (tag: string) => void;
     onSelected(selectedOptions);
 
     expect(generalProps.onTagsSaved).not.toHaveBeenCalled();
@@ -64,7 +64,7 @@ describe('Initial set up', () => {
   it('adding alredy saved tag', () => {
     Component = setUp({ ...generalProps, initialSavedTags: Options });
     const Autocomplete = findByTestAttr(Component, 'cp-autocomplete');
-    const onSelected = Autocomplete.prop('onSelected') as Function;
+    const onSelected = Autocomplete.prop('onSelected') as (tag: iTag) => void;
     onSelected(Options[0]);
     onSelected(Options[0]);
     onSelected(Options[0]);
@@ -74,7 +74,9 @@ describe('Initial set up', () => {
 
   it('removing one tag', () => {
     Component = setUp({ ...generalProps, initialSavedTags: Options });
-    const onClose = findByTestAttr(Component, 'cp-tag').at(0).prop('onClose') as Function;;
+    const onClose = findByTestAttr(Component, 'cp-tag').at(0).prop('onClose') as (
+      tag: iTag,
+    ) => void;
     onClose(Options[0]);
 
     expect(findByTestAttr(Component, 'cp-tag').length).toBe(Options.length - 1);

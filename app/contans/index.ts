@@ -1,6 +1,6 @@
-import * as KEY_CODES from './keyCodes.js';
-import * as ERROR_TYPES from './ErrorTypes.js';
-import * as ERROR_MESSAGES from './ErrorMessages.js';
+import * as KEY_CODES from './keyCodes';
+import * as ERROR_TYPES from './ErrorTypes';
+import * as ERROR_MESSAGES from './ErrorMessages';
 
 const PORT = 8082;
 // const API_URL = process.env.API_URL || `http://localhost:${PORT}/api`;

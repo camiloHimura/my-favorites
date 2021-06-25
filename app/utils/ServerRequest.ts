@@ -1,69 +1,38 @@
+import { AxiosResponse } from 'axios';
 import { iLink, iTag } from '../interfaces';
 import { iNewLink } from '../interfaces/iLink';
-import instance from './axios.conf';
+import axiosInstance from './axios.conf';
 import catchError from './CatchError';
 
 type appPromise<T> = Promise<{ status: string; data: T }>;
+type appPromiseStatus = Promise<{ status: string }>;
 
-export function getTags(): Promise<iTag[]> {
-  return instance
-    .get('/tag')
+const promiseWrapper = (flatPromise: Promise<AxiosResponse>) =>
+  Promise.resolve(flatPromise)
     .then(({ data }) => data)
     .catch(catchError);
-}
-// Todo add return types
-export function createTag(info: iTag) {
-  return instance
-    .put('/tag', info)
-    .then(({ data }) => data)
-    .catch(catchError);
-}
 
-export function updateTagRequest(id, name) {
-  return instance
-    .put(`/tag/${id}`, { name })
-    .then(({ data }) => data)
-    .catch(catchError);
-}
+export const getLinks = (): Promise<iLink[]> => promiseWrapper(axiosInstance.get('/link'));
 
-export function deleteTag(id: string) {
-  return instance
-    .delete(`/tag/${id}`)
-    .then(({ data }) => data)
-    .catch(catchError);
-}
+export const getTags = (): Promise<iTag[]> => promiseWrapper(axiosInstance.get('/tag'));
 
-export function getLinks() {
-  return instance
-    .get('/link')
-    .then(({ data }) => data)
-    .catch(catchError);
-}
+export const createTag = async (info: iTag): appPromise<iTag> =>
+  promiseWrapper(axiosInstance.put('/tag', info));
 
-export function getLinksByTags(tags: string) {
-  return instance
-    .get(`/link/byTags/${tags}`)
-    .then(({ data }) => data)
-    .catch(catchError);
-}
+export const updateTagRequest = async (id: string, name: string): appPromise<iTag> =>
+  promiseWrapper(axiosInstance.put(`/tag/${id}`, { name }));
 
-export function createLink(info: iNewLink): appPromise<iLink> {
-  return instance
-    .put('/link', info)
-    .then(({ data }) => data)
-    .catch(catchError);
-}
+export const deleteTag = async (id: string): appPromiseStatus =>
+  promiseWrapper(axiosInstance.delete(`/tag/${id}`));
 
-export function removeLinkRequest(id) {
-  return instance
-    .delete(`/link/${id}`)
-    .then(({ data }) => data)
-    .catch(catchError);
-}
+export const getLinksByTags = (tags: string): Promise<iLink[]> =>
+  promiseWrapper(axiosInstance.get(`/link/byTags/${tags}`));
 
-export function removeTagLinkRequest(linkID, tagID) {
-  return instance
-    .put(`/link/${linkID}/${tagID}`)
-    .then(({ data }) => data)
-    .catch(catchError);
-}
+export const createLink = (info: iNewLink): appPromise<iLink> =>
+  promiseWrapper(axiosInstance.put('/link', info));
+
+export const removeLinkRequest = (id: string): appPromiseStatus =>
+  promiseWrapper(axiosInstance.delete(`/link/${id}`));
+
+export const removeTagLinkRequest = (linkID: string, tagID: string): appPromiseStatus =>
+  promiseWrapper(axiosInstance.put(`/link/${linkID}/${tagID}`));

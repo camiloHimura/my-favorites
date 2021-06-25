@@ -6,7 +6,7 @@ import ErrorLog from './ErrorLog';
 import CreateLink from '../CreateLink';
 import SideBarOptions from './SideBarOptions';
 import DynamicComponent from './DynamicComponent';
-//Todo add test
+
 export interface iComponentOpt {
   icon: string;
   component: React.FC;
@@ -19,7 +19,6 @@ const options: iComponentOpt[] = [
 ];
 
 const SideBar: React.FC = () => {
-  // const [switchs, setSwitchs] = useState([{ name: 'Fun', name: 'React' }]);
   const [selectedComponent, setSelectedComponent] = useState(0);
 
   return (

@@ -1,7 +1,7 @@
 import RamdomBetween from './RamdomBetween';
 
-function Colors() {
-  let _color = [
+const Colors = () => {
+  const _color = [
     '81A632',
     'BCBF5A',
     '8A8C46',
@@ -27,6 +27,6 @@ function Colors() {
       return _color[RamdomBetween(0, _color.length)];
     },
   };
-}
+};
 
 export default Colors();

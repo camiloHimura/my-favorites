@@ -1,5 +1,5 @@
-import { Dispatch } from 'react';
-import { iAction, iError, iLink } from '../../interfaces';
+import { iError, iLink } from '../../interfaces';
+import { iAsynchDispatch } from '../../interfaces/iAsynchDispatch';
 import { iNewLink } from '../../interfaces/iLink';
 import { iTagLink } from '../../interfaces/iTagLink';
 import {
@@ -16,21 +16,24 @@ import {
   removeLinkAction,
   addErrorAction,
 } from './index';
-// import { ERROR_TYPES } from '../../contans';
 
-export const getAllLinksAction = () => async (dispatch: Dispatch<iAction<iLink[] | iError>>) => {
-  try {
-    const links = await getLinks();
-    dispatch(linkLoadedAction(links));
-  } catch (error: unknown) {
-    dispatch(addErrorAction({ ...(error as iError) }));
-  }
-};
+export const getAllLinksAction =
+  () =>
+  async (dispatch: iAsynchDispatch<iLink[]>): Promise<void> => {
+    try {
+      const links = await getLinks();
+      console.log('getAllLinksAction', links);
+      dispatch(linkLoadedAction(links));
+    } catch (error: unknown) {
+      dispatch(addErrorAction({ ...(error as iError) }));
+    }
+  };
 
 export const getAllLinksByTagsAction =
-  (tags: string) => async (dispatch: Dispatch<iAction<iLink[] | iError>>) => {
+  (tags: string) =>
+  async (dispatch: iAsynchDispatch<iLink[]>): Promise<void> => {
     try {
-      const links: iLink[] = await getLinksByTags(tags);
+      const links = await getLinksByTags(tags);
       dispatch(linkLoadedAction(links));
     } catch (error) {
       dispatch(addErrorAction({ ...error }));
@@ -38,12 +41,14 @@ export const getAllLinksByTagsAction =
   };
 
 export const removeLinkAsyncAction =
-  (linkId: string) => async (dispatch: Dispatch<iAction<string | iError>>) => {
+  (linkId: string) =>
+  async (dispatch: iAsynchDispatch<string>): Promise<void> => {
     try {
       const { status } = await removeLinkRequest(linkId);
       if (status == 'removed') {
         dispatch(removeLinkAction(linkId));
       } else {
+        //Todo add toast
         console.log('show toas "not updated"');
       }
     } catch (error) {
@@ -52,7 +57,8 @@ export const removeLinkAsyncAction =
   };
 
 export const removeTagLinkAsyncAction =
-  (linkId: string, tagId: string) => async (dispatch: Dispatch<iAction<iTagLink | iError>>) => {
+  (linkId: string, tagId: string) =>
+  async (dispatch: iAsynchDispatch<iTagLink>): Promise<void> => {
     try {
       const { status } = await removeTagLinkRequest(linkId, tagId);
       if (status == 'updated') {
@@ -66,10 +72,10 @@ export const removeTagLinkAsyncAction =
   };
 
 export const addLinkAsyncAction =
-  (info: iNewLink) => async (dispatch: Dispatch<iAction<iLink | iError>>) => {
+  (info: iNewLink) =>
+  async (dispatch: iAsynchDispatch<iLink>): Promise<void> => {
     try {
       const { status, data } = await createLink(info);
-      console.log('new link', data);
       if (status == 'saved') {
         dispatch(addLinkAction(data));
       }

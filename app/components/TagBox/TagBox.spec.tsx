@@ -53,8 +53,8 @@ fdescribe('Initial set up', () => {
 
   it('check Board props', () => {
     const tags: iTag[] = [
-      { name: 'test', id: 0 },
-      { name: 'test2', id: 1 },
+      { name: 'test', id: '0' },
+      { name: 'test2', id: '1' },
     ];
     const component = setUp({ tags });
 
@@ -69,8 +69,8 @@ fdescribe('Initial set up', () => {
   it('should call removeTagAsyncAction clicking the tags close buttom', () => {
     const index = 1;
     const tags: iTag[] = [
-      { name: 'test', id: 0 },
-      { name: 'test2', id: 1 },
+      { name: 'test', id: '0' },
+      { name: 'test2', id: '1' },
     ];
 
     mocked(Board).mockImplementationOnce((props: iBoard<iTag>) =>

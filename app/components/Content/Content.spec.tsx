@@ -38,11 +38,11 @@ const linkData: iLink = {
 const getLinks = (length: number): iLink[] =>
   Array.from({ length }, (_, index) => ({
     ...linkData,
-    id: index,
+    id: String(index),
   }));
 
 const getTags = (length: number): iTag[] =>
-  Array.from({ length }, (_, index) => ({ name: 'tagName', id: index }));
+  Array.from({ length }, (_, index) => ({ name: 'tagName', id: String(index) }));
 
 beforeEach(() => {
   setUpDispatch.mockReset();

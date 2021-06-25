@@ -1,5 +1,5 @@
 export default interface iTag {
-  id?: string | number;
+  id?: string;
   name: string;
   color?: string;
 }

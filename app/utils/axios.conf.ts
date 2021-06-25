@@ -7,24 +7,19 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  function (config) {
+  (config) => {
     console.log('Sending request...');
     return config;
   },
-  function (error) {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
-// Add a response interceptor
 instance.interceptors.response.use(
-  function (response) {
+  (response) => {
     console.log('getting request...');
     return response;
   },
-  function (error) {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
 export default instance;

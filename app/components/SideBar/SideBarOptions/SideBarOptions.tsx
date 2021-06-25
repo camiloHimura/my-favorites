@@ -7,7 +7,7 @@ import './SideBarOptions.css';
 
 import Icon from '../../generals/Icon';
 import { iComponentOpt } from '../SideBar';
-// Todo Add test
+
 export interface iProps {
   options: iComponentOpt[];
   setSelectedComponent: React.Dispatch<React.SetStateAction<number>>;
@@ -20,7 +20,10 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent, options }: iPr
   const dispatchSetSideBarIndex = useAppDispatch();
   const dispatchSetSideBarErrorIndex = useAppDispatch();
 
-  const setSideBarErrorIndex = () => dispatchSetSideBarIndex(setSideBarErrorIndexAction(2));
+  //The error tap is always the last one
+  const setSideBarErrorIndex = () =>
+    dispatchSetSideBarIndex(setSideBarErrorIndexAction(options.length - 1));
+
   const setSideBarIndex = (index: number) =>
     dispatchSetSideBarErrorIndex(setSideBarIndexAction(index));
 
@@ -38,6 +41,7 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent, options }: iPr
       {options.map(({ icon }, index) => (
         <button
           key={`options-${index}`}
+          data-test="btn-option"
           className={`--flex ${sideBar.activeIndex == index ? '--selected' : ''}`}
           onClick={() => setSideBarIndex(index)}
         >

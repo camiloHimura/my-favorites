@@ -23,14 +23,14 @@ jest.mock('../../state/actions', () => ({
 }));
 
 const data: iLink = {
-  id: 1991,
+  id: '1991',
   url: 'url test',
   title: 'title test',
   description: 'fake description 2',
   tags: [
-    { id: 123, name: 'test', color: '#000' },
-    { id: 456, name: 'test', color: '#000' },
-    { id: 789, name: 'test', color: '#000' },
+    { id: '123', name: 'test', color: '#000' },
+    { id: '456', name: 'test', color: '#000' },
+    { id: '789', name: 'test', color: '#000' },
   ],
 };
 
@@ -94,12 +94,11 @@ it('trigger remove link', () => {
   expect(removeLinkAsyncAction).toHaveBeenCalledWith(data.id);
 });
 
-const setUp = (props: iLink = {}) => {
+const setUp = (props: iLink = { title: '', url: '', tags: [] }) => {
   const mockStore = storeFactory({});
   return mount(
     <Provider store={mockStore}>
-      {' '}
-      <Card {...props} />{' '}
+      <Card {...props} />
     </Provider>,
   );
 };

@@ -52,6 +52,7 @@ const CreateLink: React.FC<iCreateLink> = () => {
 
     inputUrl.current.value = lsLink?.url;
     inputTitle.current.value = lsLink?.title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const removeInvalid = (event) => event?.target?.classList?.remove('invalid');

@@ -11,7 +11,7 @@ import linksReducer from './linksReducer';
 const tags = (id: string): iTag => ({ id, name: 'test' });
 const mockData = (): iLink[] =>
   Array.from({ length: 3 }, (_, id) => ({
-    id,
+    id: String(id),
     title: `test ${id}`,
     url: 'url test',
     tags: [tags('1'), tags('2'), tags('3')],

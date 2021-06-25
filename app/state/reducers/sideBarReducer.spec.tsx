@@ -3,7 +3,7 @@ import { setSideBarIndexAction } from '../actions';
 
 describe('Error', () => {
   it('initial state', () => {
-    const newState = sideBarReducer(undefined, {});
+    const newState = sideBarReducer(undefined, {} as any);
     expect(newState.activeIndex).toEqual(0);
   });
 
