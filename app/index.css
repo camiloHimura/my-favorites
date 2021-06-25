@@ -40,3 +40,12 @@ p {
   -webkit-font-smoothing: antialiased;
   color: #858585;
 }
+
+
+.button {
+  padding: 10px;
+  margin-left: 10px;
+  color: var(--white);
+  background: var(--blue);
+  box-sizing: border-box;
+}

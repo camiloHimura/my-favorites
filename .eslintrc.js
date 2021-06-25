@@ -11,8 +11,9 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/strict',
+    'plugin:@typescript-eslint/recommended',
   ],
-  parser: '',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -22,6 +23,7 @@ module.exports = {
   },
   plugins: ['react', 'jsx-a11y'],
   rules: {
+    'react/prop-types': 0,
     'react-hooks/exhaustive-deps': 'error',
     'no-var': 'error',
     'brace-style': 'error',
@@ -45,4 +47,9 @@ module.exports = {
       },
     },
   ],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
