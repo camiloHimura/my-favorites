@@ -1,6 +1,6 @@
 import React, { Dispatch, useEffect } from 'react';
 import './Content.css';
-
+import * as R from 'ramda';
 import { iContent, iLink, iTag } from '../../interfaces';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -19,6 +19,17 @@ export enum eContent {
 
 const selectLinks = (state: RootState) => state.links;
 const selectTags = (state: RootState) => state.tags;
+
+const getTagsIds = (selectedTags: iTag[] = []) =>
+  selectedTags.reduce((accum, { id }): string => {
+    return accum === '' ? (id as string) : `${accum},${id}`;
+  }, '');
+
+const CardComponent = (info: iLink) => <Card key={info.id} {...info} data-test="cp-card" />;
+const CardsLoading = (length: number) =>
+  Array.from({ length }, (_, index) => (
+    <CardLoading key={`cardLoading-${index}`} data-test="cp-cardLoading" />
+  ));
 
 const Content: React.FC<iContent> = ({ numLoadingCards = 2 }) => {
   const links = useAppSelector(selectLinks);
@@ -39,20 +50,13 @@ const Content: React.FC<iContent> = ({ numLoadingCards = 2 }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const cardsLoading = () =>
-    Array.from({ length: numLoadingCards }, (_, index) => (
-      <CardLoading key={`cardLoading-${index}`} data-test="cp-cardLoading" />
-    ));
-
-  const cardsLoaded = (links: iLink[]) =>
-    links.map((info, index) => <Card key={`card-${index}`} {...info} data-test="cp-card" />);
-
-  const getTagsIds = (selectedTags: iTag[] = []) =>
-    selectedTags.reduce((accum, { id }): string => {
-      return accum === '' ? (id as string) : `${accum},${id}`;
-    }, '');
-
   const requestLinksByTags = (selectedTags: iTag[]) => getAllLinksByTags(getTagsIds(selectedTags));
+
+  const GetCards = R.ifElse(
+    R.prop('isLoadingLinks'),
+    R.always(CardsLoading(numLoadingCards)),
+    R.always(R.map(CardComponent, links)),
+  );
 
   return (
     <section className="Content">
@@ -69,7 +73,7 @@ const Content: React.FC<iContent> = ({ numLoadingCards = 2 }) => {
         />
       </Row>
       <Row className="--wrap --spaceEvenly">
-        {isLoadingLinks ? cardsLoading() : cardsLoaded(links)}
+        <GetCards isLoadingLinks={isLoadingLinks} />
       </Row>
     </section>
   );

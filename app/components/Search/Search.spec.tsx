@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import Search from './Search';
 import { iSearch } from '../../interfaces';
+import { findByTestAttr } from '../../utils/test';
 
 const onSearchLink = jest.fn();
 const onGetAllLinks = jest.fn();
@@ -21,12 +22,13 @@ beforeEach(() => {
 });
 
 test('Shoud call onGetAllLinks', () => {
-  component.find('input').simulate('input', { target: { value: '' } });
+  findByTestAttr(component, 'cp-input').simulate('input', { target: { value: '' } });
   expect(spyObj.onGetAllLinks).toHaveBeenCalled();
 });
 
 test('Shoud call onSearchLink', () => {
-  const value = 'test';
-  component.find('input').simulate('input', { target: { value } });
-  expect(spyObj.onSearchLink).toHaveBeenCalledWith(value);
+  ['test', '0', 'false'].forEach((value) => {
+    findByTestAttr(component, 'cp-input').simulate('input', { target: { value } });
+    expect(spyObj.onSearchLink).toHaveBeenCalledWith(value);
+  });
 });

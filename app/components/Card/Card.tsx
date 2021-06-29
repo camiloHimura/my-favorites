@@ -26,6 +26,8 @@ const Card: React.FC<iLink> = ({ id = '0', title, url, tags = [], description = 
     // Todo edit link method backed
     console.log('editLink...', id);
   };
+  const setHoverTrue = () => setIsContHover(true);
+  const setHoverFalse = () => setIsContHover(false);
 
   return (
     <div className="card">
@@ -39,8 +41,8 @@ const Card: React.FC<iLink> = ({ id = '0', title, url, tags = [], description = 
         <button
           className="description"
           ref={containerUrl}
-          onMouseEnter={() => setIsContHover(true)}
-          onMouseLeave={() => setIsContHover(false)}
+          onMouseEnter={setHoverTrue}
+          onMouseLeave={setHoverFalse}
           data-test="description"
         >
           {description}
