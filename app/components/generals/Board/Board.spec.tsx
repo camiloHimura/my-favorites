@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import Board from './Board';
 import { findByTestAttr } from '../../../utils/test';
 import { iTag, iBoard } from '../../../interfaces';
+import { KEY_CODES } from '../../../contans';
 
 const setOptions = jest.fn();
 const tag: iTag = { name: 'test' };
@@ -40,8 +41,10 @@ it('should call setOptions when typing Enter', () => {
   const name = 'test';
   const input = findByTestAttr(component, 'input');
 
-  input.simulate('keydown', { keyCode: 13, target: { value: name } });
+  input.simulate('keydown', { keyCode: KEY_CODES.DOWN, target: { value: name } });
+  expect(setOptions).not.toHaveBeenCalledWith({ name, color: expect.any(String) });
 
+  input.simulate('keydown', { keyCode: KEY_CODES.ENTER, target: { value: name } });
   expect(setOptions).toHaveBeenCalledWith({ name, color: expect.any(String) });
 });
 

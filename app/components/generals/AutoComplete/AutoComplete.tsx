@@ -1,8 +1,11 @@
 import React, { useRef, useReducer, useEffect } from 'react';
+import * as R from 'ramda';
+
 import AutoReduce from './AutoComplete.reducer';
 import './AutoComplete.css';
-import { iAutoComplete, iInput, iTag } from '../../../interfaces';
-import * as R from 'ramda';
+import { iAutoComplete, iTag } from '../../../interfaces';
+import * as Utils from '../../../utils';
+import { KEY_CODES } from '../../../contans';
 
 export enum Actions {
   set,
@@ -11,12 +14,9 @@ export enum Actions {
   sweepDown,
   clear,
 }
-const isValidValue = R.converge(R.and, [R.complement(R.isEmpty), R.length]);
-const getInputValue: (event) => string = R.path(['target', 'value']);
-const changeInput = (input: iInput) => (val: string) => (input.current.value = val);
-const idKeyCode = (code) => R.propSatisfies(R.equals(code), 'keyCode');
+
 const isKeyEnterWithIndex = (indexSelector) =>
-  R.both(idKeyCode(13), () => Number.isInteger(indexSelector));
+  R.both(Utils.isEnter, () => Number.isInteger(indexSelector));
 
 const clearInput = (handler: (val: string) => void, newValue: string) =>
   R.ifElse(
@@ -52,24 +52,24 @@ const AutoComplete: React.FC<iAutoComplete> = ({
   });
 
   const onFilter = R.ifElse(
-    R.useWith(isValidValue, [getInputValue]),
-    R.pipe(getInputValue, setFilterValue, setOptions),
+    Utils.isNotEmptyInput,
+    R.pipe(Utils.getInputValue, setFilterValue, setOptions),
     clearOptions,
   );
 
   const clearOptionsAndSetSelection = (option: iTag) => {
-    const clerInputclearAfterSelecting = clearInput(
-      changeInput(inputFilter),
+    const clearInputAfterSelecting = clearInput(
+      Utils.setInputValue(inputFilter),
       option[propertyFilter],
     );
     clearOptions();
     onSelected(option);
-    clerInputclearAfterSelecting(clearAfterSelecting);
+    clearInputAfterSelecting(clearAfterSelecting);
   };
 
   const sweepOptions = R.cond([
-    [idKeyCode(38), () => setOptions({ type: Actions.sweepUp })],
-    [idKeyCode(40), () => setOptions({ type: Actions.sweepDown })],
+    [Utils.isKeyCode(KEY_CODES.UP), () => setOptions({ type: Actions.sweepUp })],
+    [Utils.isKeyCode(KEY_CODES.DOWN), () => setOptions({ type: Actions.sweepDown })],
     [isKeyEnterWithIndex(indexSelector), () => clearOptionsAndSetSelection(options[indexSelector])],
   ]);
 
