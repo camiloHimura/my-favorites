@@ -8,6 +8,10 @@ interface iProp {
   parentRef: any;
   calcHeight: boolean;
 }
+const isOutOfBox =
+  (calcHeight: boolean) =>
+  ({ clientWidth, scrollWidth, clientHeight, scrollHeight }): boolean =>
+    calcHeight ? clientHeight < scrollHeight : clientWidth < scrollWidth;
 
 const Tooltip: React.FC<iProp> = (props) => {
   const [show, setShow] = useState(false);
@@ -15,10 +19,7 @@ const Tooltip: React.FC<iProp> = (props) => {
   const { text, parentRef, hover, calcHeight = false } = props;
 
   useEffect(() => {
-    const { clientWidth, scrollWidth, clientHeight, scrollHeight } = parentRef.current;
-    const isOutOfBox = calcHeight ? clientHeight < scrollHeight : clientWidth < scrollWidth;
-
-    if (hover && isOutOfBox) {
+    if (hover && isOutOfBox(calcHeight)(parentRef.current)) {
       setShow(true);
       setTimeout(() => setAnimation(true), 10);
     } else {
