@@ -6,8 +6,8 @@ const testOptions: iTag[] = [{ name: 'one' }, { name: 'two' }, { name: 'three' }
 
 describe('AutoCompleteReducer', () => {
   it('set initial options', () => {
-    const newState = AutoCompleteReducer(undefined, { type: Actions.set, initOptions: testOptions });
-    expect(newState).toEqual({ initOptions: testOptions });
+    const newState = AutoCompleteReducer(undefined, { type: Actions.set, options: testOptions });
+    expect(newState).toEqual({ options: testOptions });
   });
 
   it('filter options with not initOptions', () => {
@@ -21,25 +21,25 @@ describe('AutoCompleteReducer', () => {
 
   it('filter options with valid options', () => {
     let newState = AutoCompleteReducer(
-      { initOptions: testOptions },
+      { options: testOptions },
       { type: Actions.filter, propertyFilter: 'name', value: 'two' },
     );
     expect(newState.options).toEqual([{ name: 'two' }]);
 
     newState = AutoCompleteReducer(
-      { initOptions: testOptions },
+      { options: testOptions },
       { type: Actions.filter, propertyFilter: 'name', value: 't' },
     );
     expect(newState.options).toEqual([{ name: 'two' }, { name: 'three' }]);
   });
 
   it('clear indexSelector and showOptions', () => {
-    let newState = AutoCompleteReducer(
-      { initOptions: testOptions, indexSelector: 2, showOptions: true },
+    const newState = AutoCompleteReducer(
+      { options: testOptions, indexSelector: 2, showOptions: true },
       { type: Actions.clear },
     );
     expect(newState).toEqual({
-      initOptions: testOptions,
+      options: testOptions,
       indexSelector: null,
       showOptions: false,
     });

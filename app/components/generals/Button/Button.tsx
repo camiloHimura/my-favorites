@@ -11,7 +11,7 @@ interface iProps {
 
 const Button: React.FC<iProps> = React.memo((props) => {
   const { style = {}, type = 'button', onClick, className = '', text = '' } = props;
-  console.log('==> render Button');
+
   return (
     <button style={style} className={className} type={type} onClick={onClick}>
       {text}

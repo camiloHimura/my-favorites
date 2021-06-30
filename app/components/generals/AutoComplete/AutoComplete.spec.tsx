@@ -16,7 +16,12 @@ const initialProps: iAutoComplete = {
 describe('hide and show options', () => {
   const component = setUp({
     propertyFilter: 'number',
-    options: [{ number: 'one' }, { number: 'two' }, { number: 'tree' }, { number: 'twelve' }],
+    options: [
+      { id: 0, number: 'one' },
+      { id: 1, number: 'two' },
+      { id: 2, number: 'tree' },
+      { id: 3, number: 'twelve' },
+    ],
   });
 
   it('options are hidden', () => {
@@ -43,7 +48,11 @@ describe('hide and show options', () => {
 });
 
 describe('options interactions', () => {
-  const options = [{ number: 'two' }, { number: 'twelve' }, { number: 'twenty' }];
+  const options = [
+    { id: 0, number: 'two' },
+    { id: 1, number: 'twelve' },
+    { id: 2, number: 'twenty' },
+  ];
   let component, testProps;
 
   beforeEach(() => {
@@ -121,7 +130,11 @@ describe('options interactions', () => {
 });
 
 describe('closeOptions', () => {
-  const options = [{ number: 'two' }, { number: 'twelve' }, { number: 'twenty' }];
+  const options = [
+    { id: 0, number: 'one' },
+    { id: 1, number: 'two' },
+    { id: 2, number: 'tree' },
+  ];
 
   it('clear options if autoHide = true', () => {
     const typedValue = 'tw';

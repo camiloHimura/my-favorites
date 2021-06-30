@@ -15,38 +15,26 @@ import iCreateLink from '../../interfaces/iCreateLink';
 import { RootState } from '../../state/store';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { iNewLink } from '../../interfaces/iLink';
-import { iTag } from '../../interfaces';
+import { iInput, iTag } from '../../interfaces';
 import Button from '../generals/Button';
 
-type iInput = React.MutableRefObject<HTMLInputElement>;
 type iInputEvent = React.ChangeEvent<HTMLInputElement>;
 
 const selectTags = (state: RootState) => state.tags;
 const selectLocalStorage = (state: RootState) => state.localStorage;
 //todo Implement invalid toast
 // const selectInvalidLink = (state: RootState) => state.validation.invalidLink;
-
 const getTagsIds = (tags: iTag[]) => R.map(R.propOr('', 'id'), tags) as string[];
-const setInvalidInput = (input: iInput) => {
-  input?.current?.classList?.add('invalid');
-  return false;
-};
-
+const setInvalidInput = (input: iInput) => input?.current?.classList?.add('invalid');
 const removeInvalid = (event: iInputEvent) => event?.target?.classList?.remove('invalid');
-
 const clearInput = (input: iInput) => (input.current.value = '');
-
 const isInvalidText = (input: iInput) =>
   //Todo, the 'undefined' validation was added to make the test pass, find a better approach.
   !input?.current?.value || input?.current.value === 'undefined';
 
 const isInputValid = R.ifElse(isInvalidText, setInvalidInput, R.T);
-
-const isTitleAndUrlValid = (inputTitle, inputUrl) => {
-  const isValidTitle = isInputValid(inputTitle);
-  const isValidRrl = isInputValid(inputUrl);
-  return isValidTitle && isValidRrl;
-};
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const isTitleAndUrlValid = R.useWith(R.and, [isInputValid, isInputValid]);
 
 const CreateLink: React.FC<iCreateLink> = () => {
   const inputTitle = React.useRef<HTMLInputElement>(null);
@@ -70,6 +58,8 @@ const CreateLink: React.FC<iCreateLink> = () => {
   const setLsUrl = (url: string) => dispatchSetLsUrl(setLsUrlAction(url));
   const setLsTitle = (url: string) => dispatchSetLsTitle(setLsTitleAction(url));
   const setLsTags = (tags: iTag[]) => dispatchSetLsTags(setLsTagsAction(tags));
+
+  //console.log(R.juxt([Math.min, Math.max])(1, 2, 3, 4));
 
   useEffect(() => {
     if (!tags?.length) {
