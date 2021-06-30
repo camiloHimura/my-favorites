@@ -6,6 +6,7 @@ import { mount } from 'enzyme';
 import { findByTestAttr, storeFactory } from '../../../utils/test';
 import { Provider } from 'react-redux';
 import { updateTagAsyncAction } from '../../../state/actions';
+import { KEY_CODES } from '../../../contans';
 const initialProps = {
   id: 'idTest',
   color: 'FFFF',
@@ -64,14 +65,12 @@ describe('edit mode', () => {
   });
 
   it('updating tag', () => {
-    const name = 'newNameTest';
-    (findByTestAttr(component, 'input-edit').getElement() as any).ref.current = {
-      value: name,
-    };
+    const value = 'newNameTest';
     findByTestAttr(component, 'input-edit').simulate('keyPress', {
-      key: 'Enter',
+      keyCode: KEY_CODES.ENTER,
+      target: { value },
     });
-    expect(updateTagAsyncAction).toHaveBeenCalledWith(initialProps.id, name);
+    expect(updateTagAsyncAction).toHaveBeenCalledWith(initialProps.id, value);
   });
 
   it('has "noCursor"  class if "isUpdateDisable" is false', () => {

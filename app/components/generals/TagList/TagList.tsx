@@ -11,7 +11,10 @@ type iRemoveTagHandler = (tgs: iTag[]) => (tg: iTag) => void;
 
 const isSameTag = (sTag: iTag) => (tag: iTag) => tag.id === sTag.id;
 const removeTag = (tag: iTag) => (tags: iTag[]) => R.reject(isSameTag(tag), tags);
-const checkTagWith = (tag: iTag) => R.any(isSameTag(tag));
+const findTag = (tag: iTag) => R.any(isSameTag(tag));
+
+const isAnOptionAndNotExistingTag = (options: iTag[], tags: iTag[]) => (selectedTag) =>
+  findTag(selectedTag)(options) && !findTag(selectedTag)(tags);
 
 // eslint-disable-next-line react/display-name
 const setUpTag = (tags: iTag[]) => (handler: iRemoveTagHandler) => (tag: iTag) =>
@@ -46,15 +49,10 @@ const TagList: React.FC<iTagList> = ({
   const handlerRemoveTag: iRemoveTagHandler = (savedTags: iTag[]) => (tag: iTag) =>
     R.pipe(removeTag(tag), updateStateAndProps)(savedTags);
 
-  const addTags = (options: iTag[], savedTags: iTag[]) => (selectedTag: iTag) => {
-    const isAnOptionAndNoExistingTag = () =>
-      checkTagWith(selectedTag)(options) && !checkTagWith(selectedTag)(savedTags);
-
-    R.when(
-      isAnOptionAndNoExistingTag,
-      updateStateAndProps,
-    )(R.prepend({ ...selectedTag }, savedTags));
-  };
+  const addTags = (options: iTag[], savedTags: iTag[]) =>
+    R.when(isAnOptionAndNotExistingTag(options, savedTags), (tag: iTag) =>
+      updateStateAndProps(R.prepend({ ...tag }, savedTags)),
+    );
 
   const setTapWithHandlerRemove = setUpTag(savedTags)(handlerRemoveTag);
 

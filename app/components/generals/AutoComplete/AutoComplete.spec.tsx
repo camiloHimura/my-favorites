@@ -5,6 +5,7 @@ import { findByTestAttr } from '../../../utils/test';
 
 import AutoComplete from './AutoComplete';
 import { iAutoComplete } from '../../../interfaces';
+import { KEY_CODES } from '../../../contans';
 
 const initialProps: iAutoComplete = {
   options: [],
@@ -78,7 +79,7 @@ describe('options interactions', () => {
 
   it('press enter with any option selected', () => {
     findByTestAttr(component, 'input').simulate('change', { target: { value: 'tw' } });
-    findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
+    findByTestAttr(component, 'input').simulate('keydown', { keyCode: KEY_CODES.ENTER });
     expect(component.find('.select').length).toBe(0);
     expect(testProps.onSelected).not.toHaveBeenCalled();
   });
@@ -89,7 +90,7 @@ describe('options interactions', () => {
     findByTestAttr(component, 'input').simulate('keydown', { keyCode: 40 });
     expect(component.find('.select').length).toBe(1);
 
-    findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
+    findByTestAttr(component, 'input').simulate('keydown', { keyCode: KEY_CODES.ENTER });
     expect(testProps.onSelected).toHaveBeenCalled();
     expect(findByTestAttr(component, 'options').length).toBe(0);
     expect((findByTestAttr(component, 'input').instance() as any).value).toContain(typedValue);
@@ -100,7 +101,7 @@ describe('options interactions', () => {
     component = setUp({ ...testProps, clearAfterSelecting: true });
     findByTestAttr(component, 'input').simulate('change', { target: { value: typedValue } });
     findByTestAttr(component, 'input').simulate('keydown', { keyCode: 40 });
-    findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
+    findByTestAttr(component, 'input').simulate('keydown', { keyCode: KEY_CODES.ENTER });
     expect(testProps.onSelected).toHaveBeenCalled();
     expect((findByTestAttr(component, 'input').instance() as any).value).toBe('');
   });

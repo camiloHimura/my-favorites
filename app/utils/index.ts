@@ -11,7 +11,10 @@ export const getInputValue = R.pipe(getInput, R.prop('value'));
 export const isNotEmptyInput = R.pipe(getInputValue, R.converge(R.and, [isNotEmpty, R.length]));
 
 export const isKeyCode = (code: number): ((obj: unknown) => boolean) =>
-  R.propSatisfies(R.equals(code), 'keyCode');
+  R.anyPass([
+    R.propSatisfies(R.equals(code), 'keyCode'),
+    R.propSatisfies(R.equals(code), 'charCode'),
+  ]);
 
 export const isEnter = isKeyCode(KEY_CODES.ENTER);
 
