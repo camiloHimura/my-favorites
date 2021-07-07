@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Dispatch } from 'react';
+import * as Utils from '../../utils';
 import * as R from 'ramda';
 import './CreateLink.css';
 
@@ -66,27 +67,23 @@ const CreateLink: React.FC<iCreateLink> = () => {
       getAllTags();
     }
 
-    inputUrl.current.value = lsLink?.url;
-    inputTitle.current.value = lsLink?.title;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    Utils.setInputValue(inputUrl)(lsLink?.url);
+    Utils.setInputValue(inputTitle)(lsLink?.title);
   }, []);
 
-  const check = React.useCallback(
-    () =>
-      R.when(
-        R.equals(true),
-        addLinkAndClear(inputTitle, inputUrl, lsLink?.tags),
-      )(isTitleAndUrlValid(inputTitle, inputUrl)),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [inputTitle, inputUrl, lsLink?.tags],
-  );
+  const check = React.useCallback(() => {
+    R.when(
+      R.equals(true),
+      addLinkAndClear(inputTitle, inputUrl, lsLink?.tags),
+    )(isTitleAndUrlValid(inputTitle, inputUrl));
+  }, [inputTitle, inputUrl, lsLink?.tags]);
 
   const addLinkAndClear = (inputTitle: iInput, inputUrl: iInput, tags: iTag[] = []) =>
     R.compose(
       clearLs,
       addLink({
-        title: inputTitle?.current?.value,
-        url: inputUrl?.current?.value,
+        title: Utils.getInputValue(inputTitle),
+        url: Utils.getInputValue(inputUrl),
         tags: getTagsIds(tags),
       }),
       () => clearInput(inputUrl),

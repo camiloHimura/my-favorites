@@ -23,3 +23,14 @@ export const setInputValue =
   (val: string): void => {
     getInput(inputOrEvent).value = val;
   };
+
+export const bounce = (func: any, delay: number): ((data: any) => void) => {
+  let timerId;
+
+  return (data) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => func(data), delay);
+  };
+};
+
+export const isNumber = R.is(Number);

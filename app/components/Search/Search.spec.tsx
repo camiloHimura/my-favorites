@@ -5,30 +5,35 @@ import Search from './Search';
 import { iSearch } from '../../interfaces';
 import { findByTestAttr } from '../../utils/test';
 
-const onSearchLink = jest.fn();
-const onGetAllLinks = jest.fn();
 let spyObj: iSearch = {
-  onSearchLink,
-  onGetAllLinks,
+  onSearchLink: jest.fn(),
+  onGetAllLinks: jest.fn(),
 };
-let component;
 
 beforeEach(() => {
+  jest.useFakeTimers();
   spyObj = {
     onSearchLink: jest.fn(),
     onGetAllLinks: jest.fn(),
   };
-  component = shallow(<Search {...spyObj} />);
+});
+
+afterEach(() => {
+  jest.useRealTimers();
 });
 
 test('Shoud call onGetAllLinks', () => {
+  const component = shallow(<Search {...spyObj} />);
   findByTestAttr(component, 'cp-input').simulate('input', { target: { value: '' } });
+  jest.advanceTimersByTime(1000);
   expect(spyObj.onGetAllLinks).toHaveBeenCalled();
 });
 
 test('Shoud call onSearchLink', () => {
   ['test', '0', 'false'].forEach((value) => {
+    const component = shallow(<Search {...spyObj} />);
     findByTestAttr(component, 'cp-input').simulate('input', { target: { value } });
+    jest.advanceTimersByTime(1000);
     expect(spyObj.onSearchLink).toHaveBeenCalledWith(value);
   });
 });

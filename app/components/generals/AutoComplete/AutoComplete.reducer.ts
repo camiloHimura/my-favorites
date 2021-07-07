@@ -1,11 +1,14 @@
+import * as R from 'ramda';
+
 import { iTag } from '../../../interfaces';
 import { Actions } from './AutoComplete';
+import * as Utils from '../../../utils';
 
 interface ActionType {
   value?: string;
   options?: iTag[];
   propertyFilter?: string;
-  type: Actions.set | Actions.filter | Actions.sweepUp | Actions.sweepDown | Actions.clear;
+  type: Actions.set | Actions.filter | Actions.sweepUp | Actions.sweepDown | Actions.reset;
 }
 
 interface State {
@@ -15,48 +18,49 @@ interface State {
 }
 
 export default function reducer(state: State = {}, action: ActionType): State {
+  const mergeState = R.mergeRight(state);
+  const isOptionsAnArray = (state) => Array.isArray(state?.options);
+
   switch (action.type) {
     case Actions.set:
-      return { ...state, options: action.options };
+      return mergeState({ options: action.options });
 
     case Actions.filter: {
-      if (!Array.isArray(state.options) || !action.propertyFilter) {
+      if (!isOptionsAnArray(state) || !action.propertyFilter) {
         return state;
       }
 
-      const options = state.options.filter((option) =>
-        option[action.propertyFilter].includes(action.value),
+      const options = R.filter(
+        (option) => R.includes(action.value, option[action.propertyFilter]),
+        state.options,
       );
-      return { ...state, options, showOptions: options.length > 0 ? true : false };
+
+      return mergeState({ options, showOptions: R.gt(options.length, 0) });
     }
 
     case Actions.sweepUp: {
-      if (!Array.isArray(state.options)) {
-        return state;
-      }
+      const moveIndexUp = (data: State) =>
+        R.pipe(
+          R.unless(Utils.isNumber, R.always(0)),
+          R.dec,
+          R.when(R.gt(0), () => R.dec(R.length(data.options))),
+        )(data.indexSelector);
 
-      let indexSelector = !Number.isInteger(state.indexSelector) ? 0 : state.indexSelector;
-      indexSelector -= 1;
-      if (indexSelector < 0) {
-        indexSelector = state.options.length - 1;
-      }
-      return { ...state, indexSelector };
+      return R.when(isOptionsAnArray, R.mergeLeft({ indexSelector: moveIndexUp(state) }))(state);
     }
 
     case Actions.sweepDown: {
-      if (!Array.isArray(state.options)) {
-        return state;
-      }
-      let indexSelector = !Number.isInteger(state.indexSelector) ? 0 : state.indexSelector + 1;
-      if (indexSelector >= state.options.length) {
-        indexSelector = 0;
-      }
+      const moveIndexDown = (data: State) =>
+        R.pipe(
+          R.ifElse(Utils.isNumber, R.inc, R.always(0)),
+          R.when(R.gte(R.__, R.length(data.options)), R.always(0)),
+        )(data.indexSelector);
 
-      return { ...state, indexSelector };
+      return R.when(isOptionsAnArray, R.mergeLeft({ indexSelector: moveIndexDown(state) }))(state);
     }
 
-    case Actions.clear:
-      return { ...state, indexSelector: null, showOptions: false };
+    case Actions.reset:
+      return { indexSelector: null, showOptions: false, options: action.options };
 
     default:
       return state;

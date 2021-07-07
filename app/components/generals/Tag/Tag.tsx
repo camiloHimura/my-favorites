@@ -60,8 +60,6 @@ const Tag: React.FC<iProps> = ({
       )}
       {isEdit && (
         <input
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
           placeholder={name}
           className="editBox"
           data-test="input-edit"

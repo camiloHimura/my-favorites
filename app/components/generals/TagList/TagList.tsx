@@ -17,8 +17,8 @@ const isAnOptionAndNotExistingTag = (options: iTag[], tags: iTag[]) => (selected
   findTag(selectedTag)(options) && !findTag(selectedTag)(tags);
 
 // eslint-disable-next-line react/display-name
-const setUpTag = (tags: iTag[]) => (handler: iRemoveTagHandler) => (tag: iTag) =>
-  <Tag key={tag.id} isUpdateDisable={true} onClose={handler(tags)} data-test="cp-tag" {...tag} />;
+const setUpTag = (handler: (selectedTag: iTag) => void) => (tag: iTag) =>
+  <Tag key={tag.id} isUpdateDisable={true} onClose={handler} data-test="cp-tag" {...tag} />;
 
 const TagList: React.FC<iTagList> = ({
   className,
@@ -37,7 +37,6 @@ const TagList: React.FC<iTagList> = ({
     if (initialSavedTags.length) {
       updateStateAndProps(initialSavedTags);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSavedTags.length]);
 
   useEffect(() => {
@@ -46,15 +45,15 @@ const TagList: React.FC<iTagList> = ({
     }
   }, [clearList]);
 
-  const handlerRemoveTag: iRemoveTagHandler = (savedTags: iTag[]) => (tag: iTag) =>
-    R.pipe(removeTag(tag), updateStateAndProps)(savedTags);
+  const handlerRemoveTag: iRemoveTagHandler = (tags: iTag[]) => (tag: iTag) =>
+    R.pipe(removeTag(tag), updateStateAndProps)(tags);
 
-  const addTags = (options: iTag[], savedTags: iTag[]) =>
-    R.when(isAnOptionAndNotExistingTag(options, savedTags), (tag: iTag) =>
-      updateStateAndProps(R.prepend({ ...tag }, savedTags)),
+  const addTags = (options: iTag[], tags: iTag[]) =>
+    R.when(isAnOptionAndNotExistingTag(options, tags), (tag: iTag) =>
+      updateStateAndProps(R.prepend({ ...tag }, tags)),
     );
 
-  const setTapWithHandlerRemove = setUpTag(savedTags)(handlerRemoveTag);
+  const tapWithRemoveHandler = (tags: iTag[]) => setUpTag(handlerRemoveTag(tags));
 
   return (
     <div className={className}>
@@ -67,7 +66,7 @@ const TagList: React.FC<iTagList> = ({
         onSelected={addTags(options, savedTags)}
         clearAfterSelecting={clearAfterSelecting}
       />
-      <div className="contOptions">{R.map(setTapWithHandlerRemove, savedTags)}</div>
+      <div className="contOptions">{R.map(tapWithRemoveHandler(savedTags), savedTags)}</div>
     </div>
   );
 };

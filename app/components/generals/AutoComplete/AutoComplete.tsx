@@ -12,7 +12,7 @@ export enum Actions {
   filter,
   sweepUp,
   sweepDown,
-  clear,
+  reset,
 }
 
 const isKeyEnterWithIndex = (indexSelector) =>
@@ -37,12 +37,11 @@ const AutoComplete: React.FC<iAutoComplete> = ({
   const inputFilter = useRef(null);
   const [state, setOptions] = useReducer(AutoReduce, { showOptions: false });
   const { options, showOptions, indexSelector } = state;
+  const resetOptions = () => setOptions({ type: Actions.reset, options: [...initOptions] });
 
   useEffect(() => {
-    setOptions({ type: Actions.set, options: [...initOptions] });
+    resetOptions();
   }, [initOptions]);
-
-  const clearOptions = () => setOptions({ type: Actions.clear });
 
   const setFilterValue = (value: string) => ({
     value,
@@ -54,7 +53,7 @@ const AutoComplete: React.FC<iAutoComplete> = ({
   const onFilter = R.ifElse(
     Utils.isNotEmptyInput,
     R.pipe(Utils.getInputValue, setFilterValue, setOptions),
-    clearOptions,
+    resetOptions,
   );
 
   const clearOptionsAndSetSelection = (option: iTag) => {
@@ -62,7 +61,7 @@ const AutoComplete: React.FC<iAutoComplete> = ({
       Utils.setInputValue(inputFilter),
       option[propertyFilter],
     );
-    clearOptions();
+    resetOptions();
     onSelected(option);
     clearInputAfterSelecting(clearAfterSelecting);
   };
@@ -73,7 +72,7 @@ const AutoComplete: React.FC<iAutoComplete> = ({
     [isKeyEnterWithIndex(indexSelector), () => clearOptionsAndSetSelection(options[indexSelector])],
   ]);
 
-  const closeOptions = R.when(R.equals(true), clearOptions);
+  const closeOptions = R.when(R.equals(true), resetOptions);
 
   return (
     <div className="autoComplete">

@@ -35,8 +35,8 @@ describe('AutoCompleteReducer', () => {
 
   it('clear indexSelector and showOptions', () => {
     const newState = AutoCompleteReducer(
-      { options: testOptions, indexSelector: 2, showOptions: true },
-      { type: Actions.clear },
+      { options: [], indexSelector: 2, showOptions: true },
+      { type: Actions.reset, options: testOptions },
     );
     expect(newState).toEqual({
       options: testOptions,
