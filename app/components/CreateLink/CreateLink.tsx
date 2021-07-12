@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Dispatch } from 'react';
+import React, { useState, useEffect, useRef, Dispatch } from 'react';
 import * as Utils from '../../utils';
 import * as R from 'ramda';
 import './CreateLink.css';
@@ -38,8 +38,8 @@ const isInputValid = R.ifElse(isInvalidText, setInvalidInput, R.T);
 const isTitleAndUrlValid = R.useWith(R.and, [isInputValid, isInputValid]);
 
 const CreateLink: React.FC<iCreateLink> = () => {
-  const inputTitle = React.useRef<HTMLInputElement>(null);
-  const inputUrl = React.useRef<HTMLInputElement>(null);
+  const inputTitle = useRef<HTMLInputElement>(null);
+  const inputUrl = useRef<HTMLInputElement>(null);
   const [clearList, setClearList] = useState(false);
 
   const tags = useAppSelector(selectTags);
@@ -96,7 +96,7 @@ const CreateLink: React.FC<iCreateLink> = () => {
 
   return (
     <div className="createLink">
-      <h2>Create Link</h2>
+      <h2 className="title">Create Link</h2>
 
       <input
         placeholder="Title"
@@ -106,7 +106,7 @@ const CreateLink: React.FC<iCreateLink> = () => {
         onFocus={removeInvalid}
         className="createLink__contInputs__title"
       />
-      <div className="--flex">
+      <div className="--flex --margin-top">
         <input
           placeholder="Url"
           ref={inputUrl}
@@ -124,7 +124,7 @@ const CreateLink: React.FC<iCreateLink> = () => {
       </div>
 
       <TagList
-        className="createLink__contTags --flex"
+        className="createLink__contTags --flex --margin-top"
         options={tags}
         autoHide={false}
         clearList={clearList}

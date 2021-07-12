@@ -1,8 +1,7 @@
 .board {
   width: 100%;
-  padding: 4px;
-  margin-top: 10px;
   box-sizing: border-box;
+  margin-top: var(--elemts-margin-top);
 }
 
 .contOptions {

@@ -16,6 +16,30 @@
   --sidebar-width: 30%;
   --sideBarOptions-width: 50px;
   --input-radius: 0px;
+
+  /* cards */
+  --num-cards: 1;
+  --icon-size: 18px;
+  --cards-margin: 10px;
+  --elemts-margin-top: 10px;
+}
+
+@media only screen and (min-width: 720px) {
+  :root {
+    --num-cards: 2;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  :root {
+    --num-cards: 3;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  :root {
+    --num-cards: 4;
+  }
 }
 
 .MyFavorites {

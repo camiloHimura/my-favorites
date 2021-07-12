@@ -3,6 +3,7 @@ import { KEY_CODES } from '../contans';
 import { iInput } from '../interfaces';
 
 export const isNotEmpty = R.complement(R.isEmpty);
+
 export const getInput = (inputOrEvent: iInput): HTMLInputElement =>
   R.pathOr(R.path(['target'], inputOrEvent), ['current'], inputOrEvent);
 
@@ -24,7 +25,7 @@ export const setInputValue =
     getInput(inputOrEvent).value = val;
   };
 
-export const bounce = (func: any, delay: number): ((data: any) => void) => {
+export const bounce = (func: (info: unknown) => void, delay: number): ((data: unknown) => void) => {
   let timerId;
 
   return (data) => {
