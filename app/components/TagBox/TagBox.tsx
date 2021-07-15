@@ -31,7 +31,6 @@ const TagBox: React.FC = () => {
     if (!tags.length) {
       getAllTags();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

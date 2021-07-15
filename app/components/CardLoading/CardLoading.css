@@ -1,7 +1,5 @@
 .cardLoading {
-  --num-cards: 3;
   --cards-margin: 10px;
-  --elemts-margin-top: 10px;
   --items-color: var(--light-gray-4);
 
   display: flex;

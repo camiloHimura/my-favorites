@@ -1,11 +1,12 @@
-import React, { useState, useRef, Dispatch, useCallback } from 'react';
+import React, { useState, Dispatch, useCallback } from 'react';
+import * as R from 'ramda';
+import * as Utils from '../../../utils';
 import './Tag.css';
 
 import Icon from '../Icon';
 import { updateTagAsyncAction } from '../../../state/actions';
-import { iTag } from '../../../interfaces';
+import { iInput, iTag } from '../../../interfaces';
 import { useAppDispatch } from '../../../hooks/redux';
-
 interface iProps {
   id?: string;
   name: string;
@@ -14,6 +15,8 @@ interface iProps {
   onClose: (tag: iTag) => void;
 }
 
+const isKeyEnterWithNoEmptyInput = R.both(Utils.isEnter, Utils.isNotEmptyInput);
+
 const Tag: React.FC<iProps> = ({
   id,
   onClose,
@@ -21,7 +24,6 @@ const Tag: React.FC<iProps> = ({
   color = '0396A6',
   isUpdateDisable = false,
 }) => {
-  const inputEl = useRef(null);
   const [isEdit, setIsEdit] = useState(false);
   const dispatchUpdateTag: Dispatch<any> = useAppDispatch();
   const updateTag = (id: string, name: string) => dispatchUpdateTag(updateTagAsyncAction(id, name));
@@ -30,20 +32,13 @@ const Tag: React.FC<iProps> = ({
     onClose({ id, name, color });
   }, [onClose, id, name, color]);
 
-  const activeEdit = () => {
-    if (isUpdateDisable) {
-      return;
-    }
-    setIsEdit(true);
-  };
+  const setUpdateModeIfAvailable = R.when(R.equals(true), setIsEdit);
 
   const hideEdit = () => setIsEdit(false);
 
-  const checkName = (event) => {
-    if (event.key == 'Enter' && inputEl.current.value !== '') {
-      updateTag(id, inputEl.current.value);
-    }
-  };
+  const checkName = R.when(isKeyEnterWithNoEmptyInput, (event: iInput) => {
+    updateTag(id, Utils.getInputValue(event));
+  });
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -57,7 +52,7 @@ const Tag: React.FC<iProps> = ({
       {!isEdit && (
         <button
           className={isUpdateDisable ? 'noCursor' : ''}
-          onDoubleClick={activeEdit}
+          onDoubleClick={() => setUpdateModeIfAvailable(!isUpdateDisable)}
           data-test="tag-name"
         >
           {name}
@@ -65,9 +60,6 @@ const Tag: React.FC<iProps> = ({
       )}
       {isEdit && (
         <input
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
-          ref={inputEl}
           placeholder={name}
           className="editBox"
           data-test="input-edit"

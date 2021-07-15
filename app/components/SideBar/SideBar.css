@@ -30,12 +30,13 @@ h2.--filters {
 }
 
 .sideBar__container {
-  width: calc(100% - var(--sideBarOptions-width) - var(--margin-right));
   display: flex;
   position: relative;
   align-items: center;
+  box-sizing: border-box;
   flex-direction: column;
   padding: var(--margin-right);
+  width: calc(100% - var(--sideBarOptions-width) - var(--margin-right));
 }
 .sideBar__container > * {
   width: 100%;

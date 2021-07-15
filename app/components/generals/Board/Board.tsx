@@ -1,12 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import * as R from 'ramda';
 import './Board.css';
 
-import { KEY_CODES } from '../../../contans';
 import Colors from '../../../utils/Colors';
-import iBoard from '../../../interfaces/iBoard';
-import { iTag } from '../../../interfaces';
-
-const { ENTER } = KEY_CODES;
+import { iTag, iBoard } from '../../../interfaces';
+import { getInputValue, isEnter, isNotEmptyInput, setInputValue } from '../../../utils';
 
 const BoardTags: React.FC<iBoard<iTag>> = ({
   className,
@@ -16,27 +14,19 @@ const BoardTags: React.FC<iBoard<iTag>> = ({
   isWrap = false,
   placeHolder = '',
 }) => {
-  const inputOptions = useRef<HTMLInputElement>(null);
+  const isValidNameAndTypedEnter = R.both(isEnter, isNotEmptyInput);
 
-  const addOption = (
-    event: React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>,
-  ) => {
-    const element = event.target as HTMLInputElement;
-
-    if ((event as any).keyCode === ENTER && element.value !== '') {
-      setOptions({ name: element.value, color: Colors.getRamdom() });
-      if (inputOptions?.current) {
-        inputOptions.current.value = '';
-      }
-    }
-  };
+  const addOption = R.when(isValidNameAndTypedEnter, (event) => {
+    setOptions({ name: getInputValue(event), color: Colors.getRamdom() });
+    setInputValue(event)('');
+  });
 
   return (
     <div className={`board ${className} --flex ${isWrap ? '--wrap' : ''}`}>
-      <input placeholder={placeHolder} onKeyDown={addOption} ref={inputOptions} data-test="input" />
+      <input placeholder={placeHolder} onKeyDown={addOption} data-test="input" />
       <div className="contOptions" data-test="container">
-        {options.map((option, index) => (
-          <Component key={`${index}-${className}`} {...option} data-test="element" />
+        {options.map((option) => (
+          <Component key={`${option.id}-Board`} {...option} data-test="element" />
         ))}
       </div>
     </div>

@@ -7,3 +7,4 @@ export type { default as iAutoComplete } from './iAutoComplete';
 export type { default as iContent } from './iContent';
 export type { default as iLink } from './iLink';
 export type { default as iSearch } from './iSearch';
+export type { iInput } from './iInput';

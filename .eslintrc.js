@@ -24,7 +24,7 @@ module.exports = {
   plugins: ['react', 'jsx-a11y'],
   rules: {
     'react/prop-types': 0,
-    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/exhaustive-deps': 'off',
     'no-var': 'error',
     'brace-style': 'error',
     'prefer-template': 'error',

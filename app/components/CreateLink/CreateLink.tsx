@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect, Dispatch } from 'react';
-
+import React, { useState, useEffect, useRef, Dispatch } from 'react';
+import * as Utils from '../../utils';
+import * as R from 'ramda';
 import './CreateLink.css';
 
 import TagList from '../generals/TagList';
@@ -15,12 +16,26 @@ import iCreateLink from '../../interfaces/iCreateLink';
 import { RootState } from '../../state/store';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { iNewLink } from '../../interfaces/iLink';
-import { iTag } from '../../interfaces';
+import { iInput, iTag } from '../../interfaces';
+import Button from '../generals/Button';
+
+type iInputEvent = React.ChangeEvent<HTMLInputElement>;
 
 const selectTags = (state: RootState) => state.tags;
 const selectLocalStorage = (state: RootState) => state.localStorage;
 //todo Implement invalid toast
 // const selectInvalidLink = (state: RootState) => state.validation.invalidLink;
+const getTagsIds = (tags: iTag[]) => R.map(R.propOr('', 'id'), tags) as string[];
+const setInvalidInput = (input: iInput) => input?.current?.classList?.add('invalid');
+const removeInvalid = (event: iInputEvent) => event?.target?.classList?.remove('invalid');
+const clearInput = (input: iInput) => (input.current.value = '');
+const isInvalidText = (input: iInput) =>
+  //Todo, the 'undefined' validation was added to make the test pass, find a better approach.
+  !input?.current?.value || input?.current.value === 'undefined';
+
+const isInputValid = R.ifElse(isInvalidText, setInvalidInput, R.T);
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const isTitleAndUrlValid = R.useWith(R.and, [isInputValid, isInputValid]);
 
 const CreateLink: React.FC<iCreateLink> = () => {
   const inputTitle = useRef<HTMLInputElement>(null);
@@ -38,64 +53,50 @@ const CreateLink: React.FC<iCreateLink> = () => {
   const dispatchSetLsTitle = useAppDispatch();
   const dispatchSetLsTags = useAppDispatch();
 
-  const addLink = (link: iNewLink) => dispatchAddLink(addLinkAsyncAction(link));
+  const addLink = (link: iNewLink) => () => dispatchAddLink(addLinkAsyncAction(link));
   const getAllTags = () => dispatchGetAllTags(getAllTagsAsyncAction());
   const clearLs = () => dispatchClearLs(clearLsAction());
   const setLsUrl = (url: string) => dispatchSetLsUrl(setLsUrlAction(url));
   const setLsTitle = (url: string) => dispatchSetLsTitle(setLsTitleAction(url));
   const setLsTags = (tags: iTag[]) => dispatchSetLsTags(setLsTagsAction(tags));
 
+  //console.log(R.juxt([Math.min, Math.max])(1, 2, 3, 4));
+
   useEffect(() => {
     if (!tags?.length) {
       getAllTags();
     }
 
-    inputUrl.current.value = lsLink?.url;
-    inputTitle.current.value = lsLink?.title;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    Utils.setInputValue(inputUrl)(lsLink?.url);
+    Utils.setInputValue(inputTitle)(lsLink?.title);
   }, []);
 
-  const removeInvalid = (event) => event?.target?.classList?.remove('invalid');
+  const check = React.useCallback(() => {
+    R.when(
+      R.equals(true),
+      addLinkAndClear(inputTitle, inputUrl, lsLink?.tags),
+    )(isTitleAndUrlValid(inputTitle, inputUrl));
+  }, [inputTitle, inputUrl, lsLink?.tags]);
 
-  //Todo, the 'undefined' validation was added to make the test pass, find a better approach.
-  const isInvalidInput = (text: string) => !text || text === 'undefined';
-
-  const check = () => {
-    let isValid = true;
-
-    if (isInvalidInput(inputTitle?.current?.value)) {
-      inputTitle.current.classList.add('invalid');
-      isValid = false;
-    }
-
-    if (isInvalidInput(inputUrl?.current?.value)) {
-      inputUrl.current.classList.add('invalid');
-      isValid = false;
-    }
-
-    if (isValid) {
+  const addLinkAndClear = (inputTitle: iInput, inputUrl: iInput, tags: iTag[] = []) =>
+    R.compose(
+      clearLs,
       addLink({
-        title: inputTitle.current.value,
-        url: inputUrl.current.value,
-        tags: lsLink?.tags?.map((tag) => tag.id as string),
-      });
-      clear();
-    }
-  };
-
-  const clear = () => {
-    inputUrl.current.value = '';
-    inputTitle.current.value = '';
-    setClearList(true);
-    clearLs();
-  };
+        title: Utils.getInputValue(inputTitle),
+        url: Utils.getInputValue(inputUrl),
+        tags: getTagsIds(tags),
+      }),
+      () => clearInput(inputUrl),
+      () => clearInput(inputTitle),
+      () => setClearList(true),
+    );
 
   const updateTitle = () => setLsTitle(inputTitle?.current?.value);
   const updateUrl = () => setLsUrl(inputUrl?.current?.value);
 
   return (
     <div className="createLink">
-      <h2>Create Link</h2>
+      <h2 className="title">Create Link</h2>
 
       <input
         placeholder="Title"
@@ -105,7 +106,7 @@ const CreateLink: React.FC<iCreateLink> = () => {
         onFocus={removeInvalid}
         className="createLink__contInputs__title"
       />
-      <div className="--flex">
+      <div className="--flex --margin-top">
         <input
           placeholder="Url"
           ref={inputUrl}
@@ -114,18 +115,16 @@ const CreateLink: React.FC<iCreateLink> = () => {
           onFocus={removeInvalid}
           className="createLink__contInputs__url"
         />
-        <button
-          className="createLink__send button"
-          type="button"
+        <Button
+          text="Send"
           onClick={check}
           data-test="btn-send"
-        >
-          Send
-        </button>
+          className="createLink__send button"
+        />
       </div>
 
       <TagList
-        className="createLink__contTags --flex"
+        className="createLink__contTags --flex --margin-top"
         options={tags}
         autoHide={false}
         clearList={clearList}

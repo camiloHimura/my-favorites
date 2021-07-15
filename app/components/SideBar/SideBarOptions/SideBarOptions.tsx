@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Fun from '../../../utils/Fun';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setSideBarIndexAction, setSideBarErrorIndexAction } from '../../../state/actions';
 import { RootState } from '../../../state/store';
@@ -7,6 +6,7 @@ import './SideBarOptions.css';
 
 import Icon from '../../generals/Icon';
 import { iComponentOpt } from '../SideBar';
+import * as R from 'ramda';
 
 export interface iProps {
   options: iComponentOpt[];
@@ -29,7 +29,6 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent, options }: iPr
 
   useEffect(() => {
     setSideBarErrorIndex();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -45,7 +44,7 @@ const SideBarOptions: React.FC<iProps> = ({ setSelectedComponent, options }: iPr
           className={`--flex ${sideBar.activeIndex == index ? '--selected' : ''}`}
           onClick={() => setSideBarIndex(index)}
         >
-          <Icon name={icon} onClick={Fun.noon} />
+          <Icon name={icon} onClick={R.T} />
         </button>
       ))}
     </section>

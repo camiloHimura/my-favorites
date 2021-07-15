@@ -1,9 +1,4 @@
 .card {
-  --num-cards: 3;
-  --icon-size: 18px;
-  --cards-margin: 10px;
-  --elemts-margin-top: 10px;
-
   display: flex;
   padding: 10px;
   font-size: 16px;

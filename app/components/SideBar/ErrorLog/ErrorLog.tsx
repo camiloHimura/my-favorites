@@ -10,14 +10,12 @@ const ErrorLog: React.FC = () => {
 
   return (
     <div className="errorLog">
-      {errors.map((error, index) => {
-        return (
-          <div key={`error-${index}`} className="container">
-            <h4>{error.type}</h4>
-            <p>{error.info}</p>
-          </div>
-        );
-      })}
+      {errors.map((error, index) => (
+        <div key={`error-${index}`} className="container">
+          <h4>{error.type}</h4>
+          <p>{error.info}</p>
+        </div>
+      ))}
     </div>
   );
 };

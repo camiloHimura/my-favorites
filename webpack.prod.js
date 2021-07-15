@@ -1,10 +1,12 @@
-var path = require('path');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
+let webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -22,6 +24,10 @@ module.exports = merge(common, {
     minimizer: [new TerserPlugin()],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.PORT': JSON.stringify(process.env.PORT),
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',

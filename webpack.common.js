@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 let path = require('path');
-let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -38,10 +37,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       manifestUrl: './manifest.json',
       template: 'app/index.html',
-    }),
-    new webpack.DefinePlugin({
-      'process.env.PORT': JSON.stringify(process.env.PORT),
-      'process.env.API_URL': JSON.stringify(process.env.API_URL),
     }),
   ],
 };

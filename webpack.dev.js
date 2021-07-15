@@ -22,5 +22,11 @@ module.exports = merge(common, {
     port: process.env.PORT || 8080,
     historyApiFallback: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.PORT': JSON.stringify(process.env.PORT),
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    }),
+  ],
 });

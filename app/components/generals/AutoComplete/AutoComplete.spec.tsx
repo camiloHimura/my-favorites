@@ -5,6 +5,7 @@ import { findByTestAttr } from '../../../utils/test';
 
 import AutoComplete from './AutoComplete';
 import { iAutoComplete } from '../../../interfaces';
+import { KEY_CODES } from '../../../contans';
 
 const initialProps: iAutoComplete = {
   options: [],
@@ -16,7 +17,12 @@ const initialProps: iAutoComplete = {
 describe('hide and show options', () => {
   const component = setUp({
     propertyFilter: 'number',
-    options: [{ number: 'one' }, { number: 'two' }, { number: 'tree' }, { number: 'twelve' }],
+    options: [
+      { id: 0, number: 'one' },
+      { id: 1, number: 'two' },
+      { id: 2, number: 'tree' },
+      { id: 3, number: 'twelve' },
+    ],
   });
 
   it('options are hidden', () => {
@@ -43,7 +49,11 @@ describe('hide and show options', () => {
 });
 
 describe('options interactions', () => {
-  const options = [{ number: 'two' }, { number: 'twelve' }, { number: 'twenty' }];
+  const options = [
+    { id: 0, number: 'two' },
+    { id: 1, number: 'twelve' },
+    { id: 2, number: 'twenty' },
+  ];
   let component, testProps;
 
   beforeEach(() => {
@@ -69,7 +79,7 @@ describe('options interactions', () => {
 
   it('press enter with any option selected', () => {
     findByTestAttr(component, 'input').simulate('change', { target: { value: 'tw' } });
-    findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
+    findByTestAttr(component, 'input').simulate('keydown', { keyCode: KEY_CODES.ENTER });
     expect(component.find('.select').length).toBe(0);
     expect(testProps.onSelected).not.toHaveBeenCalled();
   });
@@ -80,7 +90,7 @@ describe('options interactions', () => {
     findByTestAttr(component, 'input').simulate('keydown', { keyCode: 40 });
     expect(component.find('.select').length).toBe(1);
 
-    findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
+    findByTestAttr(component, 'input').simulate('keydown', { keyCode: KEY_CODES.ENTER });
     expect(testProps.onSelected).toHaveBeenCalled();
     expect(findByTestAttr(component, 'options').length).toBe(0);
     expect((findByTestAttr(component, 'input').instance() as any).value).toContain(typedValue);
@@ -91,7 +101,7 @@ describe('options interactions', () => {
     component = setUp({ ...testProps, clearAfterSelecting: true });
     findByTestAttr(component, 'input').simulate('change', { target: { value: typedValue } });
     findByTestAttr(component, 'input').simulate('keydown', { keyCode: 40 });
-    findByTestAttr(component, 'input').simulate('keydown', { keyCode: 13 });
+    findByTestAttr(component, 'input').simulate('keydown', { keyCode: KEY_CODES.ENTER });
     expect(testProps.onSelected).toHaveBeenCalled();
     expect((findByTestAttr(component, 'input').instance() as any).value).toBe('');
   });
@@ -121,7 +131,11 @@ describe('options interactions', () => {
 });
 
 describe('closeOptions', () => {
-  const options = [{ number: 'two' }, { number: 'twelve' }, { number: 'twenty' }];
+  const options = [
+    { id: 0, number: 'one' },
+    { id: 1, number: 'two' },
+    { id: 2, number: 'tree' },
+  ];
 
   it('clear options if autoHide = true', () => {
     const typedValue = 'tw';

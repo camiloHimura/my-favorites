@@ -5,8 +5,8 @@
   box-sizing: border-box;
 }
 
-.createLink > *:not(h2) {
-  margin-top: 10px;
+.--margin-top {
+  margin-top: var(--elemts-margin-top);
 }
 
 .createLink .createLink__contInputs {

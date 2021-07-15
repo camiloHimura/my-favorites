@@ -1,96 +1,86 @@
 import React, { useRef, useReducer, useEffect } from 'react';
+import * as R from 'ramda';
+
 import AutoReduce from './AutoComplete.reducer';
 import './AutoComplete.css';
-import { iAutoComplete } from '../../../interfaces';
+import { iAutoComplete, iTag } from '../../../interfaces';
+import * as Utils from '../../../utils';
+import { KEY_CODES } from '../../../contans';
 
 export enum Actions {
   set,
   filter,
   sweepUp,
   sweepDown,
-  clear,
+  reset,
 }
 
-const AutoComplete: React.FC<iAutoComplete> = (props) => {
+const isKeyEnterWithIndex = (indexSelector) =>
+  R.both(Utils.isEnter, () => Number.isInteger(indexSelector));
+
+const clearInput = (handler: (val: string) => void, newValue: string) =>
+  R.ifElse(
+    R.equals(true),
+    () => handler(''),
+    () => handler(newValue),
+  );
+
+const AutoComplete: React.FC<iAutoComplete> = ({
+  onSelected,
+  propertyFilter,
+  autoHide = true,
+  placeHolder = '',
+  options: initOptions = [],
+  clearAfterSelecting = false,
+}) => {
   const divOptions = useRef(null);
   const inputFilter = useRef(null);
   const [state, setOptions] = useReducer(AutoReduce, { showOptions: false });
-
   const { options, showOptions, indexSelector } = state;
-  const {
-    options: initOptions = [],
-    propertyFilter,
-    onSelected,
-    autoHide = true,
-    placeHolder = '',
-    clearAfterSelecting = false,
-  } = props;
+  const resetOptions = () => setOptions({ type: Actions.reset, options: [...initOptions] });
 
   useEffect(() => {
-    setOptions({ type: Actions.set, initOptions: [...initOptions] });
+    resetOptions();
   }, [initOptions]);
 
-  const filter = (event) => {
-    const element = event.target;
+  const setFilterValue = (value: string) => ({
+    value,
+    propertyFilter,
+    type: Actions.filter,
+    options: initOptions,
+  });
 
-    if (element.value !== '' && element.value.length > 1) {
-      setOptions({ type: Actions.filter, initOptions, propertyFilter, value: element.value });
-    } else {
-      setOptions({ type: Actions.clear });
-    }
+  const onFilter = R.ifElse(
+    Utils.isNotEmptyInput,
+    R.pipe(Utils.getInputValue, setFilterValue, setOptions),
+    resetOptions,
+  );
+
+  const clearOptionsAndSetSelection = (option: iTag) => {
+    const clearInputAfterSelecting = clearInput(
+      Utils.setInputValue(inputFilter),
+      option[propertyFilter],
+    );
+    resetOptions();
+    onSelected(option);
+    clearInputAfterSelecting(clearAfterSelecting);
   };
 
-  const sweepOptions = (event) => {
-    if (showOptions == false) {
-      return;
-    }
+  const sweepOptions = R.cond([
+    [Utils.isKeyCode(KEY_CODES.UP), () => setOptions({ type: Actions.sweepUp })],
+    [Utils.isKeyCode(KEY_CODES.DOWN), () => setOptions({ type: Actions.sweepDown })],
+    [isKeyEnterWithIndex(indexSelector), () => clearOptionsAndSetSelection(options[indexSelector])],
+  ]);
 
-    if (event.keyCode === 38) {
-      event.preventDefault();
-      setOptions({ type: Actions.sweepUp });
-    }
-
-    if (event.keyCode === 40) {
-      event.preventDefault();
-      setOptions({ type: Actions.sweepDown });
-    }
-
-    if (event.keyCode === 13 && Number.isInteger(indexSelector)) {
-      setOptions({ type: Actions.clear });
-      onSelected(options[indexSelector]);
-
-      if (!clearAfterSelecting) {
-        inputFilter.current.value = options[indexSelector][propertyFilter];
-      } else {
-        inputFilter.current.value = '';
-      }
-    }
-  };
-
-  const clickOption = (index) => {
-    onSelected(options[index]);
-    setOptions({ type: Actions.clear });
-
-    if (!clearAfterSelecting) {
-      inputFilter.current.value = options[index][propertyFilter];
-    } else {
-      inputFilter.current.value = '';
-    }
-  };
-
-  const closeOptions = () => {
-    if (autoHide) {
-      setOptions({ type: Actions.clear });
-    }
-  };
+  const closeOptions = R.when(R.equals(true), resetOptions);
 
   return (
     <div className="autoComplete">
       <input
         type="text"
         ref={inputFilter}
-        onChange={filter}
-        onBlur={closeOptions}
+        onChange={onFilter}
+        onBlur={() => closeOptions(autoHide)}
         data-test="input"
         onKeyDown={sweepOptions}
         placeholder={placeHolder}
@@ -101,8 +91,8 @@ const AutoComplete: React.FC<iAutoComplete> = (props) => {
           options.map((opt, index) => (
             <button
               data-test="options"
-              key={`${index}-autocomplete`}
-              onMouseDown={() => clickOption(index)}
+              key={`${opt.id}-autocomplete`}
+              onMouseDown={() => clearOptionsAndSetSelection(opt)}
               className={`${indexSelector === index ? 'select' : ''}`}
             >
               {opt.name}
