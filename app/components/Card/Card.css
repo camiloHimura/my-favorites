@@ -2,7 +2,6 @@
   display: flex;
   padding: 10px;
   font-size: 16px;
-  transition: all 0.5s;
   align-items: center;
   box-sizing: border-box;
   flex-direction: column;

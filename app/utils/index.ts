@@ -1,4 +1,4 @@
-import * as R from 'ramda';
+import * as R from '../utils/R';
 import { KEY_CODES } from '../contans';
 import { iInput } from '../interfaces';
 

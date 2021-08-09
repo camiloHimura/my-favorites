@@ -6,7 +6,7 @@ import './SideBarOptions.css';
 
 import Icon from '../../generals/Icon';
 import { iComponentOpt } from '../SideBar';
-import * as R from 'ramda';
+import * as R from '../../../utils/R';
 
 export interface iProps {
   options: iComponentOpt[];

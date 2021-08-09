@@ -4,7 +4,7 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './app/index.tsx'],
+  entry: ['./app/index.tsx'],
   output: {
     publicPath: '/',
     filename: 'index_bundle.js',

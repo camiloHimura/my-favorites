@@ -1,5 +1,5 @@
 import React from 'react';
-import * as R from 'ramda';
+import * as R from '../../../utils/R';
 import './Board.css';
 
 import Colors from '../../../utils/Colors';

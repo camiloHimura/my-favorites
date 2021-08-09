@@ -1,5 +1,5 @@
 import React, { useRef, useReducer, useEffect } from 'react';
-import * as R from 'ramda';
+import * as R from '../../../utils/R';
 
 import AutoReduce from './AutoComplete.reducer';
 import './AutoComplete.css';

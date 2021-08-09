@@ -1,4 +1,4 @@
-import * as R from 'ramda';
+import * as R from '../../../utils/R';
 
 import { iTag } from '../../../interfaces';
 import { Actions } from './AutoComplete';

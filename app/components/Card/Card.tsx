@@ -16,9 +16,9 @@ const Card: React.FC<iLink> = ({ id = '0', title, url, tags = [], description = 
 
   const dispatchRemoveLink: Dispatch<any> = useAppDispatch();
   const dispatchRemoveTag: Dispatch<any> = useAppDispatch();
-  const removeLink = () => dispatchRemoveLink(removeLinkAsyncAction(id as string));
+  const removeLink = () => dispatchRemoveLink(removeLinkAsyncAction(id));
   const removeTag = useCallback(
-    ({ id: tagId }) => dispatchRemoveTag(removeTagLinkAsyncAction(id as string, tagId)),
+    ({ id: tagId }) => dispatchRemoveTag(removeTagLinkAsyncAction(id, tagId)),
     [dispatchRemoveTag, id],
   );
 

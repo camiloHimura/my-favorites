@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as R from 'ramda';
+import * as R from '../../../utils/R';
 
 import Tag from '../Tag';
 import AutoComplete from '../AutoComplete';

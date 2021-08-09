@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Dispatch } from 'react';
 import * as Utils from '../../utils';
-import * as R from 'ramda';
+import * as R from '../../utils/R';
 import './CreateLink.css';
 
 import TagList from '../generals/TagList';
@@ -59,8 +59,6 @@ const CreateLink: React.FC<iCreateLink> = () => {
   const setLsUrl = (url: string) => dispatchSetLsUrl(setLsUrlAction(url));
   const setLsTitle = (url: string) => dispatchSetLsTitle(setLsTitleAction(url));
   const setLsTags = (tags: iTag[]) => dispatchSetLsTags(setLsTagsAction(tags));
-
-  //console.log(R.juxt([Math.min, Math.max])(1, 2, 3, 4));
 
   useEffect(() => {
     if (!tags?.length) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Search.css';
 import * as Utils from '../../utils';
-import * as R from 'ramda';
+import * as R from '../../utils/R';
 import { iSearch } from '../../interfaces';
 import Input from '../generals/Input';
 

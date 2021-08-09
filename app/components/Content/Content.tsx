@@ -1,6 +1,6 @@
 import React, { Dispatch, useEffect } from 'react';
 import './Content.css';
-import * as R from 'ramda';
+import * as R from '../../utils/R';
 import { iContent, iLink, iTag } from '../../interfaces';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';

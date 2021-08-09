@@ -1,5 +1,5 @@
 import React, { useState, Dispatch, useCallback } from 'react';
-import * as R from 'ramda';
+import * as R from '../../../utils/R';
 import * as Utils from '../../../utils';
 import './Tag.css';
 
