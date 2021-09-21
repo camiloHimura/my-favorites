@@ -3167,15 +3167,6 @@ babel-plugin-transform-strict-mode@^6.24.1:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
 
-babel-polyfill@^6.26.0:
-  version "6.26.0"
-  resolved "https://registry.npmjs.org/babel-polyfill/-/babel-polyfill-6.26.0.tgz"
-  integrity sha1-N5k3q8Z9eJWXCtxiHyhM2WbPIVM=
-  dependencies:
-    babel-runtime "^6.26.0"
-    core-js "^2.5.0"
-    regenerator-runtime "^0.10.5"
-
 babel-preset-current-node-syntax@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/babel-preset-current-node-syntax/-/babel-preset-current-node-syntax-1.0.1.tgz"
@@ -3823,7 +3814,7 @@ core-js-pure@^3.0.0:
   resolved "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.12.1.tgz"
   integrity sha512-1cch+qads4JnDSWsvc7d6nzlKAippwjUlf6vykkTLW53VSV+NkE6muGBToAjEA8pG90cSfcud3JgVmW2ds5TaQ==
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0:
   version "2.6.12"
   resolved "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz"
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
@@ -7916,11 +7907,6 @@ regenerate@^1.4.0:
   resolved "https://registry.npmjs.org/regenerate/-/regenerate-1.4.2.tgz"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
 
-regenerator-runtime@^0.10.5:
-  version "0.10.5"
-  resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz"
-  integrity sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=
-
 regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz"
@@ -8930,9 +8916,9 @@ tiny-warning@^1.0.0, tiny-warning@^1.0.3:
   integrity sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
 
 tmpl@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/tmpl/-/tmpl-1.0.4.tgz"
-  integrity sha1-I2QN17QtAEM5ERQIIOXPRA5SHdE=
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
+  integrity sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==
 
 to-fast-properties@^1.0.3:
   version "1.0.3"
